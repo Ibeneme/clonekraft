@@ -22,13 +22,14 @@ const Login = () => {
       )
       .required("Password is Required"),
   });
-
+  const navigate = useNavigate();
   const handleSubmit = (values, { setSubmitting }) => {
     // Handle login submission here
+    navigate('/home')
     console.log("Submitting login form:", values);
     setSubmitting(false);
   };
-  const navigate = useNavigate();
+
   return (
     <div className="auth-div">
       <div>

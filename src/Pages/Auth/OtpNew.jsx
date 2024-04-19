@@ -18,7 +18,7 @@ const OTPNew = () => {
     // Handle OTP submission here (e.g., verify OTP)
     console.log("Submitting OTP form:", values);
     setSubmitting(false);
-    navigate("/reset")
+    navigate("/home")
   };
 
   return (
