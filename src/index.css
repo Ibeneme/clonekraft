@@ -1,54 +1,314 @@
 /* @import url("https://fonts.googleapis.com/css2?family=Questrial&display=swap");
  */
- @import url("https://fonts.googleapis.com/css2?family=DM+Sans:opsz@9..40&display=swap");
- :root {
-   --font-family: "Dm Sans", sans-serif;
-   padding: 0;
-   margin: 0;
- }
- 
- :root {
-   --darkOrange: #007bff;
-   /* --darkOrange: #ff5f05; */
-   --primaryOrange: #007bff;
-   --darkBlue: #010811;
-   --lightBlue: #3586ff;
-   --lightOrange: #fef4ea;
-   --mainWhite: #ffffff;
-   --lightWhite: #f4f4f4;
-   --mainBlack: #000000;
-   --lightBlack: #121212;
-   --mainGray: #666666;
- }
- 
- body {
-   padding: 0;
-   margin: 0;
-   font-family: var(--font-family);
- }
- button {
-   cursor: pointer;
- }
- 
- .save-reassign {
-   border: 0.6px solid #808080;
-   padding: 12px 32px;
-   border-radius: 24px;
-   margin-bottom: -24px;
-   margin-top: 24px;
-   color: #808080;
-   font-size: 14px;
-   cursor: pointer;
- }
- 
- .save-reassign:hover{
-   border: 0.6px solid var(--darkOrange);
-   padding: 12px 32px;
-   border-radius: 24px;
-   margin-bottom: -24px;
-   margin-top: 24px;
-   color: #fff;
-   font-size: 14px;
-   cursor: pointer;
-   background-color: var(--darkOrange);
- }
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:opsz@9..40&display=swap");
+
+:root {
+  --font-family: "Dm Sans", sans-serif;
+  padding: 0;
+  margin: 0;
+}
+
+:root {
+  --darkOrange: #C19F62;
+  /* --darkOrange: #ff5f05; */
+  --primaryOrange: #C19F62;
+  --darkBlue: #010811;
+  --lightBlue: #3586ff;
+  --lightOrange: #fef4ea;
+  --mainWhite: #ffffff;
+  --lightWhite: #f4f4f4;
+  --mainBlack: #000000;
+  --lightBlack: #121212;
+  --mainGray: #666666;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  font-family: var(--font-family);
+}
+
+.hide-bid {
+  display: flex
+}
+
+button {
+  cursor: pointer;
+}
+
+.custom-file-upload {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #C19F62;
+  /* Background color */
+  color: white;
+  /* Text color */
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.custom-file-upload input[type="file"] {
+  display: none;
+}
+
+.save-reassign {
+  border: 0.6px solid #808080;
+  padding: 12px 32px;
+  border-radius: 24px;
+  margin-bottom: -24px;
+  margin-top: 24px;
+  color: #808080;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.save-reassign:hover {
+  border: 0.6px solid var(--darkOrange);
+  padding: 12px 32px;
+  border-radius: 24px;
+  margin-bottom: -24px;
+  margin-top: 24px;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  background-color: var(--darkOrange);
+}
+
+
+
+.order-image-container {
+  display: flex;
+}
+
+.order-image-item {
+  flex: 1 0 16%;
+  /* Display 16% of width */
+  margin-right: -42px;
+  /* Adjust spacing between images */
+}
+
+.order-image-item:last-child {
+  flex-grow: 1;
+  /* Last image takes up remaining space */
+  margin-right: 16px;
+  /* Remove margin for the last image */
+}
+
+.order-image {
+  width: 56px;
+  height: 56px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 4.3px solid #C19F6255
+}
+
+
+@keyframes blinkBorder {
+  from {
+    border-color: #ffffff12;
+  }
+
+  to {
+    border-color: #ffffff54;
+    /* You can adjust the color here */
+  }
+}
+
+.clone {
+  font-size: 120px
+}
+
+.hide-this {
+  display: block;
+}
+
+.first-chat-div {
+  width: 100vw;
+  height: 100vh;
+  background-color: #f4f4f4;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.chat-room {
+  padding-top: 160px;
+  background-color: #fff;
+  width: 600px;
+  overflow-y: scroll;
+  height: 74vh;
+  padding: 16px;
+  padding-bottom: 188px
+}
+
+.chat-input-box {
+  width: 570px;
+  height: 30px;
+  padding: 16px;
+  border-radius: 100px;
+  border: 1px solid #808080;
+  font-family: var(--font-family);
+  padding-right: -100px;
+
+}
+
+.chat-input-btn {
+  position: absolute;
+  bottom: 10px;
+  right: 8px;
+  padding: 12px;
+  font-size: 18px;
+  border-radius: 100px;
+  border: none;
+  background-color: #C19F62;
+  color: #fff;
+  width: 60px
+}
+
+.chat-room-h2 {
+  padding-top: 64px
+}
+
+.chat-room-h2-div {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  flex: 1;
+
+}
+
+.chat-room-h2-date {
+  width: fit-content;
+  align-self: center;
+  text-align: center;
+  font-size: 14px;
+  color: #C19F62;
+  background-color: #C19F6218;
+  padding: 16px;
+  border-radius: 12px;
+}
+
+.flex-end {
+  align-self: flex-end;
+
+}
+
+.flex-start {
+  align-self: flex-end;
+
+}
+
+.imagewrapper {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  gap: 24px;
+  padding: 16px
+}
+
+.imageimage {
+  width: 400px
+}
+
+@media (max-width: 768px) {
+  .clone {
+    font-size: 48px
+  }
+
+  .hide-this {
+    display: none;
+  }
+
+  .chat-room {
+    background-color: #fff;
+    width: 100%;
+
+  }
+
+  .chat-input-box {
+    width: 82vw;
+
+
+  }
+
+  .hide-bid {
+    display: none
+  }
+
+  .imageimage {
+    width: 100%
+  }
+
+  .imagewrapper {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 16px
+  }
+}
+
+
+.chat-list .chat-message {
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  border-radius: 50px;
+  background: #5a99ee;
+  display: inline-block;
+  padding: 10px 20px;
+  position: relative;
+}
+
+.chat-list .chat-message:before {
+  content: "";
+  position: absolute;
+  top: 15px;
+  width: 0;
+  height: 0;
+}
+
+.chat-list .chat-message h5 {
+  margin: 0 0 5px 0;
+  font-weight: 600;
+  line-height: 100%;
+  font-size: .9rem;
+}
+
+.chat-list .chat-message p {
+  line-height: 18px;
+  margin: 0;
+  padding: 0;
+}
+
+.chat-list .chat-body {
+  margin-left: 20px;
+  float: left;
+  width: 70%;
+}
+
+.chat-list .in .chat-message:before {
+  left: -12px;
+  border-bottom: 20px solid transparent;
+  border-right: 20px solid #5a99ee;
+}
+
+.chat-list .out .chat-img {
+  float: right;
+}
+
+.chat-list .out .chat-body {
+  float: right;
+  margin-right: 20px;
+  text-align: right;
+}
+
+.chat-list .out .chat-message {
+  background: #fc6d4c;
+}
+
+.chat-list .out .chat-message:before {
+  right: -12px;
+  border-bottom: 20px solid transparent;
+  border-left: 20px solid #fc6d4c;
+}

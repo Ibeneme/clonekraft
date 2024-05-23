@@ -1,108 +1,223 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import { useLocation } from "react-router-dom";
+import { useSocket } from "../../../chat/context/useSocket";
+import { useDispatch } from "react-redux";
+import { getMessages } from "../../../Redux/admin/admin";
+import { profile } from "../../../Redux/auth/auth";
+import { RiSendPlane2Fill } from "react-icons/ri";
 
-const ChatPage = () => {
+const Chat = () => {
+  const [user, setUser] = useState("");
+  const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
-  const messagesEndRef = useRef(null);
+  const { socket } = useSocket();
+  const chatContainerRef = useRef(null); // Ref for chat container
 
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  const location = useLocation();
+  const { order } = location.state || {};
+  console.log(order, "order");
+
+  const [fetchedMessages, setFetchedMessages] = useState([]);
+  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(true);
+
+  const handleFetchMessages = () => {
+    dispatch(getMessages(order?._id))
+      .then((response) => {
+        console.log("orders setFetchedMessages:", response);
+        setFetchedMessages(response?.payload?.messages);
+        setLoading(false);
+        scrollToBottom(); // Scroll to bottom after fetching messages
+      })
+      .catch((error) => {
+        console.log("Profile fetch failed:", error);
+        setLoading(false);
+      });
   };
+
+  const handleFetchUser = () => {
+    dispatch(profile(order?._id))
+      .then((response) => {
+        console.log("usersss successful:", response);
+        setUser(response?.payload);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log("Profile fetch failed:", error);
+        setLoading(false);
+      });
+  };
+  useEffect(() => {
+    handleFetchMessages();
+    handleFetchUser();
+  }, []);
 
   useEffect(() => {
-    scrollToBottom();
-  }, [messages]);
+    socket.emit("joinRoom", order?._id);
+    socket.on("message", (msg) => {
+      console.log(msg, "msgmsg");
+      setMessages((prevMessages) => [...prevMessages, msg]);
+      scrollToBottom(); // Scroll to bottom when new message arrives
+    });
 
-  const sendMessage = (message) => {
-    // Add user's message to the messages state
-    setMessages([...messages, { sender: "user", text: message }]);
+    return () => {
+      socket.off("message");
+    };
+  }, [socket]);
 
-    // Clear the input field if it's not empty
+  const handleChange = (e) => {
+    setMessage(e.target.value);
+  };
+
+  const handleSendMessage = () => {
     if (message.trim() !== "") {
-      document.getElementById("chat-input").value = "";
-    }
-
-    // Simulate bot's response after a delay
-    if (message.trim() !== "") {
-      // // setTimeout(() => {
-      // //   // Add bot's response to the messages state
-      // //   setMessages([
-      // //     ...messages,
-      // //     { sender: "bot", text: "This is a text chat" }
-      // //   ]);
-      // // }, 500); // Simulating a delay for the bot's response
+      socket.emit("messages", order?._id, {
+        userId: order?.userId,
+        username: order?.username,
+        message: message, // Add the current time to the message
+      });
+      setMessage("");
     }
   };
 
-  // Filter messages to display only user's messages
-  const userMessages = messages.filter((message) => message.sender === "user");
+  // Function to scroll to the bottom of the chat container
+  const scrollToBottom = () => {
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+    }
+  };
+
+  // Function to format the messages by date
+  const currentTime =
+    new Date()?.toLocaleTimeString()?.replace(/:\d+\s/, " ") || " "; // This will remove the seconds part
+
+  const formatMessagesByDate = (messages) => {
+    const formattedMessages = {};
+    messages.forEach((msg) => {
+      const date = new Date(msg.timeSent);
+      const formattedDate = date.toDateString(); // Get the date string (e.g., "Mon May 17 2024")
+      if (!formattedMessages[formattedDate]) {
+        formattedMessages[formattedDate] = [];
+      }
+      formattedMessages[formattedDate].push(msg);
+    });
+    // Convert the object to an array
+    return Object.entries(formattedMessages).map(([date, msgs]) => ({
+      date,
+      messages: msgs,
+    }));
+  };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        padding: "70px 24px",
-        alignItems: "center",
-      }}
-    >
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          padding: "120px 24px",
-          maxWidth: 400,
-          alignItems: "center",
-        }}
-      >
-        <h2>Chat with CloneKraft</h2>
+    <div className="first-chat-div">
+      <div className="chat-room" ref={chatContainerRef}>
+        <h2 className="chat-room-h2"></h2>
+        {/* Display fetched messages */}
+        {formatMessagesByDate(fetchedMessages)?.map((dateGroup, index) => (
+          <div key={index} className="chat-room-h2-div">
+            <h3 className="chat-room-h2-date">{dateGroup.date}</h3>
+            {dateGroup.messages.map((msg, msgIndex) => (
+              <p
+                key={msgIndex}
+                className={`${user?._id === msg?.userId ? "flex-end" : ""}`}
+                style={{
+                  backgroundColor:
+                    user?._id !== msg?.userId ? "#c19F62" : "#c19F6215",
+                  padding: 12,
+                  marginBottom: 4,
+                  marginTop: 0,
+                  borderRadius:
+                    user?._id !== msg?.userId
+                      ? `12px 12px 12px 0`
+                      : `12px 12px 0 01 2px`,
+                  color: user?._id !== msg?.userId ? "white" : "#c19F62",
+                  fontSize: 11,
+                  width: "fit-content",
+                  maxWidth: "70%",
+                }}
+              >
+                <strong>
+                  {user?._id !== msg?.userId
+                    ? msg.username + " - Admin"
+                    : "You"}
+                </strong>
+
+                <br />
+                <p style={{ margin: 0, fontSize: 14 }}> {msg.message}</p>
+                <p style={{ margin: 0, fontSize: 10, textAlign: "left" }}>
+                  {" "}
+                  {msg?.timeSent
+                    ? new Date(msg?.timeSent).toLocaleTimeString([], {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                        hour12: true,
+                      })
+                    : ""}
+                </p>
+              </p>
+            ))}
+          </div>
+        ))}
+
+        {formatMessagesByDate(messages)?.map((dateGroup, index) => (
+          <div key={index} className="chat-room-h2-div">
+            {dateGroup.messages.map((msg, msgIndex) => (
+              <p
+                key={msgIndex}
+                className={`${user?._id === msg?.userId ? "flex-end" : ""}`}
+                style={{
+                  backgroundColor:
+                    user?._id !== msg?.userId ? "#c19F62" : "#c19F6215",
+                  padding: 12,
+                  marginBottom: 4,
+                  marginTop: 0,
+                  borderRadius:
+                    user?._id !== msg?.userId
+                      ? `12px 12px 12px 0`
+                      : `12px 12px 0 01 2px`,
+                  color: user?._id !== msg?.userId ? "white" : "#c19F62",
+                  fontSize: 11,
+                  width: "fit-content",
+                  maxWidth: "70%",
+                }}
+              >
+                <strong>
+                  {user?._id !== msg?.userId
+                    ? msg.username + " - Admin"
+                    : "You"}
+                </strong>
+
+                <br />
+                <p style={{ margin: 0, fontSize: 14 }}> {msg.message}</p>
+                <p style={{ margin: 0, fontSize: 10, textAlign: "left" }}>
+                  {currentTime}
+                </p>
+              </p>
+            ))}
+          </div>
+        ))}
+
         <div
+          className="message-input"
           style={{
-            height: "300px",
-            border: "1px solid #ccc",
-            padding: "10px",
-            width: 300,
-            display: "flex",
-            flexDirection: "column",
-            overflowY: "auto", // Changed overflowY to auto
+            position: "fixed",
+            bottom: 24,
           }}
         >
-          {userMessages.map((message, index) => (
-            <div
-              key={index}
-              style={{
-                marginBottom: "10px",
-                textAlign: "right",
-                color: "#007bff",
-                backgroundColor: "#007bff17",
-                alignItems: "flex-end",
-                alignSelf: "flex-end",
-                padding: "10px",
-                width: "fit-content",
-                borderRadius: 12,
-                maxWidth: 200,
-              }}
-            >
-              {message.text}
-            </div>
-          ))}
-          <div ref={messagesEndRef} />
+          <input
+            type="text"
+            placeholder="Type your message..."
+            value={message}
+            onChange={handleChange}
+            className="chat-input-box"
+          />
+          <button className="chat-input-btn" onClick={handleSendMessage}>
+            <RiSendPlane2Fill />
+          </button>
         </div>
-        <input
-          id="chat-input"
-          className="input-field"
-          type="text"
-          placeholder="Type your message..."
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              sendMessage(e.target.value);
-              e.target.value = "";
-            }
-          }}
-          style={{ marginTop: "10px", width: "100%" }}
-        />
       </div>
     </div>
   );
 };
 
-export default ChatPage;
+export default Chat;

@@ -1,62 +1,65 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import Stories from "stories-react";
+import "stories-react/dist/index.css";
+import GallerySection from "./DeliverySection";
+import WelcomeSection from "./WelcomeSection";
+import GallerySectionIi from "./DeliverySectionII";
+import { useDispatch } from "react-redux";
+import { profile } from "../../../Redux/auth/auth";
+import useCustomToasts from "../../ToastNotifications/Toastify";
 
 const Home = () => {
-  //   const [backgroundIndex, setBackgroundIndex] = useState(0);
+  const navigate = useNavigate();
 
-  //   // Array of background image URLs
-  //   const backgroundImages = [
-  //     "https://f005.backblazeb2.com/file/Webimages-used/Pexelss.png",
-  //     "https://f005.backblazeb2.com/file/Webimages-used/pexels-pixabay-276583.jpg", // Add more URLs as needed
-  //     "https://f005.backblazeb2.com/file/Webimages-used/guzman-barquin-FkKClUPUURU-unsplash.jpg",
-  //   ];
-
-  // //   useEffect(() => {
-  // //     const interval = setInterval(() => {
-  // //       setBackgroundIndex(
-  // //         (prevIndex) => (prevIndex + 1) % backgroundImages.length
-  // //       );
-  // //     }, 20000); // 20 seconds
-
-  // //     return () => clearInterval(interval);
-  // //   }, [backgroundImages.length]);
-
-  //   const currentBackground = backgroundImages[backgroundIndex];
-
-  const products = [
+  const stories = [
     {
-      image: "https://f005.backblazeb2.com/file/Webimages-used/Pexelss.png",
-      title: "Custom wooden chair in a sitting room",
-      price: "$19.99",
+      type: "image",
+      url: "https://res.cloudinary.com/daiiiiupy/image/upload/v1715427077/kam-idris-_HqHX3LBN18-unsplash_kosckn.jpg",
+      duration: 5000,
     },
     {
-      image:
-        "https://f005.backblazeb2.com/file/Webimages-used/pexels-pixabay-276583.jpg",
-      title: "Custom wooden chair in a sitting room",
-      price: "$24.99",
+      type: "image",
+      url: "https://res.cloudinary.com/daiiiiupy/image/upload/v1715626430/IMG_8271_ef0uof.jpg",
+      duration: 6000,
     },
     {
-      image: "https://f005.backblazeb2.com/file/Webimages-used/Pexelss.png",
-      title: "Custom wooden chair in a sitting room",
-
-      price: "$29.99",
-    },
-    {
-      image:
-        "https://f005.backblazeb2.com/file/Webimages-used/pexels-pixabay-276583.jpg",
-      title: "Custom wooden chair in a sitting room",
-
-      price: "$34.99",
+      type: "image",
+      url: "https://res.cloudinary.com/daiiiiupy/image/upload/v1715626430/IMG_8273_qtouui.jpg",
+      duration: 7000,
     },
   ];
 
-  const navigate = useNavigate();
-  
+  const dispatch = useDispatch();
+  const [user, setUser] = useState([]);
+  //const { showSuccessToast, showErrorToast } = useCustomToasts();
+  const handleFetchUser = () => {
+    dispatch(profile())
+      .then((response) => {
+        console.log("profile successful:", response);
+        setUser(response?.payload);
+      })
+      .catch((error) => {
+        const returnErr = error.data;
+        console.log("Registration failed:", error);
+      });
+  };
+
+  useEffect(() => {
+    handleFetchUser();
+  }, []);
+
+  const formatUsername = (name) => {
+    return name?.charAt(0)?.toUpperCase() + name?.slice(1)?.toLowerCase();
+  };
+
+  const formattedUsername = formatUsername(user?.username);
+
   return (
     <div style={{ backgroundColor: "#fff" }}>
       <section
         style={{
-          backgroundImage: `url('https://f005.backblazeb2.com/file/Webimages-used/Pexelss.png')`, // Set the current background image URL
+          backgroundImage: `url('https://res.cloudinary.com/daiiiiupy/image/upload/v1715427076/francesca-tosolini-Gh_UjjYoVwk-unsplash_vb28gq.jpg')`, // Set the current background image URL
           backgroundSize: "cover",
           backgroundPosition: "center",
           minHeight: "100vh",
@@ -66,15 +69,26 @@ const Home = () => {
           padding: "0 20px",
         }}
       >
-        <div style={{ textAlign: "center", color: "#fff" }}>
+        <div
+          style={{
+            textAlign: "center",
+            color: "#fff",
+            backgroundColor: "#00000075",
+            padding: 16,
+            borderRadius: 12,
+            paddingBottom: 48,
+          }}
+        >
           <h1 style={{ maxWidth: 600, textAlign: "center", fontSize: 48 }}>
-            Create your own custom carpentry products
+            <span style={{ color: "#C19F62" }}>
+              {formattedUsername ? `Hi ${formattedUsername}` : null},{" "}
+            </span>{" "}
+            Welcome to Clonekraft
           </h1>
           <p style={{ maxWidth: 600, textAlign: "center" }}>
-            At our workshop, we craft bespoke carpentry products tailored to
-            your unique needs and preferences. Whether you're looking for rustic
-            charm or sleek modern designs, we're here to bring your vision to
-            life.
+            We bring your furniture designs to life for less than the original
+            price. Make changes to suit your preferences and style. Set your
+            quality expectations and choose your delivery date
           </p>
 
           <div style={{ width: "100%", alignContent: "center" }}>
@@ -89,7 +103,7 @@ const Home = () => {
             >
               <div
                 className="div-btn-auth"
-                style={{ backgroundColor: "#ffaa00" }}
+                style={{ backgroundColor: "#161616" }}
               ></div>
               <button
                 onClick={() => navigate("/upload")}
@@ -103,100 +117,46 @@ const Home = () => {
           </div>
         </div>
       </section>
-
-      <section style={{ marginTop: 160 }}>
-        <h3 style={{ textAlign: "center", fontSize: 36 }}>Featured Gallery</h3>
-        <div
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-            justifyContent: "center",
-            padding: "20px",
-          }}
-        >
-          {/* Map out products */}
-
-          {products?.map((product, index) => (
-            <div
-              key={index}
-              style={{ width: "300px", margin: "10px", textAlign: "center" }}
-            >
-              <img
-                src={product.image}
-                alt={product.title}
-                style={{ maxWidth: "100%", borderRadius: 8, height: 200 }}
-              />
-
-              <p style={{ color: "#808080", fontSize: 14 }}>{product.title}</p>
-
-              <h3 style={{ color: "#000", marginTop: "5px" }}>
-                {product.price}
-              </h3>
-            </div>
-          ))}
-        </div>
+      <section>
+        <WelcomeSection username={user?.username} />
       </section>
 
       <section
         style={{
-          minHeight: "100vh",
           display: "flex",
-          alignItems: "center",
           justifyContent: "center",
-          padding: "0 20px",
+          flexDirection: "column",
+          alignItems: "center",
+          paddingTop: 12,
+          backgroundColor: "#C19F62",
+          width: "100%",
+          paddingBottom: 120,
         }}
+        className="flex-xx "
       >
-        <div style={{ textAlign: "center", color: "#fff" }}>
-          <h1
-            style={{
-              maxWidth: 600,
-              textAlign: "center",
-              fontSize: 48,
-              color: "#000",
-            }}
-          >
-            Get Started with{" "}
-            <span style={{ color: "#007bff" }}> CloneKrafts</span>
-          </h1>
-          <p
-            style={{
-              maxWidth: 600,
-              textAlign: "center",
-              color: "#808080",
-              marginTop: -32,
-            }}
-          >
-            At our workshop, we craft bespoke carpentry products tailored to
-            your unique needs and preferences. Whether you're looking for rustic
-            charm or sleek modern designs, we're here to bring your vision to
-            life.
-          </p>
-
-          <div style={{ width: "100%", alignContent: "center" }}>
-            <div
-              style={{
-                marginTop: 32,
-                flexDirection: "column",
-                display: "flex",
-                alignItems: "center",
-                width: "100%",
-              }}
-            >
-              <div
-                className="div-btn-auth"
-                style={{ backgroundColor: "#007bff" }}
-              ></div>
-              <button
-                onClick={() => navigate("/upload")}
-                className="btn-auth"
-                style={{ marginTop: -14, backgroundColor: "#021548" }}
-                type="submit"
-              >
-                Upload a Design
-              </button>
-            </div>
-          </div>
+        <h3 style={{ textAlign: "center", fontSize: 64 }}>
+          Slides of Our Replicas
+        </h3>
+        <div
+          style={{
+            border: "24px solid #ffffff25",
+            animation: "blinkBorder 0.7s infinite alternate",
+          }}
+        >
+          <Stories
+            width="400px"
+            height="600px"
+            border="12px solid #000"
+            stories={stories}
+          />
         </div>
+      </section>
+      <section>
+        <GallerySectionIi />
+      </section>
+
+      <section>
+        <WelcomeSection username={user?.username} />
       </section>
     </div>
   );

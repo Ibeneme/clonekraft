@@ -4,7 +4,7 @@
 
 .modal-open {
   display: block;
-  background-color: #007bff25;
+  background-color: #C19F6225;
   transition: 0.3s ease-in;
   margin: 0;
   padding: 0;
@@ -19,7 +19,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #007bff10;
+  background-color: #C19F6210;
   height: 100%;
   width: 100vw;
   backdrop-filter: blur(6px);
@@ -43,7 +43,7 @@
   align-items: flex-end;
 
   /* Background color and blur effect */
-  background-color: #007bff15;
+  background-color: #C19F6215;
   height: 100%;
   width: 100vw;
   backdrop-filter: blur(2px);

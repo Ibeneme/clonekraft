@@ -6,6 +6,7 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   position: fixed;
   width: 100%;
+  z-index: 12;
 }
 
 .navbar-left {
@@ -19,7 +20,7 @@
 }
 
 .upload-btn {
-  background-color: #007bff;
+  background-color: #C19F62;
   padding: 14px 24px;
   color: #fff;
   border: none;
@@ -84,14 +85,14 @@
 
   .menu-toggle {
     margin-right: 12px;
-    background-color: #007bff25;
+    background-color: #C19F6225;
     padding: 12px;
     border-radius: 48px;
     width: 24px;
     height: 24px;
     align-items: center;
     justify-content: center;
-    color: #007bff;
+    color: #C19F62;
     display: flex; /* Display burger icon */
   }
 

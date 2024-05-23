@@ -1,0 +1,197 @@
+.hero-flexx {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 24px;
+    width: 100%
+}
+
+.faq-section {
+    padding-top: 100px;
+    background-color: #161616;
+    color: #ffffff;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    align-self: center;
+    display: flex;
+    padding-bottom: 160px;
+}
+
+
+
+.section-header {
+    margin-top: 80px;
+    background-color: var(--darkBlue);
+    color: #ffffff;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.accordion-container {
+    margin-top: 20px;
+    color: #ffffff;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    width: 800px;
+    align-self: center;
+    background-color: #ffffff25;
+    border-radius: 24px;
+}
+
+.accordion-item {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.accordion-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    border-radius: 0px;
+    cursor: pointer;
+}
+
+˝ .accordion-header.open {
+    background-color: #C19F62;
+}
+
+.accordion-question {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.accordion-icon {
+    font-size: 24px;
+}
+
+.accordion-content {
+    padding: 10px 20px;
+    background-color: #C19F62;
+    /* border-radius: 0 0 8px 8px; */
+}
+
+@media (max-width: 900px) {
+    .accordion-container {
+        margin-top: 20px;
+        color: #ffffff;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        width: 90%;
+        align-self: center;
+        background-color: #ffffff25;
+        border-radius: 24px;
+    }
+
+}
+
+
+@media screen and (max-width: 1000px) {
+
+    .hero-flexx {
+        padding: 0px;
+        gap: 24px;
+        width: 90%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+
+    }
+
+}
+
+
+
+.contact-section {
+    background-image: url('https://res.cloudinary.com/daiiiiupy/image/upload/v1715424195/new_fjtip4.jpg');
+    background-size: cover;
+    background-position: center;
+    padding: 50px 20px;
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+
+}
+
+.contact-container {
+    background-color: rgba(255, 255, 255, 0.8);
+    min-width: 300px;
+    width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.contact-container h2 {
+    margin-bottom: 20px;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-form label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.contact-form input,
+.contact-form textarea {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    height: 25px;
+    font-family: var(--fontFamily);
+}
+
+.contact-form textarea {
+    height: 100px;
+}
+
+.contact-form button {
+    padding: 10px 20px;
+    background-color: #C19F62;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: fit-content;
+    height: 50px
+}
+
+.contact-form button:hover {
+    background-color: #C19F62;
+}
+
+.footer {
+    background-color: #333;
+    color: #fff;
+    padding: 120px 20px;
+    text-align: center;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}

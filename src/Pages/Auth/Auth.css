@@ -10,7 +10,16 @@
   font-family: var(--fontFamily);
   border-radius: 8px;
 }
-
+.input-fields {
+  width: 93%;
+  padding: 14px;
+  margin-bottom: 2.5px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-family: var(--fontFamily);
+  border-radius: 8px;
+}
 .err-field {
   color: red;
   font-size: 0.8rem;
@@ -20,7 +29,7 @@
 .btn-auth {
   padding: 0.5rem 1rem;
   font-size: 1rem;
-  background-color: #007bff;
+  background-color: #C19F62;
   color: white;
   border: none;
   border-radius: 4px;
@@ -32,7 +41,7 @@
 }
 
 .div-btn-auth {
-  background-color: #021548;
+  background-color: #121212;
   width: 200px;
   height: 50px;
   margin-bottom: -48px;
@@ -46,10 +55,13 @@
   margin: 0px;
   padding-bottom: 48px;
 }
+
 .btn-auth:disabled {
   background-color: #ccc;
   cursor: not-allowed;
-} /* Auth.css */
+}
+
+/* Auth.css */
 .auth-div {
   display: flex;
   justify-content: center;
@@ -60,29 +72,67 @@
 .div-input {
   margin-bottom: 32px;
 }
+
 .logo-img {
   height: 100vh;
-  width: 100%; /* Adjust size as needed */
+  width: 100%;
+  /* Adjust size as needed */
 }
 
+.auth-div-div-div {
+  width: 40%;
+  /* Adjust width as needed */
+}
+
+
 .auth-div-div {
-  width: 50%; /* Adjust width as needed */
+  width: 50%;
+  /* Adjust width as needed */
+}
+
+.image-containersz {
+  position: relative;
+  margin-bottom: 1rem;
+  border-radius: 32px;
+}
+
+.overlaysz {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Adjust the opacity as needed */
+}
+
+.imagesz {
+  width: 100%;
+  height: auto;
+
 }
 
 @media screen and (max-width: 768px) {
   .auth-div {
     flex-direction: column-reverse;
   }
-
+  .auth-div-div-div {
+    width: 100%;
+    /* Adjust width as needed */
+  }
+  
   .logo-img {
-    display: none; /* Hide image on mobile view */
+    display: none;
+    /* Hide image on mobile view */
   }
 
   .auth-div-div {
-    width: 100%; /* Full width on mobile view */
+    width: 100%;
+    /* Full width on mobile view */
   }
 }
 
 .auth-div-div {
-  margin-left: 20px; /* Adjust margin as needed */
+  margin-left: 20px;
+  /* Adjust margin as needed */
 }

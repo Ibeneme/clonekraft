@@ -1,18 +1,39 @@
 import React, { useState } from "react";
 import "./Navbar.css";
-import logo from "../../assets/auth/right.png";
 import profilePic from "../../assets/auth/left.png";
 import { FaBars } from "react-icons/fa"; // Assuming you're using react-icons for the burger icon
 import { useNavigate } from "react-router-dom";
-
+import { profile } from "../../Redux/auth/auth";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { RiGalleryView } from "react-icons/ri";
+import { TbShoppingCartFilled } from "react-icons/tb";
+import { BiSolidHome } from "react-icons/bi";
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
-
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [user, setUser] = useState([]);
+
+  useEffect(() => {
+    handleFetchUser();
+  }, []);
+
+  const handleFetchUser = () => {
+    dispatch(profile())
+      .then((response) => {
+        console.log("profile successful:", response);
+        setUser(response?.payload);
+        //setImageUrl(response?.payload?.imageUrl);
+      })
+      .catch((error) => {
+        console.log("Profile fetch failed:", error);
+      });
+  };
 
   return (
     <nav className="navbar">
@@ -21,27 +42,91 @@ const Navbar = () => {
       </div>
       <div className="navbar-right">
         <ul className="nav-items">
-          <li className="nav-item" onClick={() => navigate("/home")}>
-            Home
+          <li
+            className="nav-item"
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+              color: "#808080",
+              marginRight: 12,
+            }}
+            onClick={() => navigate("/home")}
+          >
+            <BiSolidHome size={18} color="#808080" /> Home
           </li>
-          <li className="nav-item" onClick={() => navigate("/gallery")}>
+          <li
+            className="nav-item"
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+              color: "#808080",
+              marginRight: 12,
+            }}
+            onClick={() => navigate("/gallery")}
+          >
+            <RiGalleryView size={18} color="#808080" />
             Gallery
           </li>
-          <li className="nav-item">Design Lab</li>
-          <li className="nav-item" onClick={() => navigate("/order")}>
-            My Orders
+          {/* <li className="nav-item">Design Lab</li> */}
+          <li
+            className="nav-item"
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+              color: "#808080",
+              marginRight: 12,
+            }}
+            onClick={() => navigate("/order")}
+          >
+            <TbShoppingCartFilled size={18} color="#808080" /> My Orders
           </li>
-          <li className="nav-item">Production Timeline</li>
-          <li className="nav-item" onClick={() => navigate("/upload")}>
+          {/* <li className="nav-item">Production Timeline</li> */}
+          <li
+            className="nav-item"
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+              color: "#808080",
+              marginRight: 12,
+            }}
+            onClick={() => navigate("/upload")}
+          >
             <button className="upload-btn">Upload Design</button>
           </li>
           <div className="profile-container">
-            <img
-              src={profilePic}
-              alt="Profile"
-              onClick={() => navigate("/profile")}
-              className="profile-pic"
-            />
+            {user?.imageUrl ? (
+              <img
+                src={user?.imageUrl}
+                onClick={() => navigate("/profile")} // Changed from user?.avatar to user?.imageUrl
+                alt="User Avatar"
+                style={{
+                  width: 44,
+                  height: 44,
+                  borderRadius: 200,
+                  //marginBottom: "20px",
+                }}
+              />
+            ) : (
+              <img
+                onClick={() => navigate("/profile")}
+                src={profilePic} // Changed from user?.avatar to user?.imageUrl
+                alt="User Avatar"
+                style={{
+                  width: 48,
+                  height: 44,
+                  borderRadius: 200,
+                  //marginBottom: "20px",
+                }}
+              />
+            )}
           </div>
         </ul>
 
@@ -58,11 +143,13 @@ const Navbar = () => {
             <li className="nav-item" onClick={() => navigate("/gallery")}>
               Gallery
             </li>
-            <li className="nav-item">Design Lab</li>
+            {/* <li className="nav-item">Design Lab</li> */}
             <li className="nav-item" onClick={() => navigate("/order")}>
               My Orders
             </li>
-            <li className="nav-item">Production Timeline</li>
+            <li onClick={() => navigate("/profile")} className="nav-item">
+              Profile
+            </li>
             <li className="nav-item">
               <button
                 className="upload-btn"

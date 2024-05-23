@@ -33,14 +33,15 @@ const Modal = ({
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
+              zIndex: 2000,
             }}
             onClick={onClose}
           >
             <MdCancel
               onClick={onClose}
               size={28}
-              color={"#007bff"}
-              style={{ cursor: "pointer" }}
+              color={"#C19F62"}
+              style={{ cursor: "pointer", zIndex: 2000 }}
             />
           </div>
         ) : null}

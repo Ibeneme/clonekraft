@@ -1,14 +1,14 @@
 import React from "react";
-import { FaInstagram, FaFacebook, FaTwitter, FaTiktok } from "react-icons/fa";
-
+import { FaInstagram} from "react-icons/fa";
+import { BsTwitterX } from "react-icons/bs";
 const Footer = () => {
   return (
     <footer
       style={{
-        backgroundColor: "#021548",
+        backgroundColor: "#C19F62",
         color: "#fff",
         padding: "90px 0px",
-        borderBottom: "43px solid #007bff",
+        borderBottom: "43px solid #121212",
         minHeight: "20vh",
       }}
     >
@@ -26,17 +26,11 @@ const Footer = () => {
         </p>
       </div> */}
       <div style={{ display: "flex", justifyContent: "center", gap: 48 }}>
-        <a href="https://www.instagram.com/" style={{ color: "#fff" }}>
+        <a href="https://www.instagram.com/lukasdesignlab/?utm_source=qr&igsh=MTJjbDFjNHQxazhrNg%3D%3D" style={{ color: "#fff" }}>
           <FaInstagram size={24} />
         </a>
-        <a href="https://www.facebook.com/" style={{ color: "#fff" }}>
-          <FaFacebook size={24} />
-        </a>
-        <a href="https://www.twitter.com/" style={{ color: "#fff" }}>
-          <FaTwitter size={24} />
-        </a>
-        <a href="https://www.tiktok.com/" style={{ color: "#fff" }}>
-          <FaTiktok size={24} />
+        <a href="https://twitter.com/lukasdesignlab?s=09" style={{ color: "#fff" }}>
+          <BsTwitterX size={24} />
         </a>
       </div>
     </footer>

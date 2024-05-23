@@ -1,0 +1,150 @@
+.invoice-container {
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding-top: 120px;
+
+}
+
+.invoice-header {
+    padding-bottom: 48px;
+    margin-bottom: 48px;
+    display: flex;
+    width: '100%';
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 4px solid #C19F6245;
+}
+
+.invoice-header-h2 {
+    font-size: 48px
+}
+
+.invoice-details {
+    display: flex;
+    justify-content: space-between;
+}
+
+.customer-details,
+.order-info {
+    width: 45%;
+}
+
+.invoice-images {
+    margin-top: 20px;
+}
+
+.image-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    grid-gap: 10px;
+}
+
+.image-item {
+    width: 100%;
+    height: auto;
+}
+
+.invoice-chat {
+    margin-top: 20px;
+}
+
+.chat-message {
+    margin-bottom: 10px;
+}
+
+.invoice-header-p-id {
+    font-size: 14px;
+    margin: 0;
+    margin-top: -10px;
+    color: #C19F62;
+    background-color: #C19F6225;
+    padding: 12px 24px;
+    border-radius: 24px;
+    width: fit-content
+}
+
+.image-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.image-item {
+    max-width: 100%;
+    height: auto;
+    border: 2px solid transparent;
+    /* Set a transparent border initially */
+    transition: border-color 0.3s ease;
+    /* Add a smooth transition effect for the border */
+}
+
+.selected-image-item {
+    max-width: 64px;
+    height: auto;
+    border: 4px solid red;
+    /* Set a red border for the selected image */
+}
+
+.image-item {
+    max-width: 64px;
+    height: auto;
+}
+
+.big-display-container {
+    margin-top: 20px;
+}
+
+.big-display-image {
+    max-width: 100%;
+    height: auto;
+}
+
+.flex-orders {
+    display: flex;
+    flex-direction: row;
+    gap: 48px;
+    align-items: flex-start;
+}
+
+.flex-orders-div {
+    width: 50%;
+    align-items: flex-end;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+@media screen and (max-width: 768px) {
+    .flex-orders-div {
+        width: 100%;
+        align-items: flex-end;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+    }
+
+    .customer-details,
+    .order-info {
+        width: 100%;
+    }
+
+    .flex-orders-div {
+        width: 100%;
+    }
+
+
+    .invoice-header-h2 {
+        font-size: 24px;
+
+    }
+
+    .flex-orders {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+}
