@@ -6,11 +6,15 @@ import { useDropzone } from "react-dropzone";
 import Modal from "../Components/Modal/Modal";
 import { useDispatch } from "react-redux";
 import { profile } from "../../Redux/auth/auth";
+import { createOrder } from "../../Redux/order/order";
+import useCustomToasts from "../ToastNotifications/Toastify";
+import { useNavigate } from "react-router-dom";
 
 const ObjectDetection = () => {
   const [imageData, setImageData] = useState(null);
   const imageRef = useRef();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   // Convert pixels to centimeters
   const convertPixelsToCm = (pixels) => {
     const PPI = 96; // Assumed pixels per inch
@@ -18,6 +22,7 @@ const ObjectDetection = () => {
     const cm = inches * 2.54; // 1 inch = 2.54 cm
     return cm.toFixed(2); // Rounded to 2 decimal places
   };
+  const { showSuccessToast, showErrorToast } = useCustomToasts();
 
   // Classify the seating based on width and height
   const classifySeating = (widthCm, heightCm, objectClass) => {
@@ -107,6 +112,45 @@ const ObjectDetection = () => {
 
   const formattedUsername = formatUsername(user?.username);
 
+  const handleUploads = () => {
+    setLoading(true);
+    const formData = new FormData();
+    console.log(imageData?.url, "imageDataimageData");
+    console.log(file, "filefile");
+    if (Array?.isArray(imageData?.url)) {
+      imageData?.url.forEach((file) => {
+        formData.append("images", file);
+      });
+    } else {
+      formData.append("images", imageData?.url);
+    }
+    // Append other order data to the FormData object
+    formData.append("selectedLabel", label);
+    formData.append("description", description);
+    formData.append("deliveryOption", deliveryOption);
+
+    // Dispatch the createOrder action with formData
+    dispatch(createOrder(formData))
+      .then((response) => {
+        setLoading(false);
+        // Handle success
+        console.log("Request created successfully:", response);
+        if (response?.payload?.order?.description) {
+          showSuccessToast("Request Created Successfully");
+          navigate("/order");
+        } else {
+          showErrorToast("Failed to Upload Request");
+        }
+      })
+      .catch((error) => {
+        setLoading(true);
+        showErrorToast("Error Order Request");
+        console.error("Error Order Request:", error);
+      });
+
+    setModalOpen(true);
+  };
+
   const [modalOpen, setModalOpen] = useState(false);
   const Content = (
     <div>
@@ -148,10 +192,10 @@ const ObjectDetection = () => {
                   padding: `12px 18px`,
                   borderRadius: 4,
                   backgroundColor:
-                    deliveryOption === "Upholstery" ? "#C19F62" : "#80808019",
-                  color: deliveryOption === "Upholstery" ? "#fff" : "#000",
+                    choice === "Upholstery" ? "#C19F62" : "#80808019",
+                  color: choice === "Upholstery" ? "#fff" : "#000",
                 }}
-                className={deliveryOption === "Upholstery" ? "selected" : ""}
+                className={choice === "Upholstery" ? "selected" : ""}
                 onClick={() => handleChoice("Upholstery")}
               >
                 Upholstery
@@ -163,10 +207,10 @@ const ObjectDetection = () => {
                   padding: `12px 18px`,
                   borderRadius: 4,
                   backgroundColor:
-                    deliveryOption === "Cabinet" ? "#C19F62" : "#80808019",
-                  color: deliveryOption === "Cabinet" ? "#fff" : "#000",
+                    choice === "Cabinet" ? "#C19F62" : "#80808019",
+                  color: choice === "Cabinet" ? "#fff" : "#000",
                 }}
-                className={deliveryOption === "Cabinet" ? "selected" : ""}
+                className={choice === "Cabinet" ? "selected" : ""}
                 onClick={() => handleChoice("Cabinet")}
               >
                 Cabinet
@@ -196,10 +240,10 @@ const ObjectDetection = () => {
                   padding: `12px 18px`,
                   borderRadius: 4,
                   backgroundColor:
-                    deliveryOption === "l-shaped" ? "#C19F62" : "#80808019",
-                  color: deliveryOption === "l-shaped" ? "#fff" : "#000",
+                    shape === "l-shaped" ? "#C19F62" : "#80808019",
+                  color: shape === "l-shaped" ? "#fff" : "#000",
                 }}
-                className={deliveryOption === "l-shaped" ? "selected" : ""}
+                className={shape === "l-shaped" ? "selected" : ""}
                 onClick={() => handleShape("l-shaped")}
               >
                 L - Shaped
@@ -211,10 +255,10 @@ const ObjectDetection = () => {
                   padding: `12px 18px`,
                   borderRadius: 4,
                   backgroundColor:
-                    deliveryOption === "straight" ? "#C19F62" : "#80808019",
-                  color: deliveryOption === "straight" ? "#fff" : "#000",
+                    shape === "straight" ? "#C19F62" : "#80808019",
+                  color: shape === "straight" ? "#fff" : "#000",
                 }}
-                className={deliveryOption === "straight" ? "selected" : ""}
+                className={shape === "straight" ? "selected" : ""}
                 onClick={() => handleShape("straight")}
               >
                 Straight
@@ -230,8 +274,7 @@ const ObjectDetection = () => {
                 fontSize: 18,
               }}
             >
-              How many seaters
-              <span style={{ color: "#C19F62" }}>seaters </span>
+              How many <span style={{ color: "#C19F62" }}>Seaters </span>
               do you need?
             </h2>
             <div
@@ -245,12 +288,10 @@ const ObjectDetection = () => {
                   padding: `12px 18px`,
                   borderRadius: 4,
                   backgroundColor:
-                    deliveryOption === "single-seater"
-                      ? "#C19F62"
-                      : "#80808019",
-                  color: deliveryOption === "single-seater" ? "#fff" : "#000",
+                    seaters === "single-seater" ? "#C19F62" : "#80808019",
+                  color: seaters === "single-seater" ? "#fff" : "#000",
                 }}
-                className={deliveryOption === "single-seater" ? "selected" : ""}
+                className={seaters === "single-seater" ? "selected" : ""}
                 onClick={() => handleSeaters("single-seater")}
               >
                 Single Seater
@@ -262,12 +303,10 @@ const ObjectDetection = () => {
                   padding: `12px 18px`,
                   borderRadius: 4,
                   backgroundColor:
-                    deliveryOption === "double-seater"
-                      ? "#C19F62"
-                      : "#80808019",
-                  color: deliveryOption === "double-seater" ? "#fff" : "#000",
+                    seaters === "double-seater" ? "#C19F62" : "#80808019",
+                  color: seaters === "double-seater" ? "#fff" : "#000",
                 }}
-                className={deliveryOption === "double-seater" ? "selected" : ""}
+                className={seaters === "double-seater" ? "selected" : ""}
                 onClick={() => handleSeaters("double-seater")}
               >
                 Double Seater
@@ -284,18 +323,13 @@ const ObjectDetection = () => {
                   padding: `12px 18px`,
                   borderRadius: 4,
                   backgroundColor:
-                    deliveryOption === "double-and-single"
-                      ? "#C19F62"
-                      : "#80808019",
-                  color:
-                    deliveryOption === "double-and-single" ? "#fff" : "#000",
+                    seaters === "double-and-single" ? "#C19F62" : "#80808019",
+                  color: seaters === "double-and-single" ? "#fff" : "#000",
                 }}
-                className={
-                  deliveryOption === "double-and-single" ? "selected" : ""
-                }
+                className={seaters === "double-and-single" ? "selected" : ""}
                 onClick={() => handleSeaters("double-and-single")}
               >
-                Double Seater and A Single Seater
+                Double Seater + Single Seater
               </label>
 
               <label
@@ -305,13 +339,13 @@ const ObjectDetection = () => {
                   padding: `12px 18px`,
                   borderRadius: 4,
                   backgroundColor:
-                    deliveryOption === "three-single" ? "#C19F62" : "#80808019",
-                  color: deliveryOption === "three-single" ? "#fff" : "#000",
+                    seaters === "three-single" ? "#C19F62" : "#80808019",
+                  color: seaters === "three-single" ? "#fff" : "#000",
                 }}
-                className={deliveryOption === "three-single" ? "selected" : ""}
+                className={seaters === "three-single" ? "selected" : ""}
                 onClick={() => handleSeaters("three-single")}
               >
-                Three Seater and A Single Seater
+                Three Seater + Single Seater
               </label>
               <label
                 style={{
@@ -320,18 +354,13 @@ const ObjectDetection = () => {
                   padding: `12px 18px`,
                   borderRadius: 4,
                   backgroundColor:
-                    deliveryOption === "three-double-single"
-                      ? "#C19F62"
-                      : "#80808019",
-                  color:
-                    deliveryOption === "three-double-single" ? "#fff" : "#000",
+                    seaters === "three-double-single" ? "#C19F62" : "#80808019",
+                  color: seaters === "three-double-single" ? "#fff" : "#000",
                 }}
-                className={
-                  deliveryOption === "three-double-single" ? "selected" : ""
-                }
+                className={seaters === "three-double-single" ? "selected" : ""}
                 onClick={() => handleSeaters("three-double-single")}
               >
-                Three Seater and A double seater, A Single Seater
+                Three Seater + double seater + Single Seater
               </label>
             </div>
           </div>

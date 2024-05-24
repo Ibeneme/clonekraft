@@ -11,14 +11,16 @@ const ImageUpload = () => {
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [error, setError] = useState("");
   const [description, setDescription] = useState("");
-  const [label, setLabel] = useState(""); // State for selected label
+  const [label, setLabel] = useState("");
+
+  
   const [deliveryOption, setDeliveryOption] = useState(""); // State for selected delivery option
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const [user, setUser] = useState([]);
   const { showSuccessToast, showErrorToast } = useCustomToasts();
 
-  //const { showSuccessToast, showErrorToast } = useCustomToasts();
+
   const handleFetchUser = () => {
     dispatch(profile())
       .then((response) => {

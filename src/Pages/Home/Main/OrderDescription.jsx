@@ -130,7 +130,7 @@ const OrderDescriptionPage = () => {
                   minimumFractionDigits: 2,
                   maximumFractionDigits: 2,
                 })} `
-              : "Pls set a Price"}
+              : "₦235,000"}
           </h1>
           <div>
             <br />

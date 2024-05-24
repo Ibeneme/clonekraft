@@ -225,9 +225,9 @@ const OrderPage = () => {
                       display: "flex",
                       gap: 12,
                     }}
-                    onClick={() => handleOrderClicks(order)}    
+                    onClick={() => handleOrderClicks(order)}
                   >
-                    <span className="hide-bid"> Negotiate your Pricing</span>{" "}
+                    <span className="hide-bid"> Message Admin</span>{" "}
                     <span>
                       {" "}
                       <BsChatFill />
