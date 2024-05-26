@@ -26,6 +26,7 @@ import AdminOrders from "./Admin/Orders/Orders";
 import AdminOrderDescriptionPage from "./Admin/Orders/OrderDescription";
 import Chat from "./Admin/Chat/Chat";
 import ObjectDetection from "./Pages/ObjeectDetection/ObjectDetection";
+import PaymentSuccess from "./Pages/ObjeectDetection/PaymentSuccess";
 
 function App() {
   useEffect(() => {
@@ -221,6 +222,7 @@ function App() {
         <Route path="/reset" element={<ResetPassword />} />
         <Route path="/otp-new" element={<OTPNew />} />
         <Route path="/test" element={<ObjectDetection />} />
+        <Route path="/sucess" element={<PaymentSuccess />} />
         <Route
           path="/admin"
           element={

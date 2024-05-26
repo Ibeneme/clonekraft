@@ -9,8 +9,23 @@ import { profile } from "../../Redux/auth/auth";
 import { createOrder } from "../../Redux/order/order";
 import useCustomToasts from "../ToastNotifications/Toastify";
 import { useNavigate } from "react-router-dom";
+import woodImage from "../../assets/woods/wooda.png";
+import woodImageb from "../../assets/woods/woodb.png";
+import woodImagec from "../../assets/woods/woodc.png";
+import woodImaged from "../../assets/woods/woodd.png";
+import woodImagee from "../../assets/woods/woode.png";
+import woodImagef from "../../assets/woods/woodf.png";
+import PayButton from "./PayButton";
+// import woodImageg from "../../assets/woods/woodg.png";
+// import woodImageh from "../../assets/woods/woodh.png";
+// import woodImagek from "../../assets/woods/woodi.png";
+// import woodImagei from "../../assets/woods/woodk.png";
 
 const ObjectDetection = () => {
+  const sampleTotalAmount = 100; // amount in your local currency units
+  const sampleUserEmail = "ibenemeikenna2021@gmail.com";
+  const sampleReference = "ibeikennadd2ddd021ssref123456"; // you should generate unique references
+
   const [imageData, setImageData] = useState(null);
   const imageRef = useRef();
   const dispatch = useDispatch();
@@ -87,6 +102,10 @@ const ObjectDetection = () => {
   const [shape, setShape] = useState("");
   const [seaters, setSeaters] = useState("");
 
+  const [table, setTable] = useState("");
+  const [width, setWidth] = useState("");
+  const [height, setHeight] = useState("");
+
   const handleFetchUser = () => {
     dispatch(profile())
       .then((response) => {
@@ -159,7 +178,7 @@ const ObjectDetection = () => {
           <h2
             className="vw-text"
             style={{
-              fontSize: 48,
+              fontSize: 32,
             }}
           >
             <span style={{ color: "#C19F62" }}>
@@ -174,12 +193,12 @@ const ObjectDetection = () => {
             <h2
               className="vw-text"
               style={{
-                fontSize: 18,
+                fontSize: 16,
               }}
             >
               Which
               <span style={{ color: "#C19F62" }}> Furniture </span>
-              do you want{" "}
+              do you want?{" "}
             </h2>
             <div
               className="delivery-options"
@@ -189,7 +208,8 @@ const ObjectDetection = () => {
                 style={{
                   marginRight: "10px",
                   cursor: "pointer",
-                  padding: `12px 18px`,
+                  padding: `10px 14px`,
+                  fontSize: 12,
                   borderRadius: 4,
                   backgroundColor:
                     choice === "Upholstery" ? "#C19F62" : "#80808019",
@@ -204,7 +224,8 @@ const ObjectDetection = () => {
                 style={{
                   marginRight: "10px",
                   cursor: "pointer",
-                  padding: `12px 18px`,
+                  padding: `10px 14px`,
+                  fontSize: 12,
                   borderRadius: 4,
                   backgroundColor:
                     choice === "Cabinet" ? "#C19F62" : "#80808019",
@@ -218,157 +239,410 @@ const ObjectDetection = () => {
             </div>
           </div>
 
-          <div style={{ marginBottom: 48 }}>
-            <br /> <br />
-            <h2
-              className="vw-text"
-              style={{
-                fontSize: 18,
-              }}
-            >
-              How do you want it shaped
-              <span style={{ color: "#C19F62" }}> shaped ?</span>
-            </h2>
-            <div
-              className="delivery-options"
-              style={{ display: "flex", marginTop: 12 }}
-            >
-              <label
-                style={{
-                  marginRight: "10px",
-                  cursor: "pointer",
-                  padding: `12px 18px`,
-                  borderRadius: 4,
-                  backgroundColor:
-                    shape === "l-shaped" ? "#C19F62" : "#80808019",
-                  color: shape === "l-shaped" ? "#fff" : "#000",
-                }}
-                className={shape === "l-shaped" ? "selected" : ""}
-                onClick={() => handleShape("l-shaped")}
-              >
-                L - Shaped
-              </label>
-              <label
-                style={{
-                  marginRight: "10px",
-                  cursor: "pointer",
-                  padding: `12px 18px`,
-                  borderRadius: 4,
-                  backgroundColor:
-                    shape === "straight" ? "#C19F62" : "#80808019",
-                  color: shape === "straight" ? "#fff" : "#000",
-                }}
-                className={shape === "straight" ? "selected" : ""}
-                onClick={() => handleShape("straight")}
-              >
-                Straight
-              </label>
-            </div>
-          </div>
+          {choice === "Upholstery" ? (
+            <>
+              <div style={{ marginBottom: 48 }}>
+                <h2
+                  className="vw-text"
+                  style={{
+                    fontSize: 16,
+                  }}
+                >
+                  How do you want it
+                  <span style={{ color: "#C19F62" }}> shaped ?</span>
+                </h2>
+                <div
+                  className="delivery-options"
+                  style={{ display: "flex", marginTop: 12 }}
+                >
+                  <label
+                    style={{
+                      marginRight: "10px",
+                      cursor: "pointer",
+                      padding: `10px 14px`,
+                      fontSize: 12,
+                      borderRadius: 4,
+                      backgroundColor:
+                        shape === "l-shaped" ? "#C19F62" : "#80808019",
+                      color: shape === "l-shaped" ? "#fff" : "#000",
+                    }}
+                    className={shape === "l-shaped" ? "selected" : ""}
+                    onClick={() => handleShape("l-shaped")}
+                  >
+                    L - Shaped
+                  </label>
+                  <label
+                    style={{
+                      marginRight: "10px",
+                      cursor: "pointer",
+                      padding: `10px 14px`,
+                      fontSize: 12,
+                      borderRadius: 4,
+                      backgroundColor:
+                        shape === "straight" ? "#C19F62" : "#80808019",
+                      color: shape === "straight" ? "#fff" : "#000",
+                    }}
+                    className={shape === "straight" ? "selected" : ""}
+                    onClick={() => handleShape("straight")}
+                  >
+                    Straight
+                  </label>
+                  <label
+                    style={{
+                      marginRight: "10px",
+                      cursor: "pointer",
+                      padding: `10px 14px`,
+                      fontSize: 12,
+                      borderRadius: 4,
+                      backgroundColor:
+                        shape === "none" ? "#C19F62" : "#80808019",
+                      color: shape === "none" ? "#fff" : "#000",
+                    }}
+                    className={shape === "none" ? "selected" : ""}
+                    onClick={() => handleShape("none")}
+                  >
+                    None
+                  </label>
+                </div>
+              </div>
 
-          <div style={{ marginBottom: 48 }}>
-            <br /> <br />
-            <h2
-              className="vw-text"
-              style={{
-                fontSize: 18,
-              }}
-            >
-              How many <span style={{ color: "#C19F62" }}>Seaters </span>
-              do you need?
-            </h2>
-            <div
-              className="delivery-options"
-              style={{ display: "flex", marginTop: 12 }}
-            >
-              <label
-                style={{
-                  marginRight: "10px",
-                  cursor: "pointer",
-                  padding: `12px 18px`,
-                  borderRadius: 4,
-                  backgroundColor:
-                    seaters === "single-seater" ? "#C19F62" : "#80808019",
-                  color: seaters === "single-seater" ? "#fff" : "#000",
-                }}
-                className={seaters === "single-seater" ? "selected" : ""}
-                onClick={() => handleSeaters("single-seater")}
-              >
-                Single Seater
-              </label>
-              <label
-                style={{
-                  marginRight: "10px",
-                  cursor: "pointer",
-                  padding: `12px 18px`,
-                  borderRadius: 4,
-                  backgroundColor:
-                    seaters === "double-seater" ? "#C19F62" : "#80808019",
-                  color: seaters === "double-seater" ? "#fff" : "#000",
-                }}
-                className={seaters === "double-seater" ? "selected" : ""}
-                onClick={() => handleSeaters("double-seater")}
-              >
-                Double Seater
-              </label>
-            </div>
-            <div
-              className="delivery-options"
-              style={{ display: "flex", marginTop: 12 }}
-            >
-              <label
-                style={{
-                  marginRight: "10px",
-                  cursor: "pointer",
-                  padding: `12px 18px`,
-                  borderRadius: 4,
-                  backgroundColor:
-                    seaters === "double-and-single" ? "#C19F62" : "#80808019",
-                  color: seaters === "double-and-single" ? "#fff" : "#000",
-                }}
-                className={seaters === "double-and-single" ? "selected" : ""}
-                onClick={() => handleSeaters("double-and-single")}
-              >
-                Double Seater + Single Seater
-              </label>
+              <div style={{ marginBottom: 48 }}>
+                <h2
+                  className="vw-text"
+                  style={{
+                    fontSize: 16,
+                  }}
+                >
+                  How many <span style={{ color: "#C19F62" }}>Seaters </span>
+                  do you need?
+                </h2>
+                <div
+                  className="delivery-options"
+                  style={{ display: "flex", marginTop: 12 }}
+                >
+                  <label
+                    style={{
+                      marginRight: "10px",
+                      cursor: "pointer",
+                      padding: `10px 14px`,
+                      fontSize: 12,
+                      borderRadius: 4,
+                      backgroundColor:
+                        seaters === "single-seater" ? "#C19F62" : "#80808019",
+                      color: seaters === "single-seater" ? "#fff" : "#000",
+                    }}
+                    className={seaters === "single-seater" ? "selected" : ""}
+                    onClick={() => handleSeaters("single-seater")}
+                  >
+                    Single Seater
+                  </label>
+                  <label
+                    style={{
+                      marginRight: "10px",
+                      cursor: "pointer",
+                      padding: `10px 14px`,
+                      fontSize: 12,
+                      borderRadius: 4,
+                      backgroundColor:
+                        seaters === "double-seater" ? "#C19F62" : "#80808019",
+                      color: seaters === "double-seater" ? "#fff" : "#000",
+                    }}
+                    className={seaters === "double-seater" ? "selected" : ""}
+                    onClick={() => handleSeaters("double-seater")}
+                  >
+                    Double Seater
+                  </label>
+                </div>
+                <div
+                  className="delivery-options"
+                  style={{ display: "flex", marginTop: 12 }}
+                >
+                  <label
+                    style={{
+                      marginRight: "10px",
+                      cursor: "pointer",
+                      padding: `10px 14px`,
+                      fontSize: 12,
+                      borderRadius: 4,
+                      backgroundColor:
+                        seaters === "double-and-single"
+                          ? "#C19F62"
+                          : "#80808019",
+                      color: seaters === "double-and-single" ? "#fff" : "#000",
+                    }}
+                    className={
+                      seaters === "double-and-single" ? "selected" : ""
+                    }
+                    onClick={() => handleSeaters("double-and-single")}
+                  >
+                    Double & Single Seater
+                  </label>
 
-              <label
-                style={{
-                  marginRight: "10px",
-                  cursor: "pointer",
-                  padding: `12px 18px`,
-                  borderRadius: 4,
-                  backgroundColor:
-                    seaters === "three-single" ? "#C19F62" : "#80808019",
-                  color: seaters === "three-single" ? "#fff" : "#000",
-                }}
-                className={seaters === "three-single" ? "selected" : ""}
-                onClick={() => handleSeaters("three-single")}
-              >
-                Three Seater + Single Seater
-              </label>
-              <label
-                style={{
-                  marginRight: "10px",
-                  cursor: "pointer",
-                  padding: `12px 18px`,
-                  borderRadius: 4,
-                  backgroundColor:
-                    seaters === "three-double-single" ? "#C19F62" : "#80808019",
-                  color: seaters === "three-double-single" ? "#fff" : "#000",
-                }}
-                className={seaters === "three-double-single" ? "selected" : ""}
-                onClick={() => handleSeaters("three-double-single")}
-              >
-                Three Seater + double seater + Single Seater
-              </label>
-            </div>
-          </div>
+                  <label
+                    style={{
+                      marginRight: "10px",
+                      cursor: "pointer",
+                      padding: `10px 14px`,
+                      fontSize: 12,
+                      borderRadius: 4,
+                      backgroundColor:
+                        seaters === "three-single" ? "#C19F62" : "#80808019",
+                      color: seaters === "three-single" ? "#fff" : "#000",
+                    }}
+                    className={seaters === "three-single" ? "selected" : ""}
+                    onClick={() => handleSeaters("three-single")}
+                  >
+                    Three Seater & Single Seater only
+                  </label>
+                  <label
+                    style={{
+                      marginRight: "10px",
+                      cursor: "pointer",
+                      padding: `10px 14px`,
+                      fontSize: 12,
+                      borderRadius: 4,
+                      backgroundColor:
+                        seaters === "three-double-single"
+                          ? "#C19F62"
+                          : "#80808019",
+                      color:
+                        seaters === "three-double-single" ? "#fff" : "#000",
+                    }}
+                    className={
+                      seaters === "three-double-single" ? "selected" : ""
+                    }
+                    onClick={() => handleSeaters("three-double-single")}
+                  >
+                    Three Seater + double seater + Single Seater
+                  </label>
+                </div>
+              </div>
+            </>
+          ) : (
+            <>
+              <div style={{ marginBottom: 48 }}>
+                <h2
+                  className="vw-text"
+                  style={{
+                    fontSize: 16,
+                  }}
+                >
+                  How do you want it
+                  <span style={{ color: "#C19F62" }}> shaped ?</span>
+                </h2>
+                <div
+                  className="delivery-options"
+                  style={{ display: "flex", marginTop: 12 }}
+                >
+                  <label
+                    style={{
+                      marginRight: "10px",
+                      cursor: "pointer",
+                      padding: `10px 14px`,
+                      fontSize: 12,
+                      borderRadius: 4,
+                      backgroundColor:
+                        shape === "Kitchen-cabinet" ? "#C19F62" : "#80808019",
+                      color: shape === "Kitchen-cabinet" ? "#fff" : "#000",
+                    }}
+                    className={shape === "Kitchen-cabinet" ? "selected" : ""}
+                    onClick={() => handleShape("Kitchen-cabinet")}
+                  >
+                    Kitchen Cabinet
+                  </label>
+
+                  <label
+                    style={{
+                      marginRight: "10px",
+                      cursor: "pointer",
+                      padding: `10px 14px`,
+                      fontSize: 12,
+                      borderRadius: 4,
+                      backgroundColor:
+                        shape === "center-table" ? "#C19F62" : "#80808019",
+                      color: shape === "center-table" ? "#fff" : "#000",
+                    }}
+                    className={shape === "center-table" ? "selected" : ""}
+                    onClick={() => handleShape("center-table")}
+                  >
+                    Center Table
+                  </label>
+                  <label
+                    style={{
+                      marginRight: "10px",
+                      cursor: "pointer",
+                      padding: `10px 14px`,
+                      fontSize: 12,
+                      borderRadius: 4,
+                      backgroundColor:
+                        shape === "Reading-table" ? "#C19F62" : "#80808019",
+                      color: shape === "Reading-table" ? "#fff" : "#000",
+                    }}
+                    className={shape === "Reading-table" ? "selected" : ""}
+                    onClick={() => handleShape("Reading-table")}
+                  >
+                    Reading Table
+                  </label>
+                </div>
+              </div>
+
+              <div style={{ marginBottom: 48 }}>
+                <h2 className="vw-text" style={{ fontSize: 18 }}>
+                  Which type of wood do you choose
+                  <span style={{ color: "#C19F62" }}> </span>
+                </h2>
+                <div
+                  className="delivery-options"
+                  style={{ display: "flex", marginTop: 12 }}
+                >
+                  <label
+                    style={{
+                      marginRight: "10px",
+                      cursor: "pointer",
+                      padding: `10px 14px`,
+                      fontSize: 12,
+                      borderRadius: 4,
+                      backgroundColor:
+                        seaters === "single-seater" ? "#C19F62" : "#80808019",
+                      color: seaters === "single-seater" ? "#fff" : "#000",
+                    }}
+                    className={seaters === "single-seater" ? "selected" : ""}
+                    onClick={() => handleSeaters("single-seater")}
+                  >
+                    <img
+                      src={woodImage}
+                      alt="Single Seater"
+                      style={{ width: "100px", height: "auto" }}
+                    />
+                  </label>
+                  <label
+                    style={{
+                      marginRight: "10px",
+                      cursor: "pointer",
+                      padding: `10px 14px`,
+                      fontSize: 12,
+                      borderRadius: 4,
+                      backgroundColor:
+                        seaters === "double-seater" ? "#C19F62" : "#80808019",
+                      color: seaters === "double-seater" ? "#fff" : "#000",
+                    }}
+                    className={seaters === "double-seater" ? "selected" : ""}
+                    onClick={() => handleSeaters("double-seater")}
+                  >
+                    <img
+                      src={woodImageb}
+                      //src="path/to/your/double-seater.jpg"
+                      alt="Double Seater"
+                      style={{ width: "100px", height: "auto" }}
+                    />
+                  </label>
+                  <label
+                    style={{
+                      marginRight: "10px",
+                      cursor: "pointer",
+                      padding: `10px 14px`,
+                      fontSize: 12,
+                      borderRadius: 4,
+                      backgroundColor:
+                        seaters === "double-seater" ? "#C19F62" : "#80808019",
+                      color: seaters === "double-seater" ? "#fff" : "#000",
+                    }}
+                    className={seaters === "double-seater" ? "selected" : ""}
+                    onClick={() => handleSeaters("double-seater")}
+                  >
+                    <img
+                      src={woodImagec}
+                      //src="path/to/your/double-seater.jpg"
+                      alt="Double Seater"
+                      style={{ width: "100px", height: "auto" }}
+                    />
+                  </label>
+                </div>
+                <div
+                  className="delivery-options"
+                  style={{ display: "flex", marginTop: 12 }}
+                >
+                  <label
+                    style={{
+                      marginRight: "10px",
+                      cursor: "pointer",
+                      padding: `10px 14px`,
+                      fontSize: 12,
+                      borderRadius: 4,
+                      backgroundColor:
+                        seaters === "double-and-single"
+                          ? "#C19F62"
+                          : "#80808019",
+                      color: seaters === "double-and-single" ? "#fff" : "#000",
+                    }}
+                    className={
+                      seaters === "double-and-single" ? "selected" : ""
+                    }
+                    onClick={() => handleSeaters("double-and-single")}
+                  >
+                    <img
+                      src={woodImaged}
+                      //src="path/to/your/double-and-single.jpg"
+                      alt="Double & Single Seater"
+                      style={{ width: "100px", height: "auto" }}
+                    />
+                  </label>
+                  <label
+                    style={{
+                      marginRight: "10px",
+                      cursor: "pointer",
+                      padding: `10px 14px`,
+                      fontSize: 12,
+                      borderRadius: 4,
+                      backgroundColor:
+                        seaters === "three-single" ? "#C19F62" : "#80808019",
+                      color: seaters === "three-single" ? "#fff" : "#000",
+                    }}
+                    className={seaters === "three-single" ? "selected" : ""}
+                    onClick={() => handleSeaters("three-single")}
+                  >
+                    <img
+                      src={woodImagee}
+                      //src="path/to/your/three-single.jpg"
+                      alt="Three & Single Seater"
+                      style={{ width: "100px", height: "auto" }}
+                    />
+                  </label>
+                  <label
+                    style={{
+                      marginRight: "10px",
+                      cursor: "pointer",
+                      padding: `10px 14px`,
+                      fontSize: 12,
+                      borderRadius: 4,
+                      backgroundColor:
+                        seaters === "three-double-single"
+                          ? "#C19F62"
+                          : "#80808019",
+                      color:
+                        seaters === "three-double-single" ? "#fff" : "#000",
+                    }}
+                    className={
+                      seaters === "three-double-single" ? "selected" : ""
+                    }
+                    onClick={() => handleSeaters("three-double-single")}
+                  >
+                    <img
+                      src={woodImagef}
+                      //src="path/to/your/three-double-single.jpg"
+                      alt="Three + Double + Single Seater"
+                      style={{ width: "100px", height: "auto" }}
+                    />
+                  </label>
+                </div>
+              </div>
+            </>
+          )}
 
           <h2
             className="vw-text"
             style={{
-              fontSize: 18,
+              fontSize: 16,
             }}
           >
             Choose your{" "}
@@ -385,7 +659,8 @@ const ObjectDetection = () => {
               style={{
                 marginRight: "10px",
                 cursor: "pointer",
-                padding: `12px 18px`,
+                padding: `10px 14px`,
+                fontSize: 12,
                 borderRadius: 4,
                 backgroundColor: label === "basic" ? "#C19F62" : "#80808019",
                 color: label === "basic" ? "#fff" : "#000",
@@ -399,7 +674,8 @@ const ObjectDetection = () => {
               style={{
                 marginRight: "10px",
                 cursor: "pointer",
-                padding: `12px 18px`,
+                padding: `10px 14px`,
+                fontSize: 12,
                 borderRadius: 4,
                 color: label === "standard" ? "#fff" : "#000",
                 backgroundColor: label === "standard" ? "#C19F62" : "#80808019",
@@ -413,7 +689,8 @@ const ObjectDetection = () => {
               style={{
                 marginRight: "10px",
                 cursor: "pointer",
-                padding: `12px 18px`,
+                padding: `10px 14px`,
+                fontSize: 12,
                 borderRadius: 4,
                 color: label === "premium" ? "#fff" : "#000",
                 backgroundColor: label === "premium" ? "#C19F62" : "#80808019",
@@ -427,7 +704,8 @@ const ObjectDetection = () => {
               style={{
                 marginRight: "10px",
                 cursor: "pointer",
-                padding: `12px 18px`,
+                padding: `10px 14px`,
+                fontSize: 12,
                 borderRadius: 4,
                 color: label === "elite" ? "#fff" : "#000",
                 backgroundColor: label === "elite" ? "#C19F62" : "#80808019",
@@ -442,7 +720,7 @@ const ObjectDetection = () => {
             <h2
               className="vw-text"
               style={{
-                fontSize: 18,
+                fontSize: 16,
               }}
             >
               Select
@@ -463,7 +741,8 @@ const ObjectDetection = () => {
                 style={{
                   marginRight: "10px",
                   cursor: "pointer",
-                  padding: `12px 18px`,
+                  padding: `10px 14px`,
+                  fontSize: 12,
                   borderRadius: 4,
                   backgroundColor:
                     deliveryOption === 14 ? "#C19F62" : "#80808019",
@@ -478,7 +757,8 @@ const ObjectDetection = () => {
                 style={{
                   marginRight: "10px",
                   cursor: "pointer",
-                  padding: `12px 18px`,
+                  padding: `10px 14px`,
+                  fontSize: 12,
                   borderRadius: 4,
                   backgroundColor:
                     deliveryOption === 28 ? "#C19F62" : "#80808019",
@@ -493,7 +773,8 @@ const ObjectDetection = () => {
                 style={{
                   marginRight: "10px",
                   cursor: "pointer",
-                  padding: `12px 18px`,
+                  padding: `10px 14px`,
+                  fontSize: 12,
                   borderRadius: 4,
                   backgroundColor:
                     deliveryOption === 42 ? "#C19F62" : "#80808019",
@@ -508,7 +789,8 @@ const ObjectDetection = () => {
                 style={{
                   marginRight: "10px",
                   cursor: "pointer",
-                  padding: `12px 18px`,
+                  padding: `10px 14px`,
+                  fontSize: 12,
                   borderRadius: 4,
                   backgroundColor:
                     deliveryOption === 60 ? "#C19F62" : "#80808019",
@@ -526,7 +808,7 @@ const ObjectDetection = () => {
             <h2
               className="vw-text"
               style={{
-                fontSize: 18,
+                fontSize: 16,
               }}
             >
               Tell us, what's your{" "}
@@ -542,6 +824,13 @@ const ObjectDetection = () => {
           </div>
 
           <br />
+
+          <h1>Pay with Paystack</h1>
+          <PayButton
+            totalAmount={sampleTotalAmount}
+            userEmail={sampleUserEmail}
+            reference={sampleReference}
+          />
 
           {deliveryOption && label && description ? (
             <div style={{ cursor: "pointer", marginTop: 40, marginBottom: 96 }}>
