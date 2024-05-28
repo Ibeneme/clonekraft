@@ -4,6 +4,20 @@ import { useNavigate } from "react-router-dom";
 
 const SectionIII = () => {
   const navigate = useNavigate();
+
+  const handleClick = () => {
+    // Check if the token exists in localStorage
+    const token = localStorage.getItem("clone_kraft_user_token");
+
+    if (token) {
+      // If the token exists, redirect to the /home page
+      navigate("/home");
+    } else {
+      // If the token does not exist, redirect to the /login page
+      navigate("/login");
+    }
+  };
+
   return (
     <div className="hero" style={{ minHeight: "100vh" }}>
       <div className="hero-flexx">
@@ -42,7 +56,7 @@ const SectionIII = () => {
               marginLeft: 16,
             }}
           >
-            We are Designs
+            Ready to Get Started?
           </h1>
           <p
             style={{
@@ -53,11 +67,13 @@ const SectionIII = () => {
               //maxWidth: 500,
             }}
           >
-            From sleek minimalist designs to bold statement pieces, each
-            creation is meticulously crafted with an emphasis on quality
-            materials and attention to detail. Step into our world of endless
-            possibilities, where every curve, every texture, and every hue tells
-            a story waiting to be discovered.
+            Transform your furniture inspiration into a tangible piece that fits
+            perfectly in your space. Upload your image now and let us take care
+            of the rest.
+            <br />
+            We’re here to help! Whether you need more information about our
+            process or have specific requirements for your furniture piece, feel
+            free to reach out.
           </p>
           <div
             data-aos="zoom-in"
@@ -68,7 +84,7 @@ const SectionIII = () => {
                 //marginTop: 32,
                 flexDirection: "column",
               }}
-              onClick={() => navigate("/")}
+              onClick={handleClick}
             >
               <div
                 className="div-btn-auth"
@@ -79,7 +95,7 @@ const SectionIII = () => {
                 }}
               ></div>
               <button
-           onClick={() => navigate("/home")}
+                onClick={handleClick}
                 className="btn-auth"
                 style={{
                   marginTop: -14,

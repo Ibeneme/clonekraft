@@ -11,7 +11,7 @@ import Footer from "./Pages/Home/Footer";
 import Gallery from "./Pages/Home/Main/Gallery";
 import { useEffect } from "react";
 import ProfilePage from "./Pages/Home/Main/Profile";
-import ImageUpload from "./Pages/Home/Main/ImageUpload";
+//import ImageUpload from "./Pages/Home/Main/ImageUpload";
 import ChatPage from "./Pages/Home/Main/ChatPage";
 import Index from "./Pages/LandingPage/Index";
 import AOS from "aos";
@@ -135,7 +135,7 @@ function App() {
           element={
             <ProtectedRoutes>
               <Navbar />
-              <ImageUpload />
+              <ObjectDetection />
               <Footer />
             </ProtectedRoutes>
           }
@@ -221,7 +221,14 @@ function App() {
         <Route path="/otp" element={<OTP />} />
         <Route path="/reset" element={<ResetPassword />} />
         <Route path="/otp-new" element={<OTPNew />} />
-        <Route path="/test" element={<ObjectDetection />} />
+        <Route
+          path="/upload"
+          element={
+            <>
+              <Navbar /> <ObjectDetection /> <br /> <Footer />
+            </>
+          }
+        />
         <Route path="/sucess" element={<PaymentSuccess />} />
         <Route
           path="/admin"

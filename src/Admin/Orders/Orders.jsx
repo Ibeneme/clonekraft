@@ -33,7 +33,6 @@ const AdminOrders = () => {
         setLoading(false);
       });
   };
-
   const filteredOrders = () => {
     switch (filter) {
       case "inProgress":

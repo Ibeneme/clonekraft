@@ -8,6 +8,391 @@ import { useDispatch } from "react-redux";
 import { profile } from "../../Redux/auth/auth";
 
 const ObjectDetection = () => {
+
+
+  const handleUploads = () => {
+    setLoading(true);
+
+    if (choice === "Upholstery") {
+      if (styleOfChair === "Scandinavian") {
+        if (shape === "straight" || "l-shaped" || "none") {
+          if (
+            seaters.includes("single-seater-two") &&
+            seaters.includes("double-seater") &&
+            seaters.includes("three-seater")
+          ) {
+            if (label === "Basic") {
+              setPriceEstimater(150000 * 2 + 300000 + 300000);
+            } else if (label === "Standard") {
+              setPriceEstimater(200000 * 2 + 330000 + 350000);
+            } else if (label === "Elite") {
+              setPriceEstimater(270000 * 2 + 450000 + 450000);
+            } else if (label === "Premium") {
+              setPriceEstimater(350000 * 2 + 500000 + 650000);
+            }
+          } else if (
+            seaters.includes("single-seater-two") &&
+            seaters.includes("double-seater")
+          ) {
+            if (label === "Basic") {
+              setPriceEstimater(150000 * 2 + 300000);
+            } else if (label === "Standard") {
+              setPriceEstimater(200000 * 2 + 330000);
+            } else if (label === "Elite") {
+              setPriceEstimater(270000 * 2 + 450000);
+            } else if (label === "Premium") {
+              setPriceEstimater(350000 * 2 + 500000);
+            }
+          } else if (
+            seaters.includes("single-seater-two") &&
+            seaters.includes("three-seater")
+          ) {
+            if (label === "Basic") {
+              setPriceEstimater(150000 * 2 + 300000);
+            } else if (label === "Standard") {
+              setPriceEstimater(200000 * 2 + 350000);
+            } else if (label === "Elite") {
+              setPriceEstimater(270000 * 2 + 450000);
+            } else if (label === "Premium") {
+              setPriceEstimater(350000 * 2 + 650000);
+            }
+          } else if (
+            seaters.includes("double-seater") &&
+            seaters.includes("three-seater")
+          ) {
+            if (label === "Basic") {
+              setPriceEstimater(300000 + 300000);
+            } else if (label === "Standard") {
+              setPriceEstimater(330000 + 350000);
+            } else if (label === "Elite") {
+              setPriceEstimater(450000 + 450000);
+            } else if (label === "Premium") {
+              setPriceEstimater(500000 + 650000);
+            }
+          } else if (seaters.includes("single-seater-two")) {
+            if (label === "Basic") {
+              setPriceEstimater(150000 * 2);
+            } else if (label === "Standard") {
+              setPriceEstimater(200000 * 2);
+            } else if (label === "Elite") {
+              setPriceEstimater(270000 * 2);
+            } else if (label === "Premium") {
+              setPriceEstimater(350000 * 2);
+            }
+          } else if (
+            seaters.includes("single-seater") &&
+            seaters.includes("double-seater") &&
+            seaters.includes("three-seater")
+          ) {
+            if (label === "Basic") {
+              setPriceEstimater(150000 + 300000 + 300000);
+            } else if (label === "Standard") {
+              setPriceEstimater(200000 + 330000 + 350000);
+            } else if (label === "Elite") {
+              setPriceEstimater(270000 + 450000 + 450000);
+            } else if (label === "Premium") {
+              setPriceEstimater(350000 + 500000 + 650000);
+            }
+          } else if (
+            seaters.includes("single-seater") &&
+            seaters.includes("double-seater")
+          ) {
+            if (label === "Basic") {
+              setPriceEstimater(150000 + 300000);
+            } else if (label === "Standard") {
+              setPriceEstimater(200000 + 330000);
+            } else if (label === "Elite") {
+              setPriceEstimater(270000 + 450000);
+            } else if (label === "Premium") {
+              setPriceEstimater(350000 + 500000);
+            }
+          } else if (
+            seaters.includes("single-seater") &&
+            seaters.includes("three-seater")
+          ) {
+            if (label === "Basic") {
+              setPriceEstimater(150000 + 300000);
+            } else if (label === "Standard") {
+              setPriceEstimater(200000 + 350000);
+            } else if (label === "Elite") {
+              setPriceEstimater(270000 + 450000);
+            } else if (label === "Premium") {
+              setPriceEstimater(350000 + 650000);
+            }
+          } else if (seaters.includes("three-seater")) {
+            if (label === "Basic") {
+              setPriceEstimater(300000);
+            } else if (label === "Standard") {
+              setPriceEstimater(350000);
+            } else if (label === "Elite") {
+              setPriceEstimater(450000);
+            } else if (label === "Premium") {
+              setPriceEstimater(650000);
+            }
+          }
+        }
+      } else if (styleOfChair === "Contemporary") {
+        if (shape === "straight" || "l-shaped" || "none") {
+          if (
+            seaters.includes("single-seater-two") &&
+            seaters.includes("double-seater") &&
+            seaters.includes("three-seater")
+          ) {
+            if (label === "Basic") {
+              setPriceEstimater(150000 * 2 + 300000 + 300000);
+            } else if (label === "Standard") {
+              setPriceEstimater(200000 * 2 + 330000 + 350000);
+            } else if (label === "Elite") {
+              setPriceEstimater(270000 * 2 + 450000 + 450000);
+            } else if (label === "Premium") {
+              setPriceEstimater(350000 * 2 + 500000 + 650000);
+            }
+          } else if (
+            seaters.includes("single-seater-two") &&
+            seaters.includes("double-seater")
+          ) {
+            if (label === "Basic") {
+              setPriceEstimater(150000 * 2 + 300000);
+            } else if (label === "Standard") {
+              setPriceEstimater(200000 * 2 + 330000);
+            } else if (label === "Elite") {
+              setPriceEstimater(270000 * 2 + 450000);
+            } else if (label === "Premium") {
+              setPriceEstimater(350000 * 2 + 500000);
+            }
+          } else if (
+            seaters.includes("single-seater-two") &&
+            seaters.includes("three-seater")
+          ) {
+            if (label === "Basic") {
+              setPriceEstimater(150000 * 2 + 300000);
+            } else if (label === "Standard") {
+              setPriceEstimater(200000 * 2 + 350000);
+            } else if (label === "Elite") {
+              setPriceEstimater(270000 * 2 + 450000);
+            } else if (label === "Premium") {
+              setPriceEstimater(350000 * 2 + 650000);
+            }
+          } else if (
+            seaters.includes("double-seater") &&
+            seaters.includes("three-seater")
+          ) {
+            if (label === "Basic") {
+              setPriceEstimater(300000 + 300000);
+            } else if (label === "Standard") {
+              setPriceEstimater(330000 + 350000);
+            } else if (label === "Elite") {
+              setPriceEstimater(450000 + 450000);
+            } else if (label === "Premium") {
+              setPriceEstimater(500000 + 650000);
+            }
+          } else if (seaters.includes("single-seater-two")) {
+            if (label === "Basic") {
+              setPriceEstimater(150000 * 2);
+            } else if (label === "Standard") {
+              setPriceEstimater(200000 * 2);
+            } else if (label === "Elite") {
+              setPriceEstimater(270000 * 2);
+            } else if (label === "Premium") {
+              setPriceEstimater(350000 * 2);
+            }
+          } else if (
+            seaters.includes("single-seater") &&
+            seaters.includes("double-seater") &&
+            seaters.includes("three-seater")
+          ) {
+            if (label === "Basic") {
+              setPriceEstimater(150000 + 300000 + 300000);
+            } else if (label === "Standard") {
+              setPriceEstimater(200000 + 330000 + 350000);
+            } else if (label === "Elite") {
+              setPriceEstimater(270000 + 450000 + 450000);
+            } else if (label === "Premium") {
+              setPriceEstimater(350000 + 500000 + 650000);
+            }
+          } else if (
+            seaters.includes("single-seater") &&
+            seaters.includes("double-seater")
+          ) {
+            if (label === "Basic") {
+              setPriceEstimater(150000 + 300000);
+            } else if (label === "Standard") {
+              setPriceEstimater(200000 + 330000);
+            } else if (label === "Elite") {
+              setPriceEstimater(270000 + 450000);
+            } else if (label === "Premium") {
+              setPriceEstimater(350000 + 500000);
+            }
+          } else if (
+            seaters.includes("single-seater") &&
+            seaters.includes("three-seater")
+          ) {
+            if (label === "Basic") {
+              setPriceEstimater(150000 + 300000);
+            } else if (label === "Standard") {
+              setPriceEstimater(200000 + 350000);
+            } else if (label === "Elite") {
+              setPriceEstimater(270000 + 450000);
+            } else if (label === "Premium") {
+              setPriceEstimater(350000 + 650000);
+            }
+          } else if (seaters.includes("three-seater")) {
+            if (label === "Basic") {
+              setPriceEstimater(300000);
+            } else if (label === "Standard") {
+              setPriceEstimater(350000);
+            } else if (label === "Elite") {
+              setPriceEstimater(450000);
+            } else if (label === "Premium") {
+              setPriceEstimater(650000);
+            }
+          }
+        }
+      } else if (styleOfChair === "Minimalist") {
+        if (shape === "straight" || "l-shaped" || "none") {
+          if (
+            seaters.includes("single-seater-two") &&
+            seaters.includes("double-seater") &&
+            seaters.includes("three-seater")
+          ) {
+            if (label === "Basic") {
+              setPriceEstimater(150000 * 2 + 300000 + 300000);
+            } else if (label === "Standard") {
+              setPriceEstimater(200000 * 2 + 330000 + 350000);
+            } else if (label === "Elite") {
+              setPriceEstimater(270000 * 2 + 450000 + 450000);
+            } else if (label === "Premium") {
+              setPriceEstimater(350000 * 2 + 500000 + 650000);
+            }
+          } else if (
+            seaters.includes("single-seater-two") &&
+            seaters.includes("double-seater")
+          ) {
+            if (label === "Basic") {
+              setPriceEstimater(150000 * 2 + 300000);
+            } else if (label === "Standard") {
+              setPriceEstimater(200000 * 2 + 330000);
+            } else if (label === "Elite") {
+              setPriceEstimater(270000 * 2 + 450000);
+            } else if (label === "Premium") {
+              setPriceEstimater(350000 * 2 + 500000);
+            }
+          } else if (
+            seaters.includes("single-seater-two") &&
+            seaters.includes("three-seater")
+          ) {
+            if (label === "Basic") {
+              setPriceEstimater(150000 * 2 + 300000);
+            } else if (label === "Standard") {
+              setPriceEstimater(200000 * 2 + 350000);
+            } else if (label === "Elite") {
+              setPriceEstimater(270000 * 2 + 450000);
+            } else if (label === "Premium") {
+              setPriceEstimater(350000 * 2 + 650000);
+            }
+          } else if (
+            seaters.includes("double-seater") &&
+            seaters.includes("three-seater")
+          ) {
+            if (label === "Basic") {
+              setPriceEstimater(300000 + 300000);
+            } else if (label === "Standard") {
+              setPriceEstimater(330000 + 350000);
+            } else if (label === "Elite") {
+              setPriceEstimater(450000 + 450000);
+            } else if (label === "Premium") {
+              setPriceEstimater(500000 + 650000);
+            }
+          } else if (seaters.includes("single-seater-two")) {
+            if (label === "Basic") {
+              setPriceEstimater(150000 * 2);
+            } else if (label === "Standard") {
+              setPriceEstimater(200000 * 2);
+            } else if (label === "Elite") {
+              setPriceEstimater(270000 * 2);
+            } else if (label === "Premium") {
+              setPriceEstimater(350000 * 2);
+            }
+          } else if (
+            seaters.includes("single-seater") &&
+            seaters.includes("double-seater") &&
+            seaters.includes("three-seater")
+          ) {
+            if (label === "Basic") {
+              setPriceEstimater(150000 + 300000 + 300000);
+            } else if (label === "Standard") {
+              setPriceEstimater(200000 + 330000 + 350000);
+            } else if (label === "Elite") {
+              setPriceEstimater(270000 + 450000 + 450000);
+            } else if (label === "Premium") {
+              setPriceEstimater(350000 + 500000 + 650000);
+            }
+          } else if (
+            seaters.includes("single-seater") &&
+            seaters.includes("double-seater")
+          ) {
+            if (label === "Basic") {
+              setPriceEstimater(150000 + 300000);
+            } else if (label === "Standard") {
+              setPriceEstimater(200000 + 330000);
+            } else if (label === "Elite") {
+              setPriceEstimater(270000 + 450000);
+            } else if (label === "Premium") {
+              setPriceEstimater(350000 + 500000);
+            }
+          } else if (
+            seaters.includes("single-seater") &&
+            seaters.includes("three-seater")
+          ) {
+            if (label === "Basic") {
+              setPriceEstimater(150000 + 300000);
+            } else if (label === "Standard") {
+              setPriceEstimater(200000 + 350000);
+            } else if (label === "Elite") {
+              setPriceEstimater(270000 + 450000);
+            } else if (label === "Premium") {
+              setPriceEstimater(350000 + 650000);
+            }
+          } else if (seaters.includes("three-seater")) {
+            if (label === "Basic") {
+              setPriceEstimater(300000);
+            } else if (label === "Standard") {
+              setPriceEstimater(350000);
+            } else if (label === "Elite") {
+              setPriceEstimater(450000);
+            } else if (label === "Premium") {
+              setPriceEstimater(650000);
+            }
+          }
+        }
+      }
+    }
+
+    console.log(priceEstimater, "priceEstimater");
+
+    // console.log(choice, "choice");
+    // console.log(styleOfChair, "styleOfChair");
+    // console.log(shape, "shape");
+    // console.log(seaters, "seaters");
+    // console.log(label, "label");
+
+    // const formData = new FormData();
+    // console.log(imageData?.url, "imageDataimageData");
+    // console.log(file, "filefile");
+    // if (Array?.isArray(imageData?.url)) {
+    //   imageData?.url.forEach((file) => {
+    //     formData.append("images", file);
+    //   });
+    // } else {
+    //   formData.append("images", imageData?.url);
+    // // Append other order data to the FormData object
+    // formData.append("selectedLabel", label);
+    // formData.append("description", description);
+    // formData.append("deliveryOption", deliveryOption);
+
+    setModalOpen(true);
+  };
+  
   const [imageData, setImageData] = useState(null);
   const imageRef = useRef();
   const dispatch = useDispatch();

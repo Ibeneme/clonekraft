@@ -5,7 +5,7 @@ import SectionII from "./Hero/SectionII";
 import SectionIII from "./Hero/SectionIII";
 import SectionIV from "./Hero/SectionIV";
 import SectionVI from "./Hero/SectionVI";
-import ContactUs from "./Hero/Contact";
+// import ContactUs from "./Hero/Contact";
 import Footer from "./Hero/Footer";
 import TopLevel from "./Navbar/Navbar";
 
@@ -19,7 +19,7 @@ const Index = () => {
       <SectionIII />
       <SectionIV />
       <SectionVI />
-      <ContactUs />
+      {/* <ContactUs /> */}
       <Footer />
     </div>
   );

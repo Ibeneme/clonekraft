@@ -9,6 +9,20 @@ const HeroPage = () => {
   }, []);
 
   const navigate = useNavigate();
+
+  const handleClick = () => {
+    // Check if the token exists in localStorage
+    const token = localStorage.getItem("clone_kraft_user_token");
+
+    if (token) {
+      // If the token exists, redirect to the /home page
+      navigate("/home");
+    } else {
+      // If the token does not exist, redirect to the /login page
+      navigate("/login");
+    }
+  };
+
   return (
     <div
       className="hero"
@@ -84,14 +98,14 @@ const HeroPage = () => {
               width: "100%",
               height: 120,
             }}
-            onClick={() => navigate("/")}
+            onClick={handleClick}
           >
             <div
               className="div-btn-auth"
               style={{ backgroundColor: "#fff", height: 70 }}
             ></div>
             <button
-              onClick={() => navigate("/home")}
+              onClick={handleClick}
               className="btn-auth"
               style={{
                 marginTop: -14,

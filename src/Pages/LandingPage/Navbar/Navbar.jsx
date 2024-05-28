@@ -4,6 +4,20 @@ import { useNavigate } from "react-router-dom";
 
 const TopLevel = () => {
   const navigate = useNavigate();
+
+  const handleClick = () => {
+    // Check if the token exists in localStorage
+    const token = localStorage.getItem("clone_kraft_user_token");
+
+    if (token) {
+      // If the token exists, redirect to the /home page
+      navigate("/home");
+    } else {
+      // If the token does not exist, redirect to the /login page
+      navigate("/login");
+    }
+  };
+
   return (
     <div
       style={{
@@ -16,7 +30,7 @@ const TopLevel = () => {
         <div className="brands">LDL</div>
         <button
           data-aos="zoom-in"
-          onClick={() => navigate("/login")}
+          onClick={handleClick}
           className="btn-auth"
           style={{
             marginTop: -0,

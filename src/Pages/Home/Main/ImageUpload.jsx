@@ -13,7 +13,7 @@ const ImageUpload = () => {
   const [description, setDescription] = useState("");
   const [label, setLabel] = useState("");
 
-  
+
   const [deliveryOption, setDeliveryOption] = useState(""); // State for selected delivery option
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
@@ -113,6 +113,7 @@ const ImageUpload = () => {
     // Append selected images to the FormData object
     selectedFiles.forEach((file) => {
       formData.append("images", file);
+      console.log(file,'filefilefile')
     });
 
     // Append other order data to the FormData object

@@ -68,7 +68,7 @@ const Login = () => {
 
   return (
     <div style={{ width: "100vw", height: "100vh" }}>
-      <GallerySectionIi />
+      {/* <GallerySectionIi /> */}
 
       <div
         style={{
@@ -80,7 +80,7 @@ const Login = () => {
           width: "100vw",
           display: "flex",
           justifyContent: "center",
-          paddingTop: 64,
+          paddingTop: 120,
           paddingRight: 24,
         }}
       >

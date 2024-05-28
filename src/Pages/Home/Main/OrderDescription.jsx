@@ -45,7 +45,7 @@ const OrderDescriptionPage = () => {
 
   // Function to capitalize the first letter and make the rest lowercase
   const capitalizeFirstLetter = (string) => {
-    return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+    return string?.charAt(0)?.toUpperCase() + string?.slice(1)?.toLowerCase();
   };
 
   const navigate = useNavigate();
@@ -124,13 +124,24 @@ const OrderDescriptionPage = () => {
             {calculateDeliveryDate(order?.createdAt, order?.deliveryOption)}
           </p>
 
+          {order?.seaters && (
+            <p>Seaters: {capitalizeFirstLetter(order?.seaters)}</p>
+          )}
+
+          {order?.choice && (
+            <p>Choice: {capitalizeFirstLetter(order?.choice)}</p>
+          )}
+
+          {order?.shape && <p>Shape: {capitalizeFirstLetter(order?.shape)}</p>}
+
+          {order?.styleOfChair && (
+            <p>
+              Style of Furniture: {capitalizeFirstLetter(order?.styleOfChair)}
+            </p>
+          )}
+
           <h1>
-            {order?.price
-              ? `₦${order?.price.toLocaleString("en-US", {
-                  minimumFractionDigits: 2,
-                  maximumFractionDigits: 2,
-                })} `
-              : "₦235,000"}
+            {order?.price ? `₦${order?.price?.toLocaleString("en-NG")} ` : " "}
           </h1>
           <div>
             <br />

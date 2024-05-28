@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import "../../Pages/Home/Main/Orders.css"; // Import CSS file for styling
+import "../../Pages/Home/Main/Orders.css";
 import { BsChatFill } from "react-icons/bs";
 import { useDispatch } from "react-redux";
 import { getOrdersAdmin, updateOrder } from "../../Redux/admin/admin";
 import Modal from "../../Pages/Components/Modal/Modal";
 import useCustomToasts from "../../Pages/ToastNotifications/Toastify";
-//import { formatDate } from "./Profile";
 
 const AdminOrderDescriptionPage = () => {
   const location = useLocation();
@@ -353,6 +352,14 @@ const AdminOrderDescriptionPage = () => {
           <h3>Order Information</h3>
           <p>Class: {capitalizeFirstLetter(ordersFetched?.selectedLabel)}</p>
           <p>Status: {capitalizeFirstLetter(ordersFetched?.status)}</p>
+          <p>Seaters: {capitalizeFirstLetter(ordersFetched?.seaters)}</p>
+          <p>Choice: {capitalizeFirstLetter(ordersFetched?.choice)}</p>
+          <p>
+            Style of Furniture:{" "}
+            {capitalizeFirstLetter(ordersFetched?.styleOfChair)}
+          </p>
+          <p>Shape: {capitalizeFirstLetter(ordersFetched?.shape)}</p>
+
           <p>Order Created At: {formatDate(ordersFetched?.createdAt)}</p>
           <p>
             To be Delivered:{" "}

@@ -4,6 +4,20 @@ import { useNavigate } from "react-router-dom";
 
 const SectionIV = () => {
   const navigate = useNavigate();
+
+  const handleClick = () => {
+    // Check if the token exists in localStorage
+    const token = localStorage.getItem("clone_kraft_user_token");
+
+    if (token) {
+      // If the token exists, redirect to the /home page
+      navigate("/home");
+    } else {
+      // If the token does not exist, redirect to the /login page
+      navigate("/login");
+    }
+  };
+
   return (
     <div
       className="hero"
@@ -45,17 +59,14 @@ const SectionIV = () => {
             a story waiting to be discovered.
           </p>
           <br /> <br />
-          <div
-            data-aos="zoom-in"
-            style={{  alignContent: "flex-start" }}
-          >
+          <div data-aos="zoom-in" style={{ alignContent: "flex-start" }}>
             <div
               style={{
                 marginLeft: 16,
                 //marginTop: 32,
                 flexDirection: "column",
               }}
-              onClick={() => navigate("/")}
+              onClick={handleClick}
             >
               <div
                 className="div-btn-auth"
@@ -66,7 +77,7 @@ const SectionIV = () => {
                 }}
               ></div>
               <button
-              onClick={() => navigate("/home")}
+                onClick={handleClick}
                 className="btn-auth"
                 style={{
                   marginTop: -14,
@@ -98,7 +109,12 @@ const SectionIV = () => {
             data-aos="zoom-in"
             // className="scrollingImages"
             // ref={imageContainerRef}
-            style={{ overflowY: "hidden", height: "600px", width: "100%" , marginLeft: 16}}
+            style={{
+              overflowY: "hidden",
+              height: "600px",
+              width: "100%",
+              marginLeft: 16,
+            }}
           >
             <img
               src="https://res.cloudinary.com/daiiiiupy/image/upload/v1715427079/jean-philippe-delberghe-F7b0y4JbEpc-unsplash_amqdxc.jpg"
@@ -108,8 +124,7 @@ const SectionIV = () => {
                 borderRadius: 32,
                 width: "100%",
                 height: 600,
-                alignContent:'center'
-
+                alignContent: "center",
               }}
             />
           </div>

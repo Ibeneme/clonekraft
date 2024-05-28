@@ -22,6 +22,21 @@ const SectionI = () => {
     return () => clearInterval(interval);
   }, []);
 
+
+  const handleClick = () => {
+    // Check if the token exists in localStorage
+    const token = localStorage.getItem("clone_kraft_user_token");
+
+    if (token) {
+      // If the token exists, redirect to the /home page
+      navigate("/home");
+    } else {
+      // If the token does not exist, redirect to the /login page
+      navigate("/login");
+    }
+  };
+
+
   return (
     <div style={{ minHeight: "80vh", margin: 0 }}>
       <div className="hero-flexx">
@@ -33,7 +48,7 @@ const SectionI = () => {
               fontSize: "3rem",
             }}
           >
-            We are Designs
+            We are CloneKraft
           </h1>
           <p
             style={{
@@ -42,18 +57,18 @@ const SectionI = () => {
               marginBottom: "2rem",
             }}
           >
-            From sleek minimalist designs to bold statement pieces, each
-            creation is meticulously crafted with an emphasis on quality
-            materials and attention to detail. Step into our world of endless
-            possibilities, where every curve, every texture, and every hue tells
-            a story waiting to be discovered.
+            From refined elegance to striking originality, each creation is
+            meticulously crafted with a focus on high-quality materials and an
+            unwavering attention to detail. Step into our world of endless
+            possibilities, where every curve, texture, and hue tells a unique
+            story waiting to be discovered.
           </p>
           <div data-aos="zoom-in" style={{ alignContent: "flex-start" }}>
             <div
               style={{
                 flexDirection: "column",
               }}
-              onClick={() => navigate("/")}
+              onClick={handleClick}
             >
               <div
                 className="div-btn-auth"
@@ -64,7 +79,7 @@ const SectionI = () => {
                 }}
               ></div>
               <button
-                onClick={() => navigate("/home")}
+                onClick={handleClick}
                 className="btn-auth"
                 style={{
                   marginTop: -14,

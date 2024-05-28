@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import "./Auth.css";
-import logo from "../../assets/auth/right.png";
+// import logo from "../../assets/auth/right.png";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { forgot } from "../../Redux/auth/auth";
@@ -49,7 +49,8 @@ const ForgotPassword = () => {
         console.log("Registration failed:", error);
         setSubmitting(false);
       });
-  };  const imageContainerRef = useRef(null);
+  };
+  const imageContainerRef = useRef(null);
   // const navigate = useNavigate();
   useEffect(() => {
     const interval = setInterval(() => {
@@ -68,7 +69,7 @@ const ForgotPassword = () => {
   }, []);
   return (
     <div className="auth-div">
-      <div style={{ width: "50%" }} data-aos="zoom-in">
+      {/* <div style={{ width: "50%" }} data-aos="zoom-in">
         <div
           className="scrollingImages"
           ref={imageContainerRef}
@@ -174,7 +175,7 @@ const ForgotPassword = () => {
             <div className="overlaysz"></div>
           </div>
         </div>{" "}
-      </div>
+      </div> */}
       <div className="auth-div-div">
         <h2 style={{ margin: 0 }}>Forgot Password?</h2>
         <p className="auth-div-p">
