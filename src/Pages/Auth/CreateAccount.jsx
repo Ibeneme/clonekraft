@@ -91,7 +91,7 @@ const CreateAccount = () => {
 
   return (
     <div className="auth-div">
-      <div style={{ width: "50%" }} data-aos="zoom-in">
+      {/* <div style={{ width: "50%" }} data-aos="zoom-in">
         <div
           className="scrollingImages"
           ref={imageContainerRef}
@@ -197,7 +197,7 @@ const CreateAccount = () => {
             <div className="overlaysz"></div>
           </div>
         </div>{" "}
-      </div>
+      </div> */}
       <div className="auth-div-div">
         <h2 style={{ margin: 0 }}>Create an Account</h2>
         <p className="auth-div-p">
