@@ -9,18 +9,18 @@ import { profile } from "../../Redux/auth/auth";
 import { createOrder } from "../../Redux/order/order";
 import useCustomToasts from "../ToastNotifications/Toastify";
 import { useNavigate } from "react-router-dom";
-import woodImage from "../../assets/woods/wooda.png";
-import woodImageb from "../../assets/woods/woodb.png";
-import woodImagec from "../../assets/woods/woodc.png";
-import woodImaged from "../../assets/woods/woodd.png";
-import woodImagee from "../../assets/woods/woode.png";
-import woodImagef from "../../assets/woods/woodf.png";
-import PayButton from "./PayButton";
+// import woodImage from "../../assets/woods/wooda.png";
+// import woodImageb from "../../assets/woods/woodb.png";
+// import woodImagec from "../../assets/woods/woodc.png";
+// import woodImaged from "../../assets/woods/woodd.png";
+// import woodImagee from "../../assets/woods/woode.png";
+// import woodImagef from "../../assets/woods/woodf.png";
+// import PayButton from "./PayButton";
 import { PaystackButton } from "react-paystack";
 import ShimmerLoader from "../Components/Loader/ShimmerLoader";
 
 const ObjectDetection = () => {
-  const PAYSTACK_SECRET_KEY = import.meta.env.REACT_APP_PAYSTACK_SECRET_KEY;
+  const PAYSTACK_SECRET_KEY = process.env.REACT_APP_PAYSTACK_SECRET_KEY;
 
   const { showErrorToast, showSuccessToast } = useCustomToasts();
   const [error, setError] = useState("");
