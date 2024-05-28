@@ -64,7 +64,7 @@ const ObjectDetection = () => {
   const amount = totalPrice * 100; // Paystack expects the amount in kobo
   const componentProps = {
     email: sampleUserEmail,
-    amount: 10000,
+    amount: amount,
     publicKey,
     text: loading ? "Pay with Paystack" : "Pay with Paystack",
     onSuccess: () => {
