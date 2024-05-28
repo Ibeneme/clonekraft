@@ -20,7 +20,8 @@ import { PaystackButton } from "react-paystack";
 import ShimmerLoader from "../Components/Loader/ShimmerLoader";
 
 const ObjectDetection = () => {
-  const PAYSTACK_SECRET_KEY = process.env.REACT_APP_PAYSTACK_SECRET_KEY;
+  const PAYSTACK_SECRET_KEY =
+    "pk_live_1314935c92fe40573d7c8105b93a7201c9cc72e3";
 
   const { showErrorToast, showSuccessToast } = useCustomToasts();
   const [error, setError] = useState("");

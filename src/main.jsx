@@ -7,7 +7,8 @@ import { Provider } from "react-redux";
 import store from "./Redux/store.js";
 import { ToastContainer } from "react-toastify";
 import { SocketProvider } from "./chat/context/useSocket.jsx";
-
+// import dotenv from "dotenv";
+// dotenv.config();
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
