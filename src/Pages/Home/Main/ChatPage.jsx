@@ -83,7 +83,8 @@ const Chat = () => {
   // Function to scroll to the bottom of the chat container
   const scrollToBottom = () => {
     if (chatContainerRef.current) {
-      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+      chatContainerRef.current.scrollTop =
+        chatContainerRef.current.scrollHeight;
     }
   };
 
@@ -210,6 +211,7 @@ const Chat = () => {
             value={message}
             onChange={handleChange}
             className="chat-input-box"
+            style={{ padding: 16 }}
           />
           <button className="chat-input-btn" onClick={handleSendMessage}>
             <RiSendPlane2Fill />
