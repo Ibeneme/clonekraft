@@ -14,7 +14,7 @@ export const adminLogin = createAsyncThunk(
   async (credentials) => {
     try {
       const response = await axios.post(
-        `http://localhost:3000/admin/login`,
+        `${baseApiUrl}/admin/login`,
         credentials
       );
       const clone_kraft_admin = response?.data?.token;
@@ -46,10 +46,7 @@ export const getUsers = createAsyncThunk("order/getUsers", async () => {
         Authorization: `Bearer ${token}`,
       },
     };
-    const response = await axios.get(
-      `http://localhost:3000/auth/users`,
-      config
-    );
+    const response = await axios.get(`${baseApiUrl}/auth/users`, config);
     console.log(response.data, "pl");
     return response.data;
   } catch (error) {
@@ -73,7 +70,7 @@ export const getOrdersAdmin = createAsyncThunk(
       };
 
       // Make the POST request with credentials and config
-      const response = await axios.get(`http://localhost:3000/order/`, config);
+      const response = await axios.get(`${baseApiUrl}/order/`, config);
       console.log(response.data, "pl");
       return response.data;
     } catch (error) {
@@ -100,7 +97,7 @@ export const updateOrder = createAsyncThunk(
 
       // Make the POST request with payload and config
       const response = await axios.put(
-        `http://localhost:3000/order/${order_id}`,
+        `${baseApiUrl}/order/${order_id}`,
         payload,
         config
       );
@@ -130,7 +127,7 @@ export const getMessages = createAsyncThunk(
 
       // Make the POST request with payload and config
       const response = await axios.get(
-        `http://localhost:3000/order/messages/${order_id}`
+        `${baseApiUrl}/order/messages/${order_id}`
       );
       console.log(response.data, "order_id", order_id);
       return response.data;
@@ -153,10 +150,7 @@ export const getAdmin = createAsyncThunk("order/getAdmin", async () => {
     };
 
     // Make the POST request with payload and config
-    const response = await axios.get(
-      `http://localhost:3000/admin/profiler`,
-      config
-    );
+    const response = await axios.get(`${baseApiUrl}/admin/profiler`, config);
     console.log(response.data);
     return response.data;
   } catch (error) {
