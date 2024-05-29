@@ -36,6 +36,7 @@ const ProfilePage = () => {
   const dispatch = useDispatch();
   const [user, setUser] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
+  const [modalOpenLogoOut, setModalOpenLogoOut] = useState(false);
   const [address, setAddress] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [username, setUserName] = useState("");
@@ -216,6 +217,33 @@ const ProfilePage = () => {
               >
                 <button className="btn-auth" type="submit">
                   {isLoading ? "Loading...... " : "Submit"}
+                </button>
+              </div>
+            </form>
+          </div>
+        }
+      />
+
+      <Modal
+        isOpen={modalOpenLogoOut}
+        onClose={() => setModalOpenLogoOut(true)}
+        ifClose={true}
+        formContent={
+          <div>
+            <form onSubmit={handleUpdateProfile}>
+              <h2 className="vw-text" style={{ fontSize: 32 }}>
+                Confirm you want to log out
+              </h2>
+
+              <div
+                style={{ cursor: "pointer", marginTop: 40, marginBottom: 96 }}
+              >
+                <button
+                  onClick={() => setModalOpenLogoOut(true)}
+                  className="btn-auth"
+                  type="submit"
+                >
+                  {isLoading ? "Loading...... " : "Log Out"}
                 </button>
               </div>
             </form>
