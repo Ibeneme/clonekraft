@@ -14,7 +14,8 @@ const OTPNew = () => {
   const dispatch = useDispatch();
   const [err, setErr] = useState();
   //const email = "hhhdhdhd";
-  
+
+  console.log(email, "emailemail");
   const initialValues = {
     otp: "",
   };

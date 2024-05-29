@@ -27,6 +27,7 @@ import AdminOrderDescriptionPage from "./Admin/Orders/OrderDescription";
 import Chat from "./Admin/Chat/Chat";
 import ObjectDetection from "./Pages/ObjeectDetection/ObjectDetection";
 import PaymentSuccess from "./Pages/ObjeectDetection/PaymentSuccess";
+import ImageUpload from "./Pages/Home/Main/ImageUpload";
 
 function App() {
   useEffect(() => {
@@ -135,7 +136,7 @@ function App() {
           element={
             <ProtectedRoutes>
               <Navbar />
-              <ObjectDetection />
+              <ImageUpload />
               <Footer />
             </ProtectedRoutes>
           }
@@ -225,7 +226,7 @@ function App() {
           path="/upload"
           element={
             <>
-              <Navbar /> <ObjectDetection /> <br /> <Footer />
+              <Navbar /> <ImageUpload /> <br /> <Footer />
             </>
           }
         />

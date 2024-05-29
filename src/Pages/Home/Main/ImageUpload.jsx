@@ -13,13 +13,11 @@ const ImageUpload = () => {
   const [description, setDescription] = useState("");
   const [label, setLabel] = useState("");
 
-
   const [deliveryOption, setDeliveryOption] = useState(""); // State for selected delivery option
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const [user, setUser] = useState([]);
   const { showSuccessToast, showErrorToast } = useCustomToasts();
-
 
   const handleFetchUser = () => {
     dispatch(profile())
@@ -113,7 +111,7 @@ const ImageUpload = () => {
     // Append selected images to the FormData object
     selectedFiles.forEach((file) => {
       formData.append("images", file);
-      console.log(file,'filefilefile')
+      console.log(file, "filefilefile");
     });
 
     // Append other order data to the FormData object
@@ -348,7 +346,7 @@ const ImageUpload = () => {
                 type="button"
                 disabled={loading}
               >
-                {loading ? "Loading..." : "Estimate Price"}
+                {loading ? "Loading..." : "Request a Clone"}
               </button>
             </div>
           ) : null}

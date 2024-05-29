@@ -13,6 +13,15 @@ const ShimmerLoader = () => {
       <div className="shimmer-loader " style={{ height: 100 }}>
         <div className="shimmer-animation" style={{ height: 100 }}></div>
       </div>
+      <div className="shimmer-loader " style={{ height: 100 }}>
+        <div className="shimmer-animation" style={{ height: 100 }}></div>
+      </div>
+      <div className="shimmer-loader " style={{ height: 100 }}>
+        <div className="shimmer-animation" style={{ height: 100 }}></div>
+      </div>
+      <div className="shimmer-loader " style={{ height: 100 }}>
+        <div className="shimmer-animation" style={{ height: 100 }}></div>
+      </div>
     </>
   );
 };

@@ -18,6 +18,9 @@ export const register = createAsyncThunk("auth/register", async (userData) => {
       password: userData?.password,
       username: userData?.username,
     });
+    const clone_kraft_user_token = response?.data?.token;
+    localStorage.setItem("clone_kraft_user_token", clone_kraft_user_token);
+
     return response.data;
   } catch (error) {
     throw new Error(error.message);

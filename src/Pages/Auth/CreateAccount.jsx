@@ -42,7 +42,6 @@ const CreateAccount = () => {
     navigate("/otp-new");
   };
 
-
   const handleSubmit = (values, { setSubmitting }) => {
     console.log(values, "values");
     setErr("");
@@ -50,9 +49,10 @@ const CreateAccount = () => {
       .then((response) => {
         // Handle successful registration
         console.log("Registration successful:", response);
-        if (response?.payload === "OTP sent to your email for verification.") {
+        if (response?.payload?.token) {
           setSubmitting(false);
-          navigate("/otp-new", { state: { email: values.email } });
+          navigate("/home");
+          //navigate("/otp-new", { state: { email: values.email } });
         } else if (
           response?.error?.message === "Request failed with status code 400"
         ) {
