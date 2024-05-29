@@ -7,6 +7,7 @@ import { MdEdit } from "react-icons/md";
 import Modal from "../../Components/Modal/Modal";
 import useCustomToasts from "../../ToastNotifications/Toastify";
 import profilePic from "../../..//assets/auth/left.png";
+import { useNavigate } from "react-router-dom";
 
 export const formatDate = (dateString) => {
   const date = new Date(dateString);
@@ -22,6 +23,16 @@ export const formatDate = (dateString) => {
 };
 
 const ProfilePage = () => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    // Clear local storage
+    localStorage.clear();
+
+    // Redirect to login or home page
+    navigate("/login"); // Change this to the appropriate path
+  };
+
   const dispatch = useDispatch();
   const [user, setUser] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
@@ -318,6 +329,19 @@ const ProfilePage = () => {
         >
           <FaUser style={{ marginRight: "10px", color: "#C19F62" }} />
           <p>Joined Date: {formatDate(user?.createdAt)}</p>
+        </div>
+
+        <div
+          style={{
+            cursor: "pointer",
+            padding: 16,
+            borderRadius: 24,
+            // backgroundColor: "#C19F6245",
+            // color: "#C19F6230",
+          }}
+          onClick={handleLogout}
+        >
+          <span>Log Out</span>
         </div>
       </div>
     </div>
