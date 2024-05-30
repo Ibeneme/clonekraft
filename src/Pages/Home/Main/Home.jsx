@@ -8,6 +8,7 @@ import GallerySectionIi from "./DeliverySectionII";
 import { useDispatch } from "react-redux";
 import { profile } from "../../../Redux/auth/auth";
 import useCustomToasts from "../../ToastNotifications/Toastify";
+import heroImage from "../../../../src/assets/Sofa/Sofa08.png";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -59,7 +60,7 @@ const Home = () => {
     <div style={{ backgroundColor: "#fff" }}>
       <section
         style={{
-          backgroundImage: `url('https://res.cloudinary.com/daiiiiupy/image/upload/v1715427076/francesca-tosolini-Gh_UjjYoVwk-unsplash_vb28gq.jpg')`, // Set the current background image URL
+          backgroundImage: `url(${heroImage})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           minHeight: "100vh",
@@ -79,7 +80,14 @@ const Home = () => {
             paddingBottom: 48,
           }}
         >
-          <h1 style={{ maxWidth: 600, textAlign: "center", fontSize: 48 , color:'#fff'}}>
+          <h1
+            style={{
+              maxWidth: 600,
+              textAlign: "center",
+              fontSize: 48,
+              color: "#fff",
+            }}
+          >
             <span style={{ color: "#C19F62" }}>
               {formattedUsername ? `Hi ${formattedUsername},` : null}{" "}
             </span>{" "}
