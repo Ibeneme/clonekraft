@@ -8,7 +8,7 @@ const TeamMembers = () => {
   const team = [
     {
       id: 1,
-      name: "Lukas Lucky",
+      name: "Lucky Lukas Ibeh",
       title: "CEO -Chief Executive Officer",
       imageUrl: LukasImage,
     },
