@@ -21,4 +21,7 @@
     padding: 10px; /* Padding for text */
     color: #C19F62; /* Text color */
   }
+  .bw-image {
+    filter: grayscale(100%); /* Convert image to black and white */
+  }
   
