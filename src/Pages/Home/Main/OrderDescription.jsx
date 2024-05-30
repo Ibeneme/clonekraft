@@ -259,8 +259,8 @@ const OrderDescriptionPage = () => {
                       ? "selected-image-item"
                       : "image-item"
                   }
-                onClick={handleUploads}
-                  //onClick={() => handleImageClick(image, index)}
+                  // onClick={handleUploads}
+                  onClick={() => handleImageClick(image, index)}
                 />
               ))}
             </div>
