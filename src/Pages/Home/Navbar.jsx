@@ -56,7 +56,7 @@ const Navbar = () => {
           >
             <BiSolidHome size={18} color="#808080" /> Home
           </li>
-          <li
+          {/* <li
             className="nav-item"
             style={{
               display: "flex",
@@ -70,7 +70,7 @@ const Navbar = () => {
           >
             <RiGalleryView size={18} color="#808080" />
             Gallery
-          </li>
+          </li> */}
           {/* <li className="nav-item">Design Lab</li> */}
           <li
             className="nav-item"
@@ -140,9 +140,9 @@ const Navbar = () => {
             <li className="nav-item" onClick={() => navigate("/home")}>
               Home
             </li>
-            <li className="nav-item" onClick={() => navigate("/gallery")}>
+            {/* <li className="nav-item" onClick={() => navigate("/gallery")}>
               Gallery
-            </li>
+            </li> */}
             {/* <li className="nav-item">Design Lab</li> */}
             <li className="nav-item" onClick={() => navigate("/order")}>
               My Orders

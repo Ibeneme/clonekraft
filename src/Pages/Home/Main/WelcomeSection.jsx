@@ -40,7 +40,7 @@ const WelcomeSection = ({ username }) => {
             maxWidth: 600,
             textAlign: "center",
             color: "#808080",
-            marginTop: -32,
+            marginTop: 12,
           }}
         >
           At our workshop, we craft bespoke carpentry products tailored to your

@@ -32,6 +32,7 @@ const OrderDescriptionPage = () => {
         // Handle success
         console.log("Request created successfully:", response);
         handleFetchOrders();
+        navigate("/sucess");
       })
       .catch((error) => {
         setLoading(true);
@@ -258,7 +259,7 @@ const OrderDescriptionPage = () => {
                       ? "selected-image-item"
                       : "image-item"
                   }
-                  onClick={handleUploads}
+                  // onClick={handleUploads}
                   //onClick={() => handleImageClick(image, index)}
                 />
               ))}

@@ -38,17 +38,13 @@ const TeamMembers = () => {
         className="product-text"
         style={{ marginRight: 16, textDecorationLine: "overline" }}
       >
-        The Creative Team
+        The Management Team
       </h3>
 
       <div className="team-container">
         {team.map((member) => (
           <div key={member.id} className="team-member">
-            <img
-              src={member.imageUrl}
-              alt={member.name}
-              className="bw-image"
-            />
+            <img src={member.imageUrl} alt={member.name} className="bw-image" />
             <div className="member-details">
               <h3>{member.name}</h3>
               <p>{member.title}</p>

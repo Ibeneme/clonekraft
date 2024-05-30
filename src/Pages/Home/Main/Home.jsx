@@ -79,9 +79,9 @@ const Home = () => {
             paddingBottom: 48,
           }}
         >
-          <h1 style={{ maxWidth: 600, textAlign: "center", fontSize: 48 }}>
+          <h1 style={{ maxWidth: 600, textAlign: "center", fontSize: 48 , color:'#fff'}}>
             <span style={{ color: "#C19F62" }}>
-              {formattedUsername ? `Hi ${formattedUsername}` : null},{" "}
+              {formattedUsername ? `Hi ${formattedUsername},` : null}{" "}
             </span>{" "}
             Welcome to Clonekraft
           </h1>

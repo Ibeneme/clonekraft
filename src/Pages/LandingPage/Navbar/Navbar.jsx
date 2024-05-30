@@ -42,7 +42,7 @@ const TopLevel = () => {
           }}
           type="submit"
         >
-          Get Started
+          Clonekraft
         </button>
       </div>
     </div>

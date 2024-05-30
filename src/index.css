@@ -136,6 +136,7 @@ body {
 }
 h1 h2{
   line-height: -21%;
+  color: #fff
 }
 body {
   padding: 0;
@@ -146,7 +147,9 @@ body {
 .hide-bid {
   display: flex;
 }
-
+.product-text{
+  color: #121212
+}
 button {
   cursor: pointer;
 }

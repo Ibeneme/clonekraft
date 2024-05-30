@@ -28,6 +28,12 @@ import Chat from "./Admin/Chat/Chat";
 import ObjectDetection from "./Pages/ObjeectDetection/ObjectDetection";
 import PaymentSuccess from "./Pages/ObjeectDetection/PaymentSuccess";
 import ImageUpload from "./Pages/Home/Main/ImageUpload";
+import AboutUs from "./Pages/LandingPage/Hero/AboutUs";
+import TopLevel from "./Pages/LandingPage/Navbar/Navbar";
+import AboutUsHeader from "./Pages/LandingPage/Hero/AboutUsHeader";
+import TeamMembers from "./Pages/LandingPage/Hero/Team";
+import GeneralPolicy from "./Pages/LandingPage/Hero/AboutUsRefund";
+import AboutUsHeaderRefund from "./Pages/LandingPage/Hero/AboutUsRefundHeader";
 
 function App() {
   useEffect(() => {
@@ -222,6 +228,29 @@ function App() {
         <Route path="/otp" element={<OTP />} />
         <Route path="/reset" element={<ResetPassword />} />
         <Route path="/otp-new" element={<OTPNew />} />
+        <Route
+          path="/about"
+          element={
+            <>
+              <TopLevel />
+              <AboutUsHeader />
+              <AboutUs />
+              <TeamMembers />
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path="/policy"
+          element={
+            <>
+              <TopLevel />
+              <AboutUsHeaderRefund />
+              <GeneralPolicy />
+              <Footer />
+            </>
+          }
+        />
         <Route
           path="/upload"
           element={

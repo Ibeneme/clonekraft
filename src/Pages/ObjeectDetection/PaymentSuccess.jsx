@@ -7,7 +7,7 @@ const PaymentSuccess = () => {
   const navigate = useNavigate();
 
   const goToOrders = () => {
-    navigate("/order");
+    //navigate("/order");
   };
 
   return (
