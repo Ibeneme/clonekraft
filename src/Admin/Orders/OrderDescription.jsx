@@ -232,7 +232,26 @@ const AdminOrderDescriptionPage = () => {
                 //style={{ height: 120 }}
               />
             </div>
-          ) : null}
+          ) : (
+            <div>
+              <h2
+                className="vw-text"
+                style={{
+                  fontSize: 18,
+                }}
+              >
+                Update Price
+                {/* <span style={{ color: "#C19F62" }}> design preference 😊</span> */}
+              </h2>
+              <input
+                placeholder="Set a Price"
+                value={description}
+                className="input-field"
+                onChange={(e) => setDescription(e.target.value)}
+                //style={{ height: 120 }}
+              />
+            </div>
+          )}
           {ordersFetched?.price && label ? (
             <div style={{ cursor: "pointer", marginTop: 40, marginBottom: 96 }}>
               <div className="div-btn-auth"></div>
