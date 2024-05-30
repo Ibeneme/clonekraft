@@ -1,0 +1,69 @@
+/* src/components/Hero.css */
+
+.hero {
+    position: relative;
+    width: 100%;
+    height: fit-content;
+    overflow: hidden;
+
+
+
+
+}
+
+.slide {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    align-content: center;
+
+}
+
+.slide-text {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    color: white;
+    font-size: 120px;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.product-text {
+
+    font-size: 96px;
+    margin-bottom: 0;
+    text-align: right;
+}
+
+@media (max-width: 768px) {
+    .slide-text {
+        position: absolute;
+        bottom: 20px;
+        left: 20px;
+        color: white;
+        font-size: 20px;
+        background-color: rgba(0, 0, 0, 0.5);
+        padding: 10px;
+        border-radius: 5px;
+    }
+
+    .product-text {
+
+        font-size: 36px;
+
+    }
+
+}

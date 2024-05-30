@@ -3,6 +3,8 @@ import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { useNavigate } from "react-router-dom";
+import heroImage from "../../../../src/assets/Sofa/Frame8.png";
+
 const HeroPage = () => {
   useEffect(() => {
     AOS.init();
@@ -11,14 +13,11 @@ const HeroPage = () => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    // Check if the token exists in localStorage
     const token = localStorage.getItem("clone_kraft_user_token");
 
     if (token) {
-      // If the token exists, redirect to the /home page
       navigate("/home");
     } else {
-      // If the token does not exist, redirect to the /login page
       navigate("/login");
     }
   };
@@ -27,8 +26,7 @@ const HeroPage = () => {
     <div
       className="hero"
       style={{
-        backgroundImage:
-          "url('https://res.cloudinary.com/daiiiiupy/image/upload/v1715424195/new_fjtip4.jpg')",
+        backgroundImage: `url(${heroImage})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         height: "100vh",
@@ -58,25 +56,35 @@ const HeroPage = () => {
           alignItems: "center",
         }}
       >
+        <p
+          style={{
+            fontSize: 24,
+            color: "#fff",
+            textDecorationLine: "overline",
+            margin: 0,
+            padding: 0,
+          }}
+        >
+          We are
+        </p>
         <h1
-          data-aos="zoom-in"
           style={{
             color: "#fff",
             maxWidth: 800,
-            fontSize: "4.5rem",
+            fontSize: 48,
             marginBottom: "-0.5rem",
           }}
         >
           Lukas Design Lab
         </h1>
         <p
-          data-aos="zoom-in"
           style={{
             color: "#fff",
             maxWidth: 800,
             fontSize: "0.9rem",
             marginBottom: "2rem",
             textAlign: "center",
+            marginTop: 12,
           }}
         >
           Step into our design lab, where we turn ideas into beautiful
@@ -85,10 +93,7 @@ const HeroPage = () => {
           out. From sleek and modern to comfy and cozy, we've got something for
           everyone. Come see what we're all about{" "}
         </p>
-        <div
-          data-aos="zoom-in"
-          style={{ width: "100%", alignContent: "center" }}
-        >
+        <div style={{ width: "100%", alignContent: "center" }}>
           <div
             style={{
               marginTop: 32,

@@ -8,18 +8,31 @@ import SectionVI from "./Hero/SectionVI";
 // import ContactUs from "./Hero/Contact";
 import Footer from "./Hero/Footer";
 import TopLevel from "./Navbar/Navbar";
+import NewHero from "./Hero/NewHero";
+import NavbarNew from "./Hero/New/Navbar";
+import Products from "./Hero/New/Products";
+import Testimonials from "./Hero/Testimonials";
+import TeamMembers from "./Hero/Team";
+
+// import IndexNew from "./Hero/New/Index";
 
 const Index = () => {
   return (
     <div style={{ section: "100vw" }}>
+      {/* <NavbarNew /> */}
+      {/* <IndexNew /> */}
       <TopLevel />
+      <NewHero />
+      <Products />
       <HeroPage />
-      <SectionI />
+      {/* <SectionI />
       <SectionII />
-      <SectionIII />
-      <SectionIV />
+      <SectionIII /> 
+      <SectionIV />*/}
+      <Testimonials />
       <SectionVI />
-      {/* <ContactUs /> */}
+      <TeamMembers />
+      {/*     <ContactUs /> */}
       <Footer />
     </div>
   );

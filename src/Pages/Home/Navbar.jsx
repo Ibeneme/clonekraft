@@ -38,7 +38,7 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="navbar-left">
-        <h4>CloneKraft</h4>
+        <h4 onClick={() => navigate("/")}> CloneKraft</h4>
       </div>
       <div className="navbar-right">
         <ul className="nav-items">

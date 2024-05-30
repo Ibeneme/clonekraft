@@ -1,0 +1,55 @@
+/* General styles for the testimonials section */
+.testimonials {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 0;
+    background-color: #f9f9f9;
+    height: 85vh;
+    overflow: hidden;
+
+}
+
+.slider {
+    display: flex;
+    animation: slide 30s linear infinite;
+
+}
+
+.testimonial {
+    display: inline-block;
+    width: 300px;
+    margin: 0 1rem;
+    padding: 1rem;
+    background-color: #C19F6235;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.text {
+    font-size: 1rem;
+    color: #333;
+}
+
+.name {
+    margin-top: 1rem;
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: #000;
+}
+
+.location {
+    font-size: 0.9rem;
+    color: #777;
+}
+
+@keyframes slide {
+    0% {
+        transform: translateX(50%);
+    }
+
+    100% {
+        transform: translateX(-100%);
+    }
+}

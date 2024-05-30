@@ -139,7 +139,7 @@ const Chat = () => {
   }
 
   return (
-    <div className="first-chat-div" style={{ }}>
+    <div className="first-chat-div" style={{}}>
       <div className="chat-room" ref={chatContainerRef}>
         <h2 className="chat-room-h2"></h2>
 
@@ -260,6 +260,7 @@ const Chat = () => {
             value={message}
             onChange={handleChange}
             className="chat-input-box"
+            style={{ padding: 16 }}
           />
           <button className="chat-input-btn" onClick={handleSendMessage}>
             <RiSendPlane2Fill />

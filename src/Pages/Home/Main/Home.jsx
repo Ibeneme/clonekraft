@@ -121,7 +121,7 @@ const Home = () => {
         <WelcomeSection username={user?.username} />
       </section>
 
-      <section
+      {/* <section
         style={{
           display: "flex",
           justifyContent: "center",
@@ -157,7 +157,7 @@ const Home = () => {
 
       <section>
         <WelcomeSection username={user?.username} />
-      </section>
+      </section> */}
     </div>
   );
 };

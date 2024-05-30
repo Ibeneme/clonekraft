@@ -1,16 +1,18 @@
-/* @import url("https://fonts.googleapis.com/css2?family=Questrial&display=swap");
- */
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:opsz@9..40&display=swap");
 
-:root {
-  --font-family: "Dm Sans", sans-serif;
-  padding: 0;
+/* General font styles */
+body {
+  font-family: Arial, Helvetica, sans-serif; /* Fallback to web-safe fonts */
+  -webkit-font-smoothing: antialiased; /* Smoother font rendering */
+  -moz-osx-font-smoothing: grayscale; /* Smoother font rendering */
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 :root {
+  --font-family: 'DM Sans', sans-serif;
   --darkOrange: #C19F62;
-  /* --darkOrange: #ff5f05; */
   --primaryOrange: #C19F62;
   --darkBlue: #010811;
   --lightBlue: #3586ff;
@@ -20,6 +22,8 @@
   --mainBlack: #000000;
   --lightBlack: #121212;
   --mainGray: #666666;
+  padding: 0;
+  margin: 0;
 }
 
 body {
@@ -29,7 +33,7 @@ body {
 }
 
 .hide-bid {
-  display: flex
+  display: flex;
 }
 
 button {
@@ -39,10 +43,8 @@ button {
 .custom-file-upload {
   display: inline-block;
   padding: 10px 20px;
-  background-color: #C19F62;
-  /* Background color */
+  background-color: var(--darkOrange);
   color: white;
-  /* Text color */
   border-radius: 5px;
   cursor: pointer;
 }
@@ -55,26 +57,18 @@ button {
   border: 0.6px solid #808080;
   padding: 12px 32px;
   border-radius: 24px;
-  margin-bottom: -24px;
-  margin-top: 24px;
+  margin: 24px 0;
   color: #808080;
   font-size: 14px;
   cursor: pointer;
+  transition: background-color 0.3s, border 0.3s, color 0.3s;
 }
 
 .save-reassign:hover {
   border: 0.6px solid var(--darkOrange);
-  padding: 12px 32px;
-  border-radius: 24px;
-  margin-bottom: -24px;
-  margin-top: 24px;
   color: #fff;
-  font-size: 14px;
-  cursor: pointer;
   background-color: var(--darkOrange);
 }
-
-
 
 .order-image-container {
   display: flex;
@@ -82,16 +76,12 @@ button {
 
 .order-image-item {
   flex: 1 0 16%;
-  /* Display 16% of width */
   margin-right: -42px;
-  /* Adjust spacing between images */
 }
 
 .order-image-item:last-child {
   flex-grow: 1;
-  /* Last image takes up remaining space */
   margin-right: 16px;
-  /* Remove margin for the last image */
 }
 
 .order-image {
@@ -99,23 +89,20 @@ button {
   height: 56px;
   object-fit: cover;
   border-radius: 12px;
-  border: 4.3px solid #C19F6255
+  border: 4.3px solid rgba(193, 159, 98, 0.33);
 }
-
 
 @keyframes blinkBorder {
   from {
-    border-color: #ffffff12;
+    border-color: rgba(255, 255, 255, 0.07);
   }
-
   to {
-    border-color: #ffffff54;
-    /* You can adjust the color here */
+    border-color: rgba(255, 255, 255, 0.33);
   }
 }
 
 .clone {
-  font-size: 120px
+  font-size: 120px;
 }
 
 .hide-this {
@@ -125,10 +112,10 @@ button {
 .first-chat-div {
   width: 100vw;
   height: 100vh;
-  background-color: #f4f4f4;
+  background-color: var(--lightWhite);
+  display: flex;
   justify-content: center;
   align-items: center;
-  display: flex;
 }
 
 .chat-room {
@@ -138,7 +125,7 @@ button {
   overflow-y: scroll;
   height: 74vh;
   padding: 16px;
-  padding-bottom: 188px
+  padding-bottom: 188px;
 }
 
 .chat-input-box {
@@ -148,8 +135,6 @@ button {
   border-radius: 100px;
   border: 1px solid #808080;
   font-family: var(--font-family);
-  padding-right: -100px;
-
 }
 
 .chat-input-btn {
@@ -160,13 +145,13 @@ button {
   font-size: 18px;
   border-radius: 100px;
   border: none;
-  background-color: #C19F62;
+  background-color: var(--darkOrange);
   color: #fff;
-  width: 60px
+  width: 60px;
 }
 
 .chat-room-h2 {
-  padding-top: 64px
+  padding-top: 64px;
 }
 
 .chat-room-h2-div {
@@ -174,7 +159,6 @@ button {
   flex-direction: column;
   width: 100%;
   flex: 1;
-
 }
 
 .chat-room-h2-date {
@@ -182,37 +166,35 @@ button {
   align-self: center;
   text-align: center;
   font-size: 14px;
-  color: #C19F62;
-  background-color: #C19F6218;
+  color: var(--darkOrange);
+  background-color: rgba(193, 159, 98, 0.1);
   padding: 16px;
   border-radius: 12px;
 }
 
 .flex-end {
   align-self: flex-end;
-
 }
 
 .flex-start {
   align-self: flex-end;
-
 }
 
 .imagewrapper {
+  display: flex;
   justify-content: center;
   align-items: center;
-  display: flex;
   gap: 24px;
-  padding: 16px
+  padding: 16px;
 }
 
 .imageimage {
-  width: 400px
+  width: 400px;
 }
 
 @media (max-width: 768px) {
   .clone {
-    font-size: 48px
+    font-size: 48px;
   }
 
   .hide-this {
@@ -220,39 +202,27 @@ button {
   }
 
   .chat-room {
-    background-color: #fff;
     width: 100%;
-
   }
 
   .chat-input-box {
     width: 82vw;
-
-
   }
 
   .hide-bid {
-    display: none
+    display: none;
   }
 
   .imageimage {
-    width: 100%
+    width: 100%;
   }
 
   .imagewrapper {
-    justify-content: center;
-    align-items: center;
-    display: flex;
     flex-direction: column;
-    gap: 24px;
-    padding: 16px
   }
 }
 
-
 .chat-list .chat-message {
-  -webkit-border-radius: 50px;
-  -moz-border-radius: 50px;
   border-radius: 50px;
   background: #5a99ee;
   display: inline-block;
@@ -272,7 +242,7 @@ button {
   margin: 0 0 5px 0;
   font-weight: 600;
   line-height: 100%;
-  font-size: .9rem;
+  font-size: 0.9rem;
 }
 
 .chat-list .chat-message p {

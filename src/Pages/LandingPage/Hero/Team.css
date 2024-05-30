@@ -1,0 +1,24 @@
+.team-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
+    gap: 20px; /* Gap between grid items */
+ 
+  }
+  
+  .team-member {
+    display: flex;
+    flex-direction: column; /* Align items vertically */
+    justify-content: flex-end; /* Align items to the bottom */
+  }
+  
+  .team-member img {
+    max-width: 100%; /* Make the image responsive */
+    height: auto; /* Maintain aspect ratio */
+  }
+  
+  .member-details {
+    background-color: #C19F6225; /* Semi-transparent background for text */
+    padding: 10px; /* Padding for text */
+    color: #C19F62; /* Text color */
+  }
+  

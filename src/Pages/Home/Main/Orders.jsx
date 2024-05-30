@@ -44,13 +44,13 @@ const OrderPage = () => {
     }
   };
   const handleOrderClick = (order) => {
-    navigate("/order-single", { state: { order: order } });
+    navigate("/order-single", { state: { ordersFetched: order } });
     // Navigate to another page and pass the selected order as a parameter
     // history.push(`/order-description/${order._id}`, { order });
   };
 
   const handleOrderClicks = (order) => {
-    navigate("/chatpage", { state: { order: order } });
+    navigate("/chatpage", { state: { ordersFetched: order } });
     // Navigate to another page and pass the selected order as a parameter
     // history.push(`/order-description/${order._id}`, { order });
   };
