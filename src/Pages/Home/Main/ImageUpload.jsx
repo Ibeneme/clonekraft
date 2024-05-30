@@ -148,7 +148,7 @@ const ImageUpload = () => {
           <h2
             className="vw-text"
             style={{
-              fontSize: 48,
+              fontSize: 32,
             }}
           >
             <span style={{ color: "#C19F62" }}>
@@ -161,7 +161,7 @@ const ImageUpload = () => {
           <h2
             className="vw-text"
             style={{
-              fontSize: 18,
+              fontSize: 14,
             }}
           >
             Choose your{" "}
@@ -170,7 +170,7 @@ const ImageUpload = () => {
 
           <div
             className="label-container"
-            style={{ display: "flex", marginTop: 12 }}
+            style={{ display: "flex", marginTop: 12, fontSize: 14 }}
           >
             <label
               className={label === "basic" ? "selected" : ""}
@@ -235,7 +235,7 @@ const ImageUpload = () => {
             <h2
               className="vw-text"
               style={{
-                fontSize: 18,
+                fontSize: 14,
               }}
             >
               Select
@@ -244,7 +244,7 @@ const ImageUpload = () => {
             </h2>
             <div
               className="delivery-options"
-              style={{ display: "flex", marginTop: 12 }}
+              style={{ display: "flex", marginTop: 12, fontSize: 14 }}
             >
               {/* <label
               className={deliveryOption === "3days" ? "selected" : ""}
@@ -319,7 +319,7 @@ const ImageUpload = () => {
             <h2
               className="vw-text"
               style={{
-                fontSize: 18,
+                fontSize: 14,
               }}
             >
               Tell us, what's your{" "}

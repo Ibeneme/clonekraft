@@ -8,6 +8,7 @@ import axios from "axios";
 import { baseApiUrl } from "../../../Redux/Baseurl/Baseurl";
 import { useDispatch } from "react-redux";
 import { getOrders } from "../../../Redux/order/order";
+import { crossUser } from "../../../Redux/auth/auth";
 
 const OrderDescriptionPage = () => {
   const location = useLocation();
@@ -20,6 +21,26 @@ const OrderDescriptionPage = () => {
     handleFetchOrders();
   }, []);
   const traceOrder = ordersFetched;
+
+  const handleUploads = () => {
+    setLoading(true);
+    // console.log(order?.price);
+
+    dispatch(crossUser(order_id))
+      .then((response) => {
+        setLoading(false);
+        // Handle success
+        console.log("Request created successfully:", response);
+        handleFetchOrders();
+      })
+      .catch((error) => {
+        setLoading(true);
+        //showErrorToast("Errorupdating Order");
+        console.error("Error Order Request:", error);
+      });
+
+    //setModalOpen(false);
+  };
 
   console.log(ordersFetched, "ordersFetched");
   const handleFetchOrders = () => {
@@ -152,7 +173,7 @@ const OrderDescriptionPage = () => {
       setLoading(false);
       console.log("Payment Successful!");
       setModalOpenLoading(true);
-      handleUploader();
+      handleUploads();
       // navigate("/sucess");
       // Handle post-success actions here
     },
@@ -237,7 +258,8 @@ const OrderDescriptionPage = () => {
                       ? "selected-image-item"
                       : "image-item"
                   }
-                  onClick={() => handleImageClick(image, index)}
+                  onClick={handleUploads}
+                  //onClick={() => handleImageClick(image, index)}
                 />
               ))}
             </div>

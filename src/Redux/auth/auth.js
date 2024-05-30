@@ -121,6 +121,25 @@ export const profile = createAsyncThunk("auth/profile", async () => {
     throw new Error(error.message);
   }
 });
+export const crossUser = createAsyncThunk("auth/crossUser", async (orderId) => {
+  try {
+    // Retrieve token from localStorage
+    const token = localStorage.getItem("clone_kraft_user_token");
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    // Make the POST request with credentials and config
+    const response = await axios.put(`${baseApiUrl}/cross/${orderId}`, config);
+    console.log(response.data, "pl");
+    return response.data;
+  } catch (error) {
+    console.log(error, "lerror");
+    throw new Error(error.message);
+  }
+});
 
 export const updateUserImage = createAsyncThunk(
   "auth/updateUserImage",
