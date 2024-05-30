@@ -8,6 +8,7 @@ const PaymentSuccess = () => {
 
   const goToOrders = () => {
     //navigate("/order");
+    navigate(-1); 
   };
 
   return (

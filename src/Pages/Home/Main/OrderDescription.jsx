@@ -26,7 +26,7 @@ const OrderDescriptionPage = () => {
     setLoading(true);
     // console.log(order?.price);
 
-    dispatch(crossUser(order_id))
+    dispatch(crossUser(order?._id))
       .then((response) => {
         setLoading(false);
         // Handle success
@@ -259,7 +259,7 @@ const OrderDescriptionPage = () => {
                       ? "selected-image-item"
                       : "image-item"
                   }
-                  // onClick={handleUploads}
+                onClick={handleUploads}
                   //onClick={() => handleImageClick(image, index)}
                 />
               ))}
@@ -300,9 +300,7 @@ const OrderDescriptionPage = () => {
               ? `Get Price: ${formatCountdown(timeRemaining)}`
               : " "}
           </h1>
-          {order?.paid === false &&
-          order?.price !== null &&
-          timeRemaining > 0 ? (
+          {order?.paid === false && order?.price !== null && (
             // Render the "Proceed to Payment" button only if time remaining
             <div style={{ cursor: "pointer", marginTop: 40, marginBottom: 24 }}>
               <div className="div-btn-auth"></div>
@@ -312,7 +310,7 @@ const OrderDescriptionPage = () => {
                 onClick={handleClick}
               />
             </div>
-          ) : null}
+          )}
 
           <div>
             <br />

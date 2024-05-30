@@ -130,10 +130,11 @@ export const crossUser = createAsyncThunk("auth/crossUser", async (orderId) => {
         Authorization: `Bearer ${token}`,
       },
     };
+    console.log(config,'clone_kraft_user_token')
 
     // Make the POST request with credentials and config
-    const response = await axios.put(`${baseApiUrl}/cross/${orderId}`, config);
-    console.log(response.data, "pl");
+    const response = await axios.put(`${baseApiUrl}/order/cross/${orderId}`, config);
+    console.log(response.data, "localStorage");
     return response.data;
   } catch (error) {
     console.log(error, "lerror");

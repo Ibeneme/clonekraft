@@ -350,15 +350,15 @@ const AdminOrderDescriptionPage = () => {
 
         <div className="order-info">
           <h3>Order Information</h3>
-          <p>Class: {capitalizeFirstLetter(ordersFetched?.selectedLabel)}</p>
           <p>Status: {capitalizeFirstLetter(ordersFetched?.status)}</p>
+          {/* <p>Status: {capitalizeFirstLetter(ordersFetched?.status)}</p>
           <p>Seaters: {capitalizeFirstLetter(ordersFetched?.seaters)}</p>
           <p>Choice: {capitalizeFirstLetter(ordersFetched?.choice)}</p>
           <p>
             Style of Furniture:{" "}
             {capitalizeFirstLetter(ordersFetched?.styleOfChair)}
           </p>
-          <p>Shape: {capitalizeFirstLetter(ordersFetched?.shape)}</p>
+          <p>Shape: {capitalizeFirstLetter(ordersFetched?.shape)}</p> */}
 
           <p>Order Created At: {formatDate(ordersFetched?.createdAt)}</p>
           <p>
