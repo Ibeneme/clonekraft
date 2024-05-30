@@ -25,7 +25,8 @@ const AdminOrders = () => {
     dispatch(getOrdersAdmin())
       .then((response) => {
         console.log("orders successful:", response);
-        setOrdersFetched(response?.payload);
+        const sortedOrders = response?.payload?.sort((a, b) => new Date(b?.createdAt) - new Date(a?.createdAt));
+        setOrdersFetched(sortedOrders);
         setLoading(false);
       })
       .catch((error) => {
