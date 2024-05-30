@@ -9,6 +9,7 @@ import useCustomToasts from "../../ToastNotifications/Toastify";
 import profilePic from "../../..//assets/auth/left.png";
 import { useNavigate } from "react-router-dom";
 import ShimmerLoader from "../../Components/Loader/ShimmerLoader";
+import "./Profile.css";
 
 export const formatDate = (dateString) => {
   const date = new Date(dateString);
