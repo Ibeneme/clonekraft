@@ -56,6 +56,61 @@ export const getUsers = createAsyncThunk("order/getUsers", async () => {
   }
 });
 
+export const updateProgress = createAsyncThunk(
+  "order/updateProgress",
+  async ({ order_id: order_id, progress: progress }) => {
+    try {
+      const token = localStorage.getItem("clone_kraft_admin");
+
+      // Set the authorization header with the token
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      console.log(progress, "progresspp");
+      // Make the PUT request with credentials and config
+      const response = await axios.put(
+        `${baseApiUrl}/order/progress/${order_id}`,
+        { progress: progress },
+        config
+      );
+      console.log(response.data, "pl");
+      return response.data;
+    } catch (error) {
+      console.log(error, "lerror");
+      throw new Error(error.message);
+    }
+  }
+);
+
+export const updateIsRead = createAsyncThunk(
+  "order/updateIsRead",
+  async ({ order_id: order_id, progress: progress }) => {
+    try {
+      const token = localStorage.getItem("clone_kraft_admin");
+
+      // Set the authorization header with the token
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      console.log(progress, "progresspp");
+      // Make the PUT request with credentials and config
+      const response = await axios.put(
+        `${baseApiUrl}/order/messages/${order_id}/${progress}/read`,
+        { progress: progress },
+        config
+      );
+      console.log(response.data, "pl");
+      return response.data;
+    } catch (error) {
+      console.log(error, "lerror");
+      throw new Error(error.message);
+    }
+  }
+);
 export const getOrdersAdmin = createAsyncThunk(
   "order/getOrdersAdmin",
   async () => {
@@ -227,6 +282,19 @@ const adminSlice = createSlice({
         state.user = action.payload;
       })
       .addCase(getMessages.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+      });
+    builder
+      .addCase(updateProgress.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(updateProgress.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.isAuthenticated = true;
+        state.user = action.payload;
+      })
+      .addCase(updateProgress.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
       });

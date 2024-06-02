@@ -38,6 +38,35 @@ export const createOrder = createAsyncThunk(
   }
 );
 
+export const updateOrderClient = createAsyncThunk(
+  "order/updateOrderClient",
+  async ({ order_id, credentials }) => {
+    try {
+      const token = localStorage.getItem("clone_kraft_user_token");
+
+      // Set the authorization header with the token
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+
+      // Make the PUT request with credentials and config
+      const response = await axios.put(
+        `${baseApiUrl}/order/payment/${order_id}`,
+        credentials,
+        config
+      );
+      console.log(response.data, "pl");
+      return response.data;
+    } catch (error) {
+      console.log(error, "lerror");
+      throw new Error(error.message);
+    }
+  }
+);
+
+
 export const getOrders = createAsyncThunk("order/getOrders", async () => {
   try {
     const token = localStorage.getItem("clone_kraft_user_token");
@@ -125,6 +154,19 @@ const orderSlice = createSlice({
         state.user = action.payload;
       })
       .addCase(getOrders.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+      });
+    builder
+      .addCase(updateOrderClient.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(updateOrderClient.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.isAuthenticated = true;
+        state.user = action.payload;
+      })
+      .addCase(updateOrderClient.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
       });

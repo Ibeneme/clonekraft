@@ -1,0 +1,44 @@
+/* src/ProgressBar.css */
+.progress-bar-container {
+    width: 100%;
+    background-color: #e0e0e0;
+    border-radius: 25px;
+    overflow: hidden;
+  }
+  
+  .progress-bar {
+    height: 30px;
+    background-color: #6101FF;
+    width: 0;
+    text-align: center;
+    line-height: 30px;
+    color: white;
+    border-radius: 25px;
+    transition: width 0.5s;
+  }
+  
+  .input-container {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+  }
+  
+  input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  button {
+    padding: 10px 15px;
+    background-color: #6101FF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #5aa5a0;
+  }
+  

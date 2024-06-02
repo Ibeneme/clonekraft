@@ -7,19 +7,256 @@ import { PaystackButton } from "react-paystack";
 import axios from "axios";
 import { baseApiUrl } from "../../../Redux/Baseurl/Baseurl";
 import { useDispatch } from "react-redux";
-import { getOrders } from "../../../Redux/order/order";
+import { getOrders, updateOrderClient } from "../../../Redux/order/order";
 import { crossUser } from "../../../Redux/auth/auth";
+import Modal from "../../Components/Modal/Modal";
+import {
+  PDFViewer,
+  Document,
+  Page,
+  Text,
+  View,
+  StyleSheet,
+  Font,
+  Image,
+} from "@react-pdf/renderer";
+import DMSansRegular from "../../../assets/font/DMSans-Regular.ttf"; // Update the path to the regular font file
+import DMSansBold from "../../../assets/font/DMSans-Bold.ttf"; // Update the path to the bold font file
+import logoImage from "../../../assets/woods/Logo.png"; // Update the path to your logo image
+import ProgressBarComponent from "./Progress/Progress";
+
+const formatNumberWithCommas = (number) => {
+  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+};
+
+const calculateVAT = (amountPaid) => {
+  return amountPaid * 0.075;
+};
+
+// Register the font family
+Font.register({
+  family: "DM Sans",
+  fonts: [
+    { src: DMSansRegular, fontWeight: "normal" },
+    { src: DMSansBold, fontWeight: "bold" },
+  ],
+});
+
+const formatDate = (isoString) => {
+  const date = new Date(isoString);
+  return date.toLocaleDateString("en-US", {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+};
+
+// PDF component for displaying the payment details
+const PaymentReceipt = ({ installment }) => (
+  <Document>
+    <Page size="A4">
+      <View style={stylesPdf.section}>
+        <View>
+          <Image
+            src={logoImage}
+            style={{
+              width: 100,
+              height: 100,
+              alignSelf: "center",
+              marginTopF: 24,
+            }}
+          />
+          <Text style={stylesPdf.title}>Installmental Payment Receipt</Text>
+          <Text style={stylesPdf.price}>
+            Paid: NGN{" "}
+            {formatNumberWithCommas(
+              installment.amountPaid + calculateVAT(installment.amountPaid)
+            )}
+          </Text>
+
+          <Text style={stylesPdf.date}>{formatDate(installment.datePaid)}</Text>
+        </View>
+        <View
+          style={{
+            marginTop: 16,
+            paddingTop: 16,
+          }}
+        >
+          <View
+            style={{
+              flexDirection: "row",
+              gap: 120,
+              justifyContent: "space-between",
+            }}
+          >
+            <Text style={stylesPdf.text}>ID:</Text>{" "}
+            <Text style={stylesPdf.text}>{installment._id}</Text>
+          </View>
+          <View
+            style={{ flexDirection: "row", justifyContent: "space-between" }}
+          >
+            <Text style={stylesPdf.text}>Payment ID:</Text>{" "}
+            <Text style={stylesPdf.text}>{installment._id}</Text>
+          </View>
+
+          <View
+            style={{ flexDirection: "row", justifyContent: "space-between" }}
+          >
+            <Text style={stylesPdf.text}>Cost:</Text>{" "}
+            <Text style={stylesPdf.text}>
+              NGN {formatNumberWithCommas(installment.amountPaid)}
+            </Text>
+          </View>
+          <View
+            style={{ flexDirection: "row", justifyContent: "space-between" }}
+          >
+            <Text style={stylesPdf.text}>Vat 7.5%:</Text>{" "}
+            <Text style={stylesPdf.text}>
+              NGN {formatNumberWithCommas(calculateVAT(installment.amountPaid))}
+            </Text>
+          </View>
+          <View
+            style={{ flexDirection: "row", justifyContent: "space-between" }}
+          >
+            <Text style={stylesPdf.text}>Balance to Paid:</Text>{" "}
+            <Text style={stylesPdf.text}>
+              NGN{formatNumberWithCommas(installment.balanceLeft)}
+            </Text>
+          </View>
+          <View
+            style={{ flexDirection: "row", justifyContent: "space-between" }}
+          >
+            <Text style={stylesPdf.text}>To be Delivered in</Text>{" "}
+            <Text style={stylesPdf.text}>
+              {installment.deliveryOption} days
+            </Text>
+          </View>
+        </View>
+
+        <View
+          style={{
+            marginTop: 16,
+            paddingTop: 16,
+          }}
+        >
+          <Text style={stylesPdf.title}>Balance</Text>
+          <Text style={[stylesPdf.price, { fontSize: 20 }]}>
+            NGN {formatNumberWithCommas(installment?.balanceLeft)}
+          </Text>
+        </View>
+      </View>
+    </Page>
+  </Document>
+);
+
+const stylesPdf = StyleSheet.create({
+  section: {
+    margin: 10,
+    padding: 10,
+    flexGrow: 1,
+    textAlign: "center",
+    fontFamily: "DM Sans",
+    justifyContent: "space-between",
+  },
+  title: {
+    fontWeight: "bold",
+    marginBottom: 12,
+    fontSize: 20,
+    color: `#121212`,
+    marginTop: 12,
+  },
+  date: {
+    fontSize: 16,
+    marginBottom: 10,
+    color: "#666666",
+  },
+  text: {
+    fontSize: 18,
+    marginBottom: 10,
+    color: "#666666",
+  },
+
+  price: {
+    fontSize: 32,
+    marginBottom: 10,
+    fontWeight: 900,
+    color: `#C19F62`,
+  },
+});
 
 const OrderDescriptionPage = () => {
   const location = useLocation();
   const { ordersFetched } = location.state;
   const [order, setOrdersFetched] = useState([]);
-  const PAYSTACK_SECRET_KEY =
-    "pk_live_1314935c92fe40573d7c8105b93a7201c9cc72e3";
-  const dispatch = useDispatch();
   useEffect(() => {
     handleFetchOrders();
   }, []);
+  const [progress, setProgress] = useState(0);
+
+  const handleFetchOrders = () => {
+    dispatch(getOrders())
+      .then((response) => {
+        console.log("orders successful:", response);
+        const matchedOrder = response?.payload?.orders?.find(
+          (order) => order?._id === traceOrder?._id
+        );
+        console.log(matchedOrder, "matchedOrder");
+        if (matchedOrder) {
+          setOrdersFetched(matchedOrder);
+          setProgress(matchedOrder?.progress);
+        } else {
+          setOrdersFetched([]);
+        }
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log("Profile fetch failed:", error);
+        setLoading(false);
+      });
+  };
+
+  const handleDownloadPDF = (installment) => {
+    console.log(installment, "installmentinstallment");
+    // Create a blob from the PaymentReceipt component for the given installment
+    const blob = new Blob([<PaymentReceipt installment={installment} />], {
+      type: "application/pdf",
+    });
+
+    // Create a URL for the blob
+    const url = window.URL.createObjectURL(blob);
+
+    // Create an anchor element
+    const a = document.createElement("a");
+
+    // Set anchor attributes
+    a.href = url;
+    a.download = "payment_receipt.pdf";
+    // Append the anchor to the document body
+    document.body.appendChild(a);
+
+    // Programmatically click the anchor to trigger the download
+    a.click();
+
+    // Remove the anchor from the document body
+    document.body.removeChild(a);
+
+    // Revoke the URL to release resources
+    window.URL.revokeObjectURL(url);
+    console.log(window.URL.revokeObjectURL(url), "installmentinstallment");
+  };
+
+  const [selectedInstallment, setSelectedInstallment] = React.useState(null);
+
+  const handleInstallmentClick = (installment) => {
+    setSelectedInstallment(installment);
+    setModalOpenPDF(true);
+  };
+
+  const PAYSTACK_SECRET_KEY =
+    "pk_live_1314935c92fe40573d7c8105b93a7201c9cc72e3";
+  const dispatch = useDispatch();
+
   const traceOrder = ordersFetched;
 
   const handleUploads = () => {
@@ -43,26 +280,120 @@ const OrderDescriptionPage = () => {
     //setModalOpen(false);
   };
 
-  console.log(ordersFetched, "ordersFetched");
-  const handleFetchOrders = () => {
-    dispatch(getOrders())
-      .then((response) => {
-        console.log("orders successful:", response);
-        const matchedOrder = response?.payload?.orders?.find(
-          (order) => order?._id === traceOrder?._id
-        );
-        console.log(matchedOrder, "matchedOrder");
-        if (matchedOrder) {
-          setOrdersFetched(matchedOrder);
-        } else {
-          setOrdersFetched([]);
-        }
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.log("Profile fetch failed:", error);
-        setLoading(false);
-      });
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     setProgress((prevProgress) =>
+  //       prevProgress >= 100 ? 0 : prevProgress + 10
+  //     );
+  //   }, 1000);
+
+  //   return () => clearInterval(interval);
+  // }, []);
+
+  const handleInstallments = () => {
+    setLoading(true);
+
+    if (paymentOption === "withoutInstallments") {
+      const payload = {
+        order_id: order?._id,
+        amountPaid: grandTotal === 0 ? order?.balanceLeft * 1.075 : grandTotal,
+      };
+      console.log("kkpayload", payload);
+      dispatch(
+        updateOrderClient({ credentials: payload, order_id: order?._id })
+      )
+        .then((response) => {
+          setLoading(false);
+          //Handle success
+          console.log("Request created successfully:", response);
+          if (response.payload.message === "Payment processed successfully") {
+            handleFetchOrders();
+            setModalOpen(false);
+          }
+          handleFetchOrders();
+          //navigate("/sucess");
+        })
+        .catch((error) => {
+          setLoading(true);
+          console.error("Error Order Request:", error);
+        });
+    } else {
+      const payload = {
+        order_id: order?._id,
+        installment: true,
+        amountPaid: grandTotal === 0 ? order?.balanceLeft * 1.075 : grandTotal,
+      };
+      console.log(" pay pay pay pay", payload);
+      dispatch(
+        updateOrderClient({ credentials: payload, order_id: order?._id })
+      )
+        .then((response) => {
+          setLoading(false);
+          // Handle success
+          console.log("Request created successfully:", response);
+          if (response.payload.message === "Payment processed successfully") {
+            handleFetchOrders();
+            setModalOpen(false);
+          }
+          // handleFetchOrders();
+          //navigate("/sucess");
+        })
+        .catch((error) => {
+          setLoading(true);
+          console.error("Error Order Request:", error);
+        });
+    }
+
+    //setModalOpen(false);
+  };
+
+  const orderBalanceLeft = order?.balanceLeft ? order?.balanceLeft : 0;
+
+  const [grandTotal, setGrandTotal] = useState(orderBalanceLeft);
+  console.log(grandTotal, "ordersFetched");
+  const [modalOpenPDF, setModalOpenPDF] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [paymentOption, setPaymentOption] = useState("");
+  const [installmentPlan, setInstallmentPlan] = useState(null);
+  const [installmentBalance, setInstallmentBalance] = useState(null);
+  const [payThisAmount, setPayThisAmount] = useState(null);
+  const handlePaymentOptionChange = (event) => {
+    setPaymentOption(event.target.value);
+    const surcharge = (price * 0.075).toFixed(2);
+    if (event.target.value === "withoutInstallments") {
+      setInstallmentPlan(null);
+      setInstallmentBalance(null);
+      const totalWithoutInstallments = (price * 1.075).toFixed(2); // Add 7.5% surcharge
+      setGrandTotal(totalWithoutInstallments);
+      setPayThisAmount(price);
+    } else {
+      const installmentAmount = (price * 0.6).toFixed(2);
+      const totalWithSurcharge = (installmentAmount * 1.075).toFixed(2); // Add 7.5% surcharge to the installment amount
+      setInstallmentPlan(installmentAmount);
+      setInstallmentBalance((price * 0.4).toFixed(2));
+      setGrandTotal(totalWithSurcharge);
+      setPayThisAmount(price * 0.6);
+    }
+  };
+
+  const price = order?.price;
+  console.log(price, order?.price, order, "orderorderorder");
+
+  const handleSubmit = () => {
+    if (paymentOption === "withoutInstallments") {
+      console.log(`Total price to be paid: $${price}`);
+      setPayThisAmount(price);
+      setGrandTotal((price * 1.075).toFixed(2)); // Add 7.5% surcharge
+    } else if (paymentOption === "withInstallments") {
+      console.log(`Payment option: ${paymentOption}`);
+      setPayThisAmount(price * 0.6);
+      const installmentAmount = (price * 0.6).toFixed(2);
+      setInstallmentPlan(installmentAmount);
+      setInstallmentBalance((price * 0.4).toFixed(2));
+      setGrandTotal((installmentAmount * 1.075).toFixed(2)); // Add 7.5% surcharge to the installment amount
+      console.log(`First installment (60%): $${installmentAmount}`);
+      console.log(`Second installment (40%): $${(price * 0.4).toFixed(2)}`);
+    }
   };
 
   // State to track the URL of the currently selected big display image
@@ -167,14 +498,16 @@ const OrderDescriptionPage = () => {
   const publicKey = PAYSTACK_SECRET_KEY; // Use your public key here
   const componentProps = {
     email: order?.email,
-    amount: amount,
+    amount:
+      grandTotal === 0 ? order?.balanceLeft * 1.075 * 100 : grandTotal * 100,
     publicKey,
-    text: loading ? "Pay with Paystack" : "Pay with Paystack",
+    text: loading ? "loading..." : "Proceed to Pay",
     onSuccess: () => {
       setLoading(false);
       console.log("Payment Successful!");
       setModalOpenLoading(true);
-      handleUploads();
+      handleInstallments();
+      //handleUploads();
       // navigate("/sucess");
       // Handle post-success actions here
     },
@@ -207,14 +540,195 @@ const OrderDescriptionPage = () => {
     }
   };
 
+  const Content = (
+    <div style={styles.container}>
+      <h1 style={{ fontSize: 32, paddingRight: 96 }}>
+        Choose a Payment Option
+      </h1>
+      <br /> <br />
+      <div style={styles.optionContainer}>
+        <input
+          type="radio"
+          value="withoutInstallments"
+          checked={paymentOption === "withoutInstallments"}
+          onChange={handlePaymentOptionChange}
+          id="withoutInstallments"
+          style={styles.radioInput}
+        />
+        <label htmlFor="withoutInstallments" style={styles.customLabel}>
+          Pay Without Installments
+        </label>
+      </div>
+      <div style={styles.optionContainer}>
+        <input
+          type="radio"
+          value="withInstallments"
+          checked={paymentOption === "withInstallments"}
+          onChange={handlePaymentOptionChange}
+          id="withInstallments"
+          style={styles.radioInput}
+        />
+        <label htmlFor="withInstallments" style={styles.customLabel}>
+          Pay in Installments
+        </label>
+      </div>
+      {paymentOption === "withInstallments" && (
+        <div style={styles.installments}>
+          <br />
+          {paymentOption === "withInstallments" && (
+            <>
+              <h2 style={{ fontSize: 16 }}>
+                First Installment Plan - You'll Pay 60%
+              </h2>
+
+              <p
+                style={{
+                  fontSize: 16,
+                  marginBottom: 48,
+                  fontWeight: 900,
+                }}
+              >
+                {" "}
+                ₦{formatNumberWithCommas(installmentPlan)}
+              </p>
+              <p
+                style={{
+                  fontSize: 16,
+                  marginTop: -32,
+                  marginBottom: 48,
+                  fontWeight: 900,
+                }}
+              >
+                {" "}
+                + ₦{formatNumberWithCommas(calculateVAT(installmentPlan))} ( Vat
+                - 7.5%)
+              </p>
+              <p style={{ fontSize: 32, fontWeight: 900 }}>
+                {" "}
+                ₦{formatNumberWithCommas(grandTotal)}
+              </p>
+              <p
+                style={{
+                  fontSize: 16,
+                  fontWeight: 600,
+                  backgroundColor: `var(--darkOrange)`,
+                  padding: 12,
+                  color: "#fff",
+                }}
+              >
+                {" "}
+                You'll Balance ₦{formatNumberWithCommas(installmentBalance)}
+              </p>
+            </>
+          )}
+        </div>
+      )}
+      {paymentOption === "withoutInstallments" && (
+        <div style={styles.installments}>
+          <br />
+          {paymentOption === "withoutInstallments" && (
+            <>
+              <h2 style={{ fontSize: 16 }}>You'll Pay</h2>
+
+              <p
+                style={{
+                  fontSize: 16,
+                  marginBottom: 48,
+                  fontWeight: 900,
+                }}
+              >
+                {" "}
+                ₦{formatNumberWithCommas(payThisAmount)}
+              </p>
+              <p
+                style={{
+                  fontSize: 16,
+                  marginTop: -32,
+                  marginBottom: 48,
+                  fontWeight: 900,
+                }}
+              >
+                {" "}
+                + ₦{((payThisAmount * 75) / 1000).toFixed(2)} ( Vat - 7.5%)
+              </p>
+
+              <p style={{ fontSize: 32, fontWeight: 900 }}>
+                {" "}
+                ₦{formatNumberWithCommas(grandTotal)}
+              </p>
+            </>
+          )}
+        </div>
+      )}
+      {paymentOption === "withoutInstallments" && (
+        <div
+          onClick={handleInstallments}
+          style={{ cursor: "pointer", marginTop: 40, marginBottom: 24 }}
+        >
+          <PaystackButton
+            {...componentProps}
+            className="btn-auth-black"
+            style={{
+              backgroundColor: "#121212",
+            }}
+            onClick={handleClick}
+          />
+        </div>
+      )}
+      {paymentOption === "withInstallments" && (
+        <div
+          onClick={handleInstallments}
+          style={{ cursor: "pointer", marginTop: 40, marginBottom: 24 }}
+        >
+          <PaystackButton
+            {...componentProps}
+            className="btn-auth-black"
+            style={{
+              backgroundColor: "#121212",
+            }}
+            onClick={handleClick}
+          />
+        </div>
+      )}
+    </div>
+  );
+
   return (
     <div className="invoice-container">
       <div className="invoice-header">
         <div>
+          <Modal
+            isOpen={modalOpen}
+            onClose={() => setModalOpen(false)}
+            ifClose={true}
+            formContent={Content}
+          />
+          <Modal
+            isOpen={modalOpenPDF}
+            onClose={() => setModalOpenPDF(false)}
+            ifClose={true}
+            formContent={
+              <div style={{ flex: "1 0 50%", margin: -14 }}>
+                {selectedInstallment && (
+                  <PDFViewer width="100%" height={600}>
+                    <PaymentReceipt installment={selectedInstallment} />
+                  </PDFViewer>
+                )}
+              </div>
+            }
+          />
           <h2 className="invoice-header-h2">
             Order Details - {capitalizeFirstLetter(order?.status)}
           </h2>
           <p className="invoice-header-p-id">Order ID: {order?._id}</p>
+          <br />
+
+          {order?.progress > 0 ? (
+            <>
+              <h1 style={{ fontSize: 16 }}>Your Order Progress</h1>
+              <ProgressBarComponent progress={progress} />
+            </>
+          ) : null}
         </div>
         <p
           style={{
@@ -273,6 +787,14 @@ const OrderDescriptionPage = () => {
           <p>Status: {capitalizeFirstLetter(order?.status)}</p>
           <p>Order Created At: {formatDate(order?.createdAt)}</p>
           <p>
+            Payment Status:{" "}
+            {order?.paid === true
+              ? "Paid"
+              : order?.isInstallmentPaid === true
+              ? "Paid"
+              : "Not Yet Paid "}
+          </p>
+          <p>
             To be Delivered:{" "}
             {calculateDeliveryDate(order?.createdAt, order?.deliveryOption)}
           </p>
@@ -293,27 +815,177 @@ const OrderDescriptionPage = () => {
             </p>
           )}
 
-          <h1>
-            {order?.price
-              ? `₦${order?.price?.toLocaleString("en-NG")}`
-              : timeRemaining > 0
-              ? `Get Price: ${formatCountdown(timeRemaining)}`
-              : " "}
+          <h1 style={{ marginTop: 48, marginBottom: 64 }}>
+            {order?.price ? (
+              <>
+                Price: ₦{formatNumberWithCommas(order?.price)} <br />
+                <span style={{ fontSize: 14, marginTop: -64 }}>
+                  {" "}
+                  +₦{formatNumberWithCommas((order?.price * 75) / 1000)} - VAT
+                  Charges
+                </span>
+              </>
+            ) : timeRemaining > 0 ? (
+              `You'll Get a Price in: ${formatCountdown(timeRemaining)}`
+            ) : (
+              " "
+            )}
           </h1>
-          {order?.paid === false && order?.price !== null && (
-            // Render the "Proceed to Payment" button only if time remaining
-            <div style={{ cursor: "pointer", marginTop: 40, marginBottom: 24 }}>
-              <div className="div-btn-auth"></div>
-              <PaystackButton
+
+          <h1 style={{ marginTop: 48, marginBottom: 64, fontSize: 24 }}>
+            {order?.isInstallment === true ? (
+              <>
+                <div>
+                  <h1 style={{ fontSize: 18 }}>You Paid in Installments</h1>
+                  <div
+                    style={{
+                      backgroundColor: "#f4f4f4",
+                      padding: `12px 12px`,
+                      borderRadius: 24,
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: 12,
+                    }}
+                  >
+                    {order?.installments.map((installment) => (
+                      <p
+                        key={installment?._id}
+                        style={{
+                          backgroundColor: "#fff",
+                          padding: `12px 12px`,
+                          borderRadius: 12,
+                          margin: 0,
+                          cursor: "pointer",
+                        }}
+                        //onClick={()=>handleDownloadPDF(installment)}
+                        onClick={() => handleInstallmentClick(installment)}
+                      >
+                        <p style={{ fontSize: 16, fontWeight: 600, margin: 0 }}>
+                          Amount Paid: ₦{installment?.amountPaid} + VAT: ₦
+                          {calculateVAT(installment.amountPaid).toFixed(2)}
+                        </p>
+
+                        <p
+                          style={{
+                            fontSize: 13,
+                            fontWeight: 400,
+                            color: "#666",
+                            margin: 0,
+                            // backgroundColor: "#C19F6225",
+                            // color: "#C19F62",
+                            // padding: `12px 24px`,
+                            // borderRadius: 4,
+                          }}
+                        >
+                          Date Paid: {formatDate(installment?.datePaid)}
+                        </p>
+                        <p
+                          style={{
+                            fontSize: 13,
+                            fontWeight: 400,
+                            margin: 0,
+                            backgroundColor: "#C19F6225",
+                            color: "#C19F62",
+                            padding: `10px 24px`,
+                            borderRadius: 4,
+                            width: "fit-content",
+                            marginTop: 16,
+                          }}
+                        >
+                          View receipt
+                        </p>
+                      </p>
+                    ))}
+                  </div>
+                </div>
+              </>
+            ) : (
+              " "
+            )}
+          </h1>
+
+          {order?.isInstallmentPaid === false &&
+            order?.price !== null &&
+            order?.balanceLeft <= 0 &&
+            order?.paid !== true && (
+              // Render the "Proceed to Payment" button only if time remaining
+              <div
+                style={{ cursor: "pointer", marginTop: 40, marginBottom: 24 }}
+              >
+                <div className="div-btn-auth"></div>
+                <button className="btn-auth" onClick={() => setModalOpen(true)}>
+                  Proceed to Pay
+                </button>
+                {/* <PaystackButton
                 {...componentProps}
                 className="btn-auth"
                 onClick={handleClick}
-              />
-            </div>
-          )}
+              /> */}
+              </div>
+            )}
+
+          {order?.balanceLeft > 0 &&
+            order?.balanceLeft <= order?.price &&
+            order?.paid !== true && (
+              // Render the "Proceed to Payment" button only if time remaining
+              <div
+                style={{
+                  cursor: "pointer",
+                  width: "fit-content",
+                  marginTop: 40,
+                  marginBottom: 24,
+                }}
+              >
+                <h3 style={{ fontWeight: 600, fontSize: 16, marginBottom: 32 }}>
+                  {" "}
+                  Proceed to Pay balance ₦{order?.balanceLeft} + Vat( ₦
+                  {calculateVAT(order?.balanceLeft)})
+                </h3>
+                <div
+                  className="div-btn-auth"
+                  //style={{ width: "fit-content" }}
+                ></div>
+                {/* <button
+                //style={{ width: "fit-content" }}
+                className="btn-auth"
+                onClick={() => {
+                  //setModalOpen(true);
+                  setGrandTotal(order?.balanceLeft * 1.075 * 100);
+                  console.log(order?.balanceLeft * 1.075 * 100);
+                  setLoading(true);
+                  handleClick()
+                }}
+              >
+                {/* Proceed to Pay balance ₦{order?.balanceLeft} + Vat( ₦
+                {calculateVAT(order?.balanceLeft)})
+              </button> */}
+                <PaystackButton
+                  {...componentProps}
+                  className="btn-auth"
+                  onClick={
+                    handleClick
+                    //() => {
+                    //setModalOpen(true);
+                    // setGrandTotal(order?.balanceLeft * 1.075 * 100);
+                    // console.log(
+                    //   order?.balanceLeft * 1.075 * 100,
+                    //   "order?.balance"
+                    // );
+                    // setLoading(true);
+
+                    // // Delay handleClick() by 30 seconds
+                    // setTimeout(() => {
+                    //   handleClick();
+                    // }, 30000);
+                    // }
+                  }
+                />
+              </div>
+            )}
 
           <div>
             <br />
+
             <p
               style={{
                 fontSize: 14,
@@ -350,6 +1022,58 @@ const OrderDescriptionPage = () => {
       </div>
     </div>
   );
+};
+const styles = {
+  container: {
+    borderRadius: "8px",
+    maxWidth: "600px",
+    margin: "auto",
+    minWidth: 300,
+  },
+  optionContainer: {
+    marginBottom: "24px",
+  },
+  label: {
+    marginLeft: "8px",
+    fontSize: "18px",
+  },
+  installments: {
+    marginTop: "20px",
+  },
+  progressBarContainer: {
+    display: "flex",
+    height: "24px",
+    borderRadius: "4px",
+    overflow: "hidden",
+    backgroundColor: "#e0e0e0",
+    position: "relative",
+  },
+  progressBar: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    height: "100%",
+    position: "relative",
+  },
+  progressText: {
+    position: "absolute",
+    width: "100%",
+    textAlign: "center",
+    color: "#fff",
+    fontSize: "18px",
+  },
+  submitButton: {
+    padding: "16px 28px",
+    fontSize: "18px",
+    backgroundColor: "#121212",
+    color: "#fff",
+    border: "none",
+    borderRadius: "4px",
+    cursor: "pointer",
+  },
+  customLabel: {
+    marginLeft: 6,
+  },
 };
 
 export default OrderDescriptionPage;

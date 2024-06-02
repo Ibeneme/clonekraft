@@ -3,9 +3,16 @@ import { useLocation, useNavigate } from "react-router-dom";
 import "../../Pages/Home/Main/Orders.css";
 import { BsChatFill } from "react-icons/bs";
 import { useDispatch } from "react-redux";
-import { getOrdersAdmin, updateOrder } from "../../Redux/admin/admin";
+import {
+  getOrdersAdmin,
+  updateOrder,
+  updateProgress,
+} from "../../Redux/admin/admin";
 import Modal from "../../Pages/Components/Modal/Modal";
 import useCustomToasts from "../../Pages/ToastNotifications/Toastify";
+import ProgressBarAdmin from "../Progress/Progress";
+import "../Progress/ProgressBar.css";
+import ProgressBarComponent from "../../Pages/Home/Main/Progress/Progress";
 
 const AdminOrderDescriptionPage = () => {
   const location = useLocation();
@@ -16,6 +23,33 @@ const AdminOrderDescriptionPage = () => {
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [progress, setProgress] = useState(0);
+  const [inputValue, setInputValue] = useState("");
+  const [inputValueErr, setInputValueErr] = useState("");
+
+  const handleInputChange = (e) => {
+    setInputValue(e.target.value);
+    setInputValueErr("");
+  };
+
+  const handleUpdateClick = () => {
+    setInputValueErr("");
+    const newProgress = parseInt(inputValue, 10);
+    if (validateProgress(newProgress)) {
+      setProgress(newProgress);
+      //setInputValue("");
+      handleProgressbar(newProgress);
+    } else {
+      setInputValueErr(
+        "Progress value It must be higher than the current progress and not exceed 100."
+      );
+    }
+  };
+
+  const validateProgress = (newProgress) => {
+    return newProgress > progress && newProgress <= 100;
+  };
+
   useEffect(() => {
     handleFetchOrders();
   }, []);
@@ -31,6 +65,7 @@ const AdminOrderDescriptionPage = () => {
         console.log(matchedOrder, "matchedOrder");
         if (matchedOrder) {
           setOrdersFetched(matchedOrder);
+          setProgress(matchedOrder?.progress);
         } else {
           setOrdersFetched([]);
         }
@@ -130,6 +165,35 @@ const AdminOrderDescriptionPage = () => {
           setModalOpen(false);
         } else {
           showErrorToast("Failed to update order");
+        }
+      })
+      .catch((error) => {
+        setLoading(true);
+        showErrorToast("Errorupdating Order");
+        console.error("Error Order Request:", error);
+      });
+
+    setModalOpen(false);
+  };
+
+  const handleProgressbar = (newProgress) => {
+    const order_id = order?._id;
+    //const newProgress = parseInt(inputValue, 10);
+    console.log(newProgress, "handleProgressbar");
+    dispatch(updateProgress({ order_id: order_id, progress: newProgress }))
+      .then((response) => {
+        setLoading(false);
+        // Handle success
+        console.log("progress created successfully:", response);
+        if (
+          response?.payload?.message === "Order progress updated successfully"
+        ) {
+          showSuccessToast("Order progress updated successfully");
+          handleFetchOrders();
+          // navigate("/order");
+          setModalOpen(false);
+        } else {
+          showErrorToast("Failed to update order progress");
         }
       })
       .catch((error) => {
@@ -252,7 +316,7 @@ const AdminOrderDescriptionPage = () => {
               />
             </div>
           )}
-          {ordersFetched?.price && label ? (
+          {/* {ordersFetched?.price && label ? (
             <div style={{ cursor: "pointer", marginTop: 40, marginBottom: 96 }}>
               <div className="div-btn-auth"></div>
               <button
@@ -265,22 +329,20 @@ const AdminOrderDescriptionPage = () => {
                 {loading ? "Loading..." : "Update Status"}
               </button>
             </div>
-          ) : null}
+          ) : null} */}
           <br />
-          {label && description ? (
-            <div style={{ cursor: "pointer", marginTop: 40, marginBottom: 96 }}>
-              <div className="div-btn-auth"></div>
-              <button
-                // onClick={() => navigate("/pricing")}
-                onClick={handleUploads}
-                className="btn-auth"
-                type="button"
-                disabled={loading}
-              >
-                {loading ? "Loading..." : "Update Status"}
-              </button>
-            </div>
-          ) : null}
+          <div style={{ cursor: "pointer", marginTop: 40, marginBottom: 96 }}>
+            <div className="div-btn-auth"></div>
+            <button
+              // onClick={() => navigate("/pricing")}
+              onClick={handleUploads}
+              className="btn-auth"
+              type="button"
+              disabled={loading}
+            >
+              {loading ? "Loading..." : "Update Status"}
+            </button>
+          </div>{" "}
         </div>
       </div>
     </div>
@@ -316,6 +378,22 @@ const AdminOrderDescriptionPage = () => {
           >
             Update this Status
           </button>
+
+          <br />
+          <h1 style={{ fontSize: 16, marginTop: 100 }}>
+            Update the Progress level
+          </h1>
+          <ProgressBarComponent progress={progress} />
+          <div className="input-container">
+            <input
+              type="number"
+              value={inputValue}
+              onChange={handleInputChange}
+              placeholder="Enter new progress"
+            />
+            <button onClick={handleUpdateClick}>Update Progress</button>
+          </div>
+          <p style={{ color: "red", fontSize: 16 }}>{inputValueErr}</p>
         </div>
         <p
           style={{
