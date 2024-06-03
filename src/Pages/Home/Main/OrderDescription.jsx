@@ -312,6 +312,7 @@ const OrderDescriptionPage = () => {
           console.log("Request created successfully:", response);
           if (response.payload.message === "Payment processed successfully") {
             handleFetchOrders();
+            navigate("/sucess");
             setModalOpen(false);
           }
           handleFetchOrders();
@@ -337,10 +338,12 @@ const OrderDescriptionPage = () => {
         .then((response) => {
           setLoading(false);
           // Handle success
+
           console.log("Request created successfully:", response);
           if (response.payload.message === "Payment processed successfully") {
             handleFetchOrders();
             setModalOpen(false);
+            navigate("/sucess");
           }
           // handleFetchOrders();
           //navigate("/sucess");
