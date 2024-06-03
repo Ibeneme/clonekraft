@@ -512,7 +512,12 @@ const OrderDescriptionPage = () => {
     email: order?.email,
     amount: grandTotal === 0 ? order?.balanceLeft * 100 : grandTotal * 100,
     publicKey,
-    text: loading ? "loading..." : "Proceed to Pay",
+    text:
+      order?.isInstallment === true
+        ? "Pay Balance"
+        : loading
+        ? "loading..."
+        : "Proceed to Pay",
     onSuccess: () => {
       setLoading(false);
       console.log("Payment Successful!");
@@ -802,8 +807,10 @@ const OrderDescriptionPage = () => {
             {order?.paid === true
               ? "Paid"
               : order?.isInstallmentPaid === true
-              ? "Paid"
-              : "Not Yet Paid "}
+              ? "Paid in Installments"
+              : (order?.isInstallmentPaid === true) & (order?.paid === false)
+              ? "First Installment Paid"
+              : "Not yet Paid"}
           </p>
           <p>
             To be Delivered:{" "}
