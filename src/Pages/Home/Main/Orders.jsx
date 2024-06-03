@@ -34,7 +34,7 @@ const OrderPage = () => {
   const filteredOrders = () => {
     switch (filter) {
       case "inProgress":
-        return ordersFetched?.filter((order) => order?.status === "pending");
+        return ordersFetched?.filter((order) => order?.status === "inProgress");
       case "completed":
         return ordersFetched?.filter((order) => order?.status === "completed");
       case "cancelled":
@@ -43,16 +43,13 @@ const OrderPage = () => {
         return ordersFetched;
     }
   };
+
   const handleOrderClick = (order) => {
     navigate("/order-single", { state: { ordersFetched: order } });
-    // Navigate to another page and pass the selected order as a parameter
-    // history.push(`/order-description/${order._id}`, { order });
   };
 
   const handleOrderClicks = (order) => {
     navigate("/chatpage", { state: { ordersFetched: order } });
-    // Navigate to another page and pass the selected order as a parameter
-    // history.push(`/order-description/${order._id}`, { order });
   };
 
   return (
@@ -218,9 +215,8 @@ const OrderPage = () => {
                       color: "#C19F62",
                       backgroundColor: "#C19F6212",
                       padding: 16,
-                      bprderRadius: 24,
-                      cursor: "pointer",
                       borderRadius: 24,
+                      cursor: "pointer",
                       fontSize: 12,
                       display: "flex",
                       gap: 12,

@@ -514,6 +514,7 @@ const OrderDescriptionPage = () => {
   const componentProps = {
     email: order?.email,
     amount: grandTotal === 0 ? order?.balanceLeft * 100 : grandTotal * 100,
+    //amount: 10000,
     publicKey,
     text:
       order?.isInstallment === true
@@ -521,10 +522,10 @@ const OrderDescriptionPage = () => {
         : loading
         ? "loading..."
         : "Proceed to Pay",
-    onSuccess: () => {
+    onSuccess: (response) => {
       setLoading(false);
-      console.log("Payment Successful!");
-      setModalOpenLoading(true);
+      console.log("Payment Successful!", response, "responseresponse");
+      //setModalOpenLoading(true);
       handleInstallments();
       //handleUploads();
       // navigate("/sucess");
@@ -811,7 +812,8 @@ const OrderDescriptionPage = () => {
               ? "Paid"
               : order?.isInstallmentPaid === true
               ? "Paid in Installments"
-              : (order?.isInstallmentPaid === true) & (order?.paid === false)
+              : order?.installments?.length > 0 === true &&
+                order?.paid === false
               ? "First Installment Paid"
               : "Not yet Paid"}
           </p>

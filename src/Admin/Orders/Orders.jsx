@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getOrdersAdmin, getUsers } from "../../Redux/admin/admin";
+import { getOrdersAdmin } from "../../Redux/admin/admin";
 import { useDispatch } from "react-redux";
 import "../Users/user.css";
 import Navbar from "../Navbar/Navbar";
@@ -33,10 +33,11 @@ const AdminOrders = () => {
         setLoading(false);
       });
   };
+
   const filteredOrders = () => {
     switch (filter) {
       case "inProgress":
-        return ordersFetched?.filter((order) => order?.status === "pending");
+        return ordersFetched?.filter((order) => order?.status === "inProgress");
       case "completed":
         return ordersFetched?.filter((order) => order?.status === "completed");
       case "cancelled":
@@ -45,6 +46,7 @@ const AdminOrders = () => {
         return ordersFetched;
     }
   };
+
   const handleOrderClick = (order) => {
     navigate("/order-admin", { state: { order: order } });
   };
@@ -209,7 +211,7 @@ const AdminOrders = () => {
                           color: "#808080",
                           fontSize: 12,
                           textAlign: "left",
-                          marginTop: 8
+                          marginTop: 8,
                         }}
                       >
                         ID:{" "}
@@ -229,9 +231,8 @@ const AdminOrders = () => {
                           color: "#C19F62",
                           backgroundColor: "#C19F6212",
                           padding: 16,
-                          bprderRadius: 24,
-                          cursor: "pointer",
                           borderRadius: 24,
+                          cursor: "pointer",
                           fontSize: 12,
                           display: "flex",
                           gap: 12,
