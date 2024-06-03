@@ -26,7 +26,7 @@ import logoImage from "../../../assets/woods/Logo.png"; // Update the path to yo
 import ProgressBarComponent from "./Progress/Progress";
 
 const formatNumberWithCommas = (number) => {
-  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  return number?.toString()?.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };
 
 const calculateVAT = (amountPaid) => {
@@ -71,7 +71,8 @@ const PaymentReceipt = ({ installment }) => (
           <Text style={stylesPdf.price}>
             Paid: NGN{" "}
             {formatNumberWithCommas(
-              installment.amountPaid + calculateVAT(installment.amountPaid)
+              installment.amountPaid
+              //+ calculateVAT(installment.amountPaid)
             )}
           </Text>
 
@@ -108,14 +109,14 @@ const PaymentReceipt = ({ installment }) => (
               NGN {formatNumberWithCommas(installment.amountPaid)}
             </Text>
           </View>
-          <View
+          {/* <View
             style={{ flexDirection: "row", justifyContent: "space-between" }}
           >
             <Text style={stylesPdf.text}>Vat 7.5%:</Text>{" "}
             <Text style={stylesPdf.text}>
               NGN {formatNumberWithCommas(calculateVAT(installment.amountPaid))}
             </Text>
-          </View>
+          </View> */}
           <View
             style={{ flexDirection: "row", justifyContent: "space-between" }}
           >
@@ -296,7 +297,10 @@ const OrderDescriptionPage = () => {
     if (paymentOption === "withoutInstallments") {
       const payload = {
         order_id: order?._id,
-        amountPaid: grandTotal === 0 ? order?.balanceLeft * 1.075 : grandTotal,
+        amountPaid:
+          grandTotal === 0
+            ? Math.round(order?.balanceLeft)
+            : Math.round(grandTotal),
       };
       console.log("kkpayload", payload);
       dispatch(
@@ -321,9 +325,12 @@ const OrderDescriptionPage = () => {
       const payload = {
         order_id: order?._id,
         installment: true,
-        amountPaid: grandTotal === 0 ? order?.balanceLeft * 1.075 : grandTotal,
+        amountPaid:
+          grandTotal === 0
+            ? Math.round(order?.balanceLeft)
+            : Math.round(grandTotal),
       };
-      console.log(" pay pay pay pay", payload);
+      console.log("pay pay pay pay", payload);
       dispatch(
         updateOrderClient({ credentials: payload, order_id: order?._id })
       )
@@ -357,18 +364,23 @@ const OrderDescriptionPage = () => {
   const [installmentPlan, setInstallmentPlan] = useState(null);
   const [installmentBalance, setInstallmentBalance] = useState(null);
   const [payThisAmount, setPayThisAmount] = useState(null);
+
   const handlePaymentOptionChange = (event) => {
     setPaymentOption(event.target.value);
     const surcharge = (price * 0.075).toFixed(2);
     if (event.target.value === "withoutInstallments") {
       setInstallmentPlan(null);
       setInstallmentBalance(null);
-      const totalWithoutInstallments = (price * 1.075).toFixed(2); // Add 7.5% surcharge
+      //const totalWithoutInstallments = (price * 1.075).toFixed(2); // Add 7.5% surcharge
+      const totalWithoutInstallments = price.toFixed(2); // Add 7.5% surcharge
+
       setGrandTotal(totalWithoutInstallments);
       setPayThisAmount(price);
     } else {
       const installmentAmount = (price * 0.6).toFixed(2);
-      const totalWithSurcharge = (installmentAmount * 1.075).toFixed(2); // Add 7.5% surcharge to the installment amount
+      const totalWithSurcharge = installmentAmount; // Add 7.5% surcharge to the installment amount
+      //const totalWithSurcharge = (installmentAmount * 1.075).toFixed(2); // Add 7.5% surcharge to the installment amount
+
       setInstallmentPlan(installmentAmount);
       setInstallmentBalance((price * 0.4).toFixed(2));
       setGrandTotal(totalWithSurcharge);
@@ -383,14 +395,14 @@ const OrderDescriptionPage = () => {
     if (paymentOption === "withoutInstallments") {
       console.log(`Total price to be paid: $${price}`);
       setPayThisAmount(price);
-      setGrandTotal((price * 1.075).toFixed(2)); // Add 7.5% surcharge
+      setGrandTotal(price.toFixed(2)); // Add 7.5% surcharge
     } else if (paymentOption === "withInstallments") {
       console.log(`Payment option: ${paymentOption}`);
       setPayThisAmount(price * 0.6);
       const installmentAmount = (price * 0.6).toFixed(2);
       setInstallmentPlan(installmentAmount);
       setInstallmentBalance((price * 0.4).toFixed(2));
-      setGrandTotal((installmentAmount * 1.075).toFixed(2)); // Add 7.5% surcharge to the installment amount
+      setGrandTotal(installmentAmount.toFixed(2)); // Add 7.5% surcharge to the installment amount
       console.log(`First installment (60%): $${installmentAmount}`);
       console.log(`Second installment (40%): $${(price * 0.4).toFixed(2)}`);
     }
@@ -498,8 +510,7 @@ const OrderDescriptionPage = () => {
   const publicKey = PAYSTACK_SECRET_KEY; // Use your public key here
   const componentProps = {
     email: order?.email,
-    amount:
-      grandTotal === 0 ? order?.balanceLeft * 1.075 * 100 : grandTotal * 100,
+    amount: grandTotal === 0 ? order?.balanceLeft * 100 : grandTotal * 100,
     publicKey,
     text: loading ? "loading..." : "Proceed to Pay",
     onSuccess: () => {
@@ -581,7 +592,7 @@ const OrderDescriptionPage = () => {
                 First Installment Plan - You'll Pay 60%
               </h2>
 
-              <p
+              {/* <p
                 style={{
                   fontSize: 16,
                   marginBottom: 48,
@@ -590,8 +601,8 @@ const OrderDescriptionPage = () => {
               >
                 {" "}
                 ₦{formatNumberWithCommas(installmentPlan)}
-              </p>
-              <p
+              </p> */}
+              {/* <p
                 style={{
                   fontSize: 16,
                   marginTop: -32,
@@ -602,7 +613,7 @@ const OrderDescriptionPage = () => {
                 {" "}
                 + ₦{formatNumberWithCommas(calculateVAT(installmentPlan))} ( Vat
                 - 7.5%)
-              </p>
+              </p> */}
               <p style={{ fontSize: 32, fontWeight: 900 }}>
                 {" "}
                 ₦{formatNumberWithCommas(grandTotal)}
@@ -630,7 +641,7 @@ const OrderDescriptionPage = () => {
             <>
               <h2 style={{ fontSize: 16 }}>You'll Pay</h2>
 
-              <p
+              {/* <p
                 style={{
                   fontSize: 16,
                   marginBottom: 48,
@@ -639,8 +650,8 @@ const OrderDescriptionPage = () => {
               >
                 {" "}
                 ₦{formatNumberWithCommas(payThisAmount)}
-              </p>
-              <p
+              </p> */}
+              {/* <p
                 style={{
                   fontSize: 16,
                   marginTop: -32,
@@ -650,7 +661,7 @@ const OrderDescriptionPage = () => {
               >
                 {" "}
                 + ₦{((payThisAmount * 75) / 1000).toFixed(2)} ( Vat - 7.5%)
-              </p>
+              </p> */}
 
               <p style={{ fontSize: 32, fontWeight: 900 }}>
                 {" "}
@@ -662,7 +673,7 @@ const OrderDescriptionPage = () => {
       )}
       {paymentOption === "withoutInstallments" && (
         <div
-          onClick={handleInstallments}
+          //onClick={handleInstallments}
           style={{ cursor: "pointer", marginTop: 40, marginBottom: 24 }}
         >
           <PaystackButton
@@ -677,7 +688,7 @@ const OrderDescriptionPage = () => {
       )}
       {paymentOption === "withInstallments" && (
         <div
-          onClick={handleInstallments}
+          //onClick={handleInstallments}
           style={{ cursor: "pointer", marginTop: 40, marginBottom: 24 }}
         >
           <PaystackButton
@@ -821,8 +832,8 @@ const OrderDescriptionPage = () => {
                 Price: ₦{formatNumberWithCommas(order?.price)} <br />
                 <span style={{ fontSize: 14, marginTop: -64 }}>
                   {" "}
-                  +₦{formatNumberWithCommas((order?.price * 75) / 1000)} - VAT
-                  Charges
+                  {/* +₦{formatNumberWithCommas((order?.price * 75) / 1000)} - VAT
+                  Charges */}
                 </span>
               </>
             ) : timeRemaining > 0 ? (
@@ -861,8 +872,8 @@ const OrderDescriptionPage = () => {
                         onClick={() => handleInstallmentClick(installment)}
                       >
                         <p style={{ fontSize: 16, fontWeight: 600, margin: 0 }}>
-                          Amount Paid: ₦{installment?.amountPaid} + VAT: ₦
-                          {calculateVAT(installment.amountPaid).toFixed(2)}
+                          Amount Paid: ₦{installment?.amountPaid}
+                          {/* + VAT: ₦  {calculateVAT(installment.amountPaid).toFixed(2)} */}
                         </p>
 
                         <p
@@ -904,29 +915,23 @@ const OrderDescriptionPage = () => {
             )}
           </h1>
 
-          {order?.isInstallmentPaid === false &&
-            order?.price !== null &&
-            order?.balanceLeft <= 0 &&
-            order?.paid !== true && (
-              // Render the "Proceed to Payment" button only if time remaining
-              <div
-                style={{ cursor: "pointer", marginTop: 40, marginBottom: 24 }}
-              >
-                <div className="div-btn-auth"></div>
-                <button className="btn-auth" onClick={() => setModalOpen(true)}>
-                  Proceed to Pay
-                </button>
-                {/* <PaystackButton
+          {order?.paid !== true && order.isInstallment !== true && (
+            // Render the "Proceed to Payment" button only if time remaining
+            <div style={{ cursor: "pointer", marginTop: 40, marginBottom: 24 }}>
+              <div className="div-btn-auth"></div>
+              <button className="btn-auth" onClick={() => setModalOpen(true)}>
+                Proceed to Pay
+              </button>
+              {/* <PaystackButton
                 {...componentProps}
                 className="btn-auth"
                 onClick={handleClick}
               /> */}
-              </div>
-            )}
+            </div>
+          )}
 
-          {order?.balanceLeft > 0 &&
-            order?.balanceLeft <= order?.price &&
-            order?.paid !== true && (
+          {order?.isInstallmentPaid !== true &&
+            order.isInstallment === true && (
               // Render the "Proceed to Payment" button only if time remaining
               <div
                 style={{
@@ -936,10 +941,15 @@ const OrderDescriptionPage = () => {
                   marginBottom: 24,
                 }}
               >
-                <h3 style={{ fontWeight: 600, fontSize: 16, marginBottom: 32 }}>
+                <h3
+                  style={{ fontWeight: 600, fontSize: 16, marginBottom: 32 }}
+                  //onClick={handleInstallments}
+                >
                   {" "}
-                  Proceed to Pay balance ₦{order?.balanceLeft} + Vat( ₦
-                  {calculateVAT(order?.balanceLeft)})
+                  Proceed to Pay balance ₦{order?.balanceLeft}
+                  {/* + Vat( ₦
+                  {calculateVAT(order?.balanceLeft)}
+                  ) */}
                 </h3>
                 <div
                   className="div-btn-auth"
