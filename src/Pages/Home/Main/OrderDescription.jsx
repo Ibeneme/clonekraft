@@ -22,7 +22,7 @@ import {
 } from "@react-pdf/renderer";
 import DMSansRegular from "../../../assets/font/DMSans-Regular.ttf"; // Update the path to the regular font file
 import DMSansBold from "../../../assets/font/DMSans-Bold.ttf"; // Update the path to the bold font file
-import logoImage from "../../../assets/woods/Logo.png"; // Update the path to your logo image
+import logoImage from "../../../assets/woods/logo.jpg"; // Update the path to your logo image
 import ProgressBarComponent from "./Progress/Progress";
 
 const formatNumberWithCommas = (number) => {
