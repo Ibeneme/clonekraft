@@ -14,6 +14,7 @@ import Products from "./Hero/New/Products";
 import Testimonials from "./Hero/Testimonials";
 import TeamMembers from "./Hero/Team";
 import Footer from "../Home/Footer";
+import NewsletterSubscription from "./Newsletter/Newsletter";
 
 // import IndexNew from "./Hero/New/Index";
 
@@ -30,11 +31,13 @@ const Index = () => {
       <SectionII />
       <SectionIII /> 
       <SectionIV />*/}
+
       <Testimonials />
       <SectionVI />
       <TeamMembers />
       {/*     <ContactUs /> */}
       {/* <Footer /> */}
+      <NewsletterSubscription />
       <Footer />
     </div>
   );

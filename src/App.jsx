@@ -34,6 +34,7 @@ import AboutUsHeader from "./Pages/LandingPage/Hero/AboutUsHeader";
 import TeamMembers from "./Pages/LandingPage/Hero/Team";
 import GeneralPolicy from "./Pages/LandingPage/Hero/AboutUsRefund";
 import AboutUsHeaderRefund from "./Pages/LandingPage/Hero/AboutUsRefundHeader";
+import OrdersPage from "./Pages/Home/Main/OrdersPage";
 
 function App() {
   useEffect(() => {
@@ -52,8 +53,8 @@ function App() {
     return null;
   }
 
-  const isLoggedIn = !!localStorage.getItem("clone_kraft_user_token");
-  const isAdminLoggedIn = !!localStorage.getItem("clone_kraft_admin_token"); // Separate storage for admin token
+  const isLoggedIn = !!localStorage.getItem("clone_kraft_user_token") || !!localStorage.getItem("clone_kraft_admin_token");
+  //const isAdminLoggedIn = !!localStorage.getItem("clone_kraft_admin_token"); // Separate storage for admin token
 
   useEffect(() => {
     const currentPath = window.location.pathname;
@@ -69,14 +70,15 @@ function App() {
       "/users",
       "/orders",
     ];
-    const adminProtectedPaths = ["/order-admin", "/chat-admin"]; // Admin-specific routes
+    //const adminProtectedPaths = ["/order-admin", "/chat-admin"]; // Admin-specific routes
 
     if (!isLoggedIn && protectedPaths.includes(currentPath)) {
       navigate("/"); // Redirect to login for non-admin protected routes
-    } else if (!isAdminLoggedIn && adminProtectedPaths.includes(currentPath)) {
-      navigate("/"); // Redirect to admin login for admin-specific routes
-    }
-  }, [isLoggedIn, isAdminLoggedIn]);
+    } 
+    // else if ( adminProtectedPaths.includes(currentPath)) {
+    //   navigate("/admin"); // Redirect to admin login for admin-specific routes
+    // }
+  }, [isLoggedIn]);
 
   // Protected Routes (non-admin)
   const ProtectedRoutes = ({ children }) => <>{children}</>;
@@ -88,6 +90,8 @@ function App() {
       <ScrollToTop />
 
       <Routes>
+        <Route path="/order-details/:orderId" element={<OrdersPage />} />
+
         <Route
           path="/home"
           element={

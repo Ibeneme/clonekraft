@@ -1,6 +1,4 @@
-// src/components/NewHero.js
-
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -9,6 +7,7 @@ import imagea from "../../../assets/Sofa/Framea.png";
 import imageb from "../../../assets/Sofa/Frameb.png";
 import imaged from "../../../assets/Sofa/Framed.png";
 import imagee from "../../../assets/Sofa/Framee.png";
+
 const NewHero = () => {
   const settings = {
     dots: true,
@@ -27,24 +26,46 @@ const NewHero = () => {
     { id: 3, image: imaged, text: "Sofa Replicas" },
   ];
 
-  return (
-    <div
-      className="hero"
-      style={
-        {
-          // paddingTop: 120,
-          // paddingBottom: 120,
-          // width: "100vw",
-        }
+  const [timeRemaining, setTimeRemaining] = useState("");
+
+  useEffect(() => {
+    const countdown = setInterval(() => {
+      const now = new Date();
+      const targetTime = new Date();
+      targetTime.setHours(12, 0, 0, 0); // Set target time to 12:00 PM
+
+      if (now > targetTime) {
+        targetTime.setDate(targetTime.getDate() + 1); // Set target to next day if current time is past 12:00 PM
       }
-    >
+
+      const diff = targetTime - now;
+      const hours = Math.floor(diff / 1000 / 60 / 60);
+      const minutes = Math.floor((diff / 1000 / 60) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      setTimeRemaining(
+        `${hours.toString().padStart(2, "0")}:${minutes
+          .toString()
+          .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`
+      );
+    }, 1000);
+
+    return () => clearInterval(countdown);
+  }, []);
+
+  return (
+    <div className="hero">
+      <div className="countdown-timer">
+        <p>
+          <span style={{ color: "var(--darkOrange)" }}>Clonekraft</span>{" "}
+          launches in{" "}
+          <span style={{ color: "var(--darkOrange)" }}>{timeRemaining}</span>{" "}
+          🎉🥂
+        </p>
+      </div>
       <Slider {...settings}>
         {slides.map((slide) => (
-          <div
-            key={slide.id}
-            className="slide"
-            //style={{ paddingLeft: 32, paddingRight: 32, }}
-          >
+          <div key={slide.id} className="slide">
             <img src={slide.image} alt={`Slide ${slide.id}`} />
             <h3 className="slide-text">{slide.text}</h3>
           </div>

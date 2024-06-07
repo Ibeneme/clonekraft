@@ -1,0 +1,83 @@
+.image-upload-container {
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .upload-button, .submit-button {
+    padding: 10px 20px;
+    margin: 10px;
+    cursor: pointer;
+    background-color: #C19F62;
+    color: white;
+    border: none;
+    border-radius: 5px;
+  }
+  
+  .image-preview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 10px;
+    margin: 20px 0;
+  }
+  
+  .image-preview {
+    position: relative;
+  }
+  
+  .image-preview img {
+    width: 100%;
+    border-radius: 8px;
+  }
+  
+  .remove-button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: rgba(255, 255, 255, 0.7);
+    border: none;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  .modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 500px;
+  }
+  
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+  }
+  
+  .modal-image-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 10px;
+    margin: 20px 0;
+  }
+  
+  .upload-button {
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: #C19F62;
+    color: white;
+    border: none;
+    border-radius: 5px;
+  }
+  

@@ -6,6 +6,7 @@ import { BsChatFill } from "react-icons/bs";
 import NoOrdersMessage from "../../Components/NoORDERS/NoOrdes";
 import { useNavigate } from "react-router-dom";
 import ShimmerLoader from "../../Components/Loader/ShimmerLoader";
+import { capitalizeFirstLetter } from "../../../Admin/Orders/OrderDescription";
 
 const OrderPage = () => {
   const [filter, setFilter] = useState("all");
@@ -33,8 +34,12 @@ const OrderPage = () => {
 
   const filteredOrders = () => {
     switch (filter) {
-      case "inProgress":
-        return ordersFetched?.filter((order) => order?.status === "inProgress");
+      case "pending":
+        return ordersFetched?.filter((order) => order?.status === "pending");
+      case "in Progress":
+        return ordersFetched?.filter(
+          (order) => order?.status === "in Progress"
+        );
       case "completed":
         return ordersFetched?.filter((order) => order?.status === "completed");
       case "cancelled":
@@ -65,7 +70,7 @@ const OrderPage = () => {
       <div
         style={{
           backgroundColor: "#C19F6220",
-          width: 337,
+          width: "fit-content",
           padding: 6,
           borderRadius: 35,
           marginBottom: 32,
@@ -86,6 +91,21 @@ const OrderPage = () => {
           }}
         >
           All
+        </button>{" "}
+        <button
+          onClick={() => setFilter("pending")}
+          style={{
+            padding: `10px 18px`,
+            marginRight: 0,
+            borderRadius: 32,
+            fontSize: 12,
+            fontFamily: "var(--fontFamily)",
+            backgroundColor: filter === "pending" ? "#C19F62" : "transparent",
+            color: filter === "pending" ? "#fff" : "#C19F62",
+            border: filter === "pending" ? "1.5px solid #fff" : "none",
+          }}
+        >
+          Pending
         </button>
         <button
           onClick={() => setFilter("inProgress")}
@@ -158,14 +178,14 @@ const OrderPage = () => {
                   flexDirection: "row",
                 }}
               >
-                <div style={{ width: 120 }}>
+                <div style={{ width: 84 }}>
                   <div
                     className={`order-image-container ${
                       order.selectedImages.length > 1 ? "stack-images" : ""
                     }`}
                   >
                     {order?.selectedImages?.slice(0, 3).map((image, index) => (
-                      <div key={index} className="order-image-item">
+                      <div key={index}>
                         <img
                           src={image}
                           alt={`Image ${index + 1}`}
@@ -184,11 +204,7 @@ const OrderPage = () => {
                 >
                   <div>
                     {order?.status && (
-                      <div>
-                        {order?.status?.charAt(0)?.toUpperCase() +
-                          order?.status?.slice(1)?.toLowerCase()}{" "}
-                        Order
-                      </div>
+                      <div>Order {capitalizeFirstLetter(order?.status)}</div>
                     )}
                   </div>
                   <p

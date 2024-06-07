@@ -10,6 +10,8 @@ import profilePic from "../../..//assets/auth/left.png";
 import { useNavigate } from "react-router-dom";
 import ShimmerLoader from "../../Components/Loader/ShimmerLoader";
 import "./Profile.css";
+import { getRatings } from "../../../Redux/order/order";
+import RatingGrid from "../../LandingPage/Newsletter/RatingGrid";
 
 export const formatDate = (dateString) => {
   const date = new Date(dateString);
@@ -46,13 +48,28 @@ const ProfilePage = () => {
   const [image, setImage] = useState(null); // Added state for image file
   const [isLoading, setIsLoading] = useState(false); // Added state for loading status
   const [imageUrl, setImageUrl] = useState("");
+  const [rating, setRatings] = useState([]);
   useEffect(() => {
     handleFetchUser();
+    handleFetchRating();
 
     if (isLoading === true) {
       handleFetchUser();
     }
   }, []);
+
+  const handleFetchRating = () => {
+    dispatch(getRatings())
+      .then((response) => {
+        console.log("orders handleFetchRating:", response);
+        setRatings(response?.payload);
+        //setLoading(false);
+      })
+      .catch((error) => {
+        console.log("Profile fetch failed:", error);
+        //setLoading(false);
+      });
+  };
 
   const handleFetchUser = () => {
     setIsLoading(true);
@@ -509,6 +526,16 @@ const ProfilePage = () => {
               <span>Log Out</span>
             </div>
           </div>
+
+          {rating ? (
+            <>
+              <br /> <br />
+              <h1 style={{ margin: 0, fontSize: 18, marginTop: 64 }}>
+                Your Ratings
+              </h1>
+              <RatingGrid ratings={rating} />
+            </>
+          ) : null}
         </div>
       )}
     </>

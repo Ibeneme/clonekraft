@@ -6,9 +6,25 @@
     height: fit-content;
     overflow: hidden;
 
+}
 
-
-
+.countdown-timer {
+    text-align: center;
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: #fff;
+    z-index: 24;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #000;
+    height: 78px;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: 800;
 }
 
 .slide {

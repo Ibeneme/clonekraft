@@ -13,6 +13,17 @@ import useCustomToasts from "../../Pages/ToastNotifications/Toastify";
 import ProgressBarAdmin from "../Progress/Progress";
 import "../Progress/ProgressBar.css";
 import ProgressBarComponent from "../../Pages/Home/Main/Progress/Progress";
+import ImageUpload from "./ImageUpload";
+
+// Function to capitalize the first letter and make the rest lowercase
+export function capitalizeFirstLetter(str) {
+  if (!str) return ""; // handle null or undefined input
+
+  return str
+    .split(" ")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+}
 
 const AdminOrderDescriptionPage = () => {
   const location = useLocation();
@@ -21,6 +32,8 @@ const AdminOrderDescriptionPage = () => {
   const [filter, setFilter] = useState("all");
   const [ordersFetched, setOrdersFetched] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [modalPhotos, setModalPhotos] = useState(false);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [progress, setProgress] = useState(0);
@@ -112,12 +125,8 @@ const AdminOrderDescriptionPage = () => {
     }
   };
 
-  // Function to capitalize the first letter and make the rest lowercase
-  const capitalizeFirstLetter = (string) => {
-    return (
-      string?.charAt(0)?.toUpperCase() + string?.slice(1)?.toLowerCase() || " "
-    );
-  };
+  // const ordersFetched = { status: "your example status here" };
+  // console.log(capitalizeFirstLetter(ordersFetched?.status));
 
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -174,6 +183,23 @@ const AdminOrderDescriptionPage = () => {
       });
 
     setModalOpen(false);
+  };
+
+  // State to track the URL of the currently selected big display image
+
+  const [bigDisplayImageProgress, setBigDisplayImageProgress] = useState(
+    order?.progressImages && order?.progressImages?.length > 0
+      ? order?.progressImages[0]
+      : order?.progressImages[0]
+  );
+
+  // State to track the index of the currently selected image
+
+  const [selectedImageIndexProgress, setSelectedImageIndexProgress] =
+    useState(0);
+  const handleImageClickProgress = (image, index) => {
+    setBigDisplayImageProgress(image);
+    setSelectedImageIndexProgress(index);
   };
 
   const handleProgressbar = (newProgress) => {
@@ -244,6 +270,21 @@ const AdminOrderDescriptionPage = () => {
               }}
             >
               Pending
+            </label>
+            <label
+              className={label === "in Progress" ? "selected" : ""}
+              onClick={() => handleLabelClick("in Progress")}
+              style={{
+                marginRight: "10px",
+                cursor: "pointer",
+                padding: `12px 18px`,
+                borderRadius: 4,
+                backgroundColor:
+                  label === "in Progress" ? "#C19F62" : "#80808019",
+                color: label === "in Progress" ? "#fff" : "#000",
+              }}
+            >
+              In Progress
             </label>
             <label
               className={label === "completed" ? "selected" : ""}
@@ -363,6 +404,13 @@ const AdminOrderDescriptionPage = () => {
         ifClose={true}
         formContent={Content}
       />
+
+      <Modal
+        isOpen={modalPhotos}
+        onClose={() => setModalPhotos(false)}
+        ifClose={true}
+        formContent={<ImageUpload order={ordersFetched} />}
+      />
       <div className="invoice-header">
         <div>
           <h2 className="invoice-header-h2">
@@ -372,11 +420,19 @@ const AdminOrderDescriptionPage = () => {
 
           <br />
           <button
-            style={{ marginBottom: -64 }}
+            style={{ marginBottom: 16 }}
             className="upload-btn"
             onClick={() => setModalOpen(true)}
           >
             Update this Status
+          </button>
+          <br />
+          <button
+            style={{ marginBottom: -64 }}
+            className="upload-btn"
+            onClick={() => setModalPhotos(true)}
+          >
+            Update Photos of Progress
           </button>
 
           <br />
@@ -419,30 +475,62 @@ const AdminOrderDescriptionPage = () => {
 
       <div className="flex-orders">
         <div className="flex-orders-div">
-          <div className="big-display-container">
-            <img
-              src={bigDisplayImage}
-              alt="Big Display"
-              className="big-display-image"
-            />
-          </div>
-          <div className="invoice-images">
-            <div className="image-grid">
-              {ordersFetched?.selectedImages?.map((image, index) => (
-                <img
-                  key={index}
-                  src={image}
-                  alt={`Image ${index + 1}`}
-                  className={
-                    index === selectedImageIndex
-                      ? "selected-image-item"
-                      : "image-item"
-                  }
-                  onClick={() => handleImageClick(image, index)}
-                />
-              ))}
+          <>
+            <div className="big-display-container">
+              <img
+                src={bigDisplayImage}
+                alt="Big Display"
+                className="big-display-image"
+              />
             </div>
-          </div>
+            <div className="invoice-images">
+              <div className="image-grid">
+                {ordersFetched?.selectedImages?.map((image, index) => (
+                  <img
+                    key={index}
+                    src={image}
+                    alt={`Image ${index + 1}`}
+                    className={
+                      index === selectedImageIndex
+                        ? "selected-image-item"
+                        : "image-item"
+                    }
+                    onClick={() => handleImageClick(image, index)}
+                  />
+                ))}
+              </div>
+            </div>
+          </>
+
+          <>
+            <br /> <br /> <br /> <br /> <br /> <br /> <br />
+            <h1>Images Displaying your Orders Progress</h1>
+            <div className="big-display-container">
+              <img
+                src={bigDisplayImageProgress}
+                alt="Big Display"
+                className="big-display-image"
+              />
+            </div>
+            <div className="invoice-images">
+              <div className="image-grid">
+                {order?.progressImages?.map((image, index) => (
+                  <img
+                    key={index}
+                    src={image}
+                    alt={`Image ${index + 1}`}
+                    className={
+                      index === selectedImageIndexProgress
+                        ? "selected-image-item"
+                        : "image-item"
+                    }
+                    // onClick={handleUploads}
+                    onClick={() => handleImageClickProgress(image, index)}
+                  />
+                ))}
+              </div>
+            </div>
+          </>
         </div>
 
         <div className="order-info">

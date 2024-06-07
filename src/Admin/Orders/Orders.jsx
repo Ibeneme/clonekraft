@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { BsChatFill } from "react-icons/bs";
 import ShimmerLoader from "../../Pages/Components/Loader/ShimmerLoader";
 import NoOrdersMessage from "../../Pages/Components/NoORDERS/NoOrdes";
+import { capitalizeFirstLetter } from "./OrderDescription";
 
 const AdminOrders = () => {
   const dispatch = useDispatch();
@@ -36,8 +37,12 @@ const AdminOrders = () => {
 
   const filteredOrders = () => {
     switch (filter) {
-      case "inProgress":
-        return ordersFetched?.filter((order) => order?.status === "inProgress");
+      case "pending":
+        return ordersFetched?.filter((order) => order?.status === "pending");
+      case "in Progress":
+        return ordersFetched?.filter(
+          (order) => order?.status === "in Progress"
+        );
       case "completed":
         return ordersFetched?.filter((order) => order?.status === "completed");
       case "cancelled":
@@ -93,7 +98,7 @@ const AdminOrders = () => {
               All
             </button>
             <button
-              onClick={() => setFilter("inProgress")}
+              onClick={() => setFilter("pending")}
               style={{
                 padding: `10px 18px`,
                 marginRight: 0,
@@ -101,12 +106,29 @@ const AdminOrders = () => {
                 fontSize: 12,
                 fontFamily: "var(--fontFamily)",
                 backgroundColor:
-                  filter === "inProgress" ? "#C19F62" : "transparent",
-                color: filter === "inProgress" ? "#fff" : "#C19F62",
-                border: filter === "inProgress" ? "1.5px solid #fff" : "none",
+                  filter === "pending" ? "#C19F62" : "transparent",
+                color: filter === "pending" ? "#fff" : "#C19F62",
+                border: filter === "pending" ? "1.5px solid #fff" : "none",
               }}
             >
-              InProgress
+              Pending
+            </button>
+
+            <button
+              onClick={() => setFilter("in Progress")}
+              style={{
+                padding: `10px 18px`,
+                marginRight: 0,
+                borderRadius: 32,
+                fontSize: 12,
+                fontFamily: "var(--fontFamily)",
+                backgroundColor:
+                  filter === "in Progress" ? "#C19F62" : "transparent",
+                color: filter === "in Progress" ? "#fff" : "#C19F62",
+                border: filter === "in Progress" ? "1.5px solid #fff" : "none",
+              }}
+            >
+              In Progress
             </button>
             <button
               onClick={() => setFilter("completed")}
@@ -200,9 +222,7 @@ const AdminOrders = () => {
                       <div>
                         {order?.status && (
                           <div>
-                            {order?.status?.charAt(0)?.toUpperCase() +
-                              order?.status?.slice(1)?.toLowerCase()}{" "}
-                            Order
+                            {capitalizeFirstLetter(order?.status)} Order
                           </div>
                         )}
                       </div>

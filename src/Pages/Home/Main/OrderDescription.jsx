@@ -7,7 +7,12 @@ import { PaystackButton } from "react-paystack";
 import axios from "axios";
 import { baseApiUrl } from "../../../Redux/Baseurl/Baseurl";
 import { useDispatch } from "react-redux";
-import { getOrders, updateOrderClient } from "../../../Redux/order/order";
+import {
+  getOrders,
+  getRatings,
+  getRatingsPerOrder,
+  updateOrderClient,
+} from "../../../Redux/order/order";
 import { crossUser } from "../../../Redux/auth/auth";
 import Modal from "../../Components/Modal/Modal";
 import {
@@ -24,8 +29,15 @@ import DMSansRegular from "../../../assets/font/DMSans-Regular.ttf"; // Update t
 import DMSansBold from "../../../assets/font/DMSans-Bold.ttf"; // Update the path to the bold font file
 import logoImage from "../../../assets/woods/logo.jpg"; // Update the path to your logo image
 import ProgressBarComponent from "./Progress/Progress";
+import { capitalizeFirstLetter } from "../../../Admin/Orders/OrderDescription";
+import ExperienceRatingModal from "../../LandingPage/Newsletter/Rating";
+import RatingCard from "../../LandingPage/Newsletter/RateCard";
+import { Link } from "react-router-dom"; // Assuming you're using React Router
+import CopyToClipboard from "../../LandingPage/Newsletter/Copy";
+import { FaCopy } from "react-icons/fa";
+import OrderLink from "../../LandingPage/Newsletter/Copy";
 
-const formatNumberWithCommas = (number) => {
+export const formatNumberWithCommas = (number) => {
   return number?.toString()?.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };
 
@@ -190,8 +202,10 @@ const OrderDescriptionPage = () => {
   const location = useLocation();
   const { ordersFetched } = location.state;
   const [order, setOrdersFetched] = useState([]);
+  const [rating, setRatings] = useState([]);
   useEffect(() => {
     handleFetchOrders();
+    handleFetchRating();
   }, []);
   const [progress, setProgress] = useState(0);
 
@@ -216,7 +230,18 @@ const OrderDescriptionPage = () => {
         setLoading(false);
       });
   };
-
+  const handleFetchRating = () => {
+    dispatch(getRatingsPerOrder(ordersFetched?._id))
+      .then((response) => {
+        console.log("orders handleFetchRating:", response);
+        setRatings(response?.payload);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log("Profile fetch failed:", error);
+        setLoading(false);
+      });
+  };
   const handleDownloadPDF = (installment) => {
     console.log(installment, "installmentinstallment");
     // Create a blob from the PaymentReceipt component for the given installment
@@ -417,10 +442,20 @@ const OrderDescriptionPage = () => {
       ? ordersFetched?.selectedImages[0]
       : ordersFetched?.selectedImages[0]
   );
+  const [bigDisplayImageProgress, setBigDisplayImageProgress] = useState(
+    ordersFetched?.progressImages && ordersFetched?.progressImages.length > 0
+      ? ordersFetched?.progressImages[0]
+      : ordersFetched?.progressImages[0]
+  );
 
   // State to track the index of the currently selected image
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
-
+  const [selectedImageIndexProgress, setSelectedImageIndexProgress] =
+    useState(0);
+  const handleImageClickProgress = (image, index) => {
+    setBigDisplayImageProgress(image);
+    setSelectedImageIndexProgress(index);
+  };
   // Function to handle clicking on an image to set it as the big display
   const handleImageClick = (image, index) => {
     setBigDisplayImage(image);
@@ -448,9 +483,9 @@ const OrderDescriptionPage = () => {
   };
 
   // Function to capitalize the first letter and make the rest lowercase
-  const capitalizeFirstLetter = (string) => {
-    return string?.charAt(0)?.toUpperCase() + string?.slice(1)?.toLowerCase();
-  };
+  // const capitalizeFirstLetter = (string) => {
+  //   return string?.charAt(0)?.toUpperCase() + string?.slice(1)?.toLowerCase();
+  // };
 
   const navigate = useNavigate();
   const handleOrderClicks = (order) => {
@@ -712,11 +747,16 @@ const OrderDescriptionPage = () => {
       )}
     </div>
   );
-
+  const generateOrderLink = (orderId) => {
+    return `/order-details/${orderId}`;
+  };
   return (
     <div className="invoice-container">
       <div className="invoice-header">
         <div>
+          {order?.rated === false && order?.completed === true ? (
+            <ExperienceRatingModal order={order} />
+          ) : null}
           <Modal
             isOpen={modalOpen}
             onClose={() => setModalOpen(false)}
@@ -774,31 +814,81 @@ const OrderDescriptionPage = () => {
 
       <div className="flex-orders">
         <div className="flex-orders-div">
-          <div className="big-display-container">
-            <img
-              src={bigDisplayImage}
-              alt="Big Display"
-              className="big-display-image"
-            />
-          </div>
-          <div className="invoice-images">
-            <div className="image-grid">
-              {order?.selectedImages?.map((image, index) => (
-                <img
-                  key={index}
-                  src={image}
-                  alt={`Image ${index + 1}`}
-                  className={
-                    index === selectedImageIndex
-                      ? "selected-image-item"
-                      : "image-item"
-                  }
-                  // onClick={handleUploads}
-                  onClick={() => handleImageClick(image, index)}
-                />
-              ))}
+          <>
+            {/* <Link to={generateOrderLink(order._id)}>
+              {" "}
+              Share This Order <FaCopy />
+            </Link> */}
+            <OrderLink orderId={order._id} />
+            {/* <CopyToClipboard text={generateOrderLink(order._id)} /> */}
+          </>
+          <>
+            <div className="big-display-container">
+              <img
+                src={bigDisplayImage}
+                alt="Big Display"
+                className="big-display-image"
+              />
             </div>
-          </div>
+            <div className="invoice-images">
+              <div className="image-grid">
+                {order?.selectedImages?.map((image, index) => (
+                  <img
+                    key={index}
+                    src={image}
+                    alt={`Image ${index + 1}`}
+                    className={
+                      index === selectedImageIndex
+                        ? "selected-image-item"
+                        : "image-item"
+                    }
+                    // onClick={handleUploads}
+                    onClick={() => handleImageClick(image, index)}
+                  />
+                ))}
+              </div>
+              {rating ? (
+                <>
+                  <h1
+                    style={{ marginTop: 120, textAlign: "right", fontSize: 16 }}
+                  >
+                    Your Rating
+                  </h1>
+                  <RatingCard rating={rating} />
+                </>
+              ) : null}
+            </div>
+          </>
+
+          <>
+          <br /> <br /> <br /> <br /> <br /> <br /> <br />
+            <h1>Images Displaying your Orders Progress</h1>
+            <div className="big-display-container">
+              <img
+                src={bigDisplayImageProgress}
+                alt="Big Display"
+                className="big-display-image"
+              />
+            </div>
+            <div className="invoice-images">
+              <div className="image-grid">
+                {order?.progressImages?.map((image, index) => (
+                  <img
+                    key={index}
+                    src={image}
+                    alt={`Image ${index + 1}`}
+                    className={
+                      index === selectedImageIndexProgress
+                        ? "selected-image-item"
+                        : "image-item"
+                    }
+                    // onClick={handleUploads}
+                    onClick={() => handleImageClickProgress(image, index)}
+                  />
+                ))}
+              </div>
+            </div>
+          </>
         </div>
 
         <div className="order-info">
