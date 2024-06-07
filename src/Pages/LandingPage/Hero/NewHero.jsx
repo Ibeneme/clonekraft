@@ -32,7 +32,7 @@ const NewHero = () => {
     const countdown = setInterval(() => {
       const now = new Date();
       const targetTime = new Date();
-      targetTime.setHours(12, 0, 0, 0); // Set target time to 12:00 PM
+      targetTime.setHours(15, 0, 0, 0); // Set target time to 12:00 PM
 
       if (now > targetTime) {
         targetTime.setDate(targetTime.getDate() + 1); // Set target to next day if current time is past 12:00 PM
