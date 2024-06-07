@@ -55,14 +55,14 @@ const NewHero = () => {
 
   return (
     <div className="hero">
-      <div className="countdown-timer">
+      {/* <div className="countdown-timer">
         <p>
-          <span style={{ color: "var(--darkOrange)" }}>Clonekraft</span>{" "}
+          <span style={{ color: "var(--darkOrange)" }}></span>{" "}
           launches in{" "}
           <span style={{ color: "var(--darkOrange)" }}>{timeRemaining}</span>{" "}
           🎉🥂
         </p>
-      </div>
+      </div> */}
       <Slider {...settings}>
         {slides.map((slide) => (
           <div key={slide.id} className="slide">
