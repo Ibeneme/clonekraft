@@ -272,6 +272,26 @@ const OrderDescriptionPage = () => {
     console.log(window.URL.revokeObjectURL(url), "installmentinstallment");
   };
 
+  const whatsappNumber = "+2349134270313";
+  // Format the phone number for WhatsApp (remove any leading zeros and add the country code)
+  const formattedNumber = whatsappNumber.startsWith("0")
+    ? `+234${whatsappNumber.slice(1)}`
+    : whatsappNumber;
+
+  // Ensure selectedImages is an array, even if it's undefined or null
+  const imageUrls = order?.selectedImages || [];
+
+  // Construct the message string with the images
+  const imagesText = imageUrls.map((url) => `\n${url}`).join("");
+  const message = `Hello, I am ${order?.username}. My email is ${order?.email}. I have an inquiry regarding my order with ID: ${order?._id}. Can we negotiate on this on my order as described: ${order?.description}.${imagesText}`;
+  const whatsappUrl = `https://wa.me/${formattedNumber}?text=${encodeURIComponent(
+    message
+  )}`;
+
+  const handleClickWhatsapp = () => {
+    window.open(whatsappUrl, "_blank");
+  };
+
   const [selectedInstallment, setSelectedInstallment] = React.useState(null);
 
   const handleInstallmentClick = (installment) => {
@@ -404,6 +424,8 @@ const OrderDescriptionPage = () => {
 
       setGrandTotal(totalWithoutInstallments);
       setPayThisAmount(price);
+    } else if (event.target.value === "nego") {
+      window.open(whatsappUrl, "_blank");
     } else {
       const installmentAmount = (price * 0.6).toFixed(2);
       const totalWithSurcharge = installmentAmount; // Add 7.5% surcharge to the installment amount
@@ -627,6 +649,20 @@ const OrderDescriptionPage = () => {
           Pay in Installments
         </label>
       </div>
+      <div style={styles.optionContainer} onClick={handleClickWhatsapp}>
+        <input
+          type="radio"
+          value="nego"
+          checked={paymentOption === "nego"}
+          onChange={handlePaymentOptionChange}
+          id="nego"
+          style={styles.radioInput}
+        />
+        <label htmlFor="nego" style={styles.customLabel}>
+          Negotiate your Pricing, Takes you to our admin Whatsapp Chat
+        </label>
+      </div>
+      {/* //whatsappUrl */}
       {paymentOption === "withInstallments" && (
         <div style={styles.installments}>
           <br />
@@ -750,6 +786,7 @@ const OrderDescriptionPage = () => {
   const generateOrderLink = (orderId) => {
     return `/order-details/${orderId}`;
   };
+
   return (
     <div className="invoice-container">
       <div className="invoice-header">
