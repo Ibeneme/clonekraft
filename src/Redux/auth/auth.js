@@ -10,13 +10,14 @@ const initialState = {
   error: null,
 };
 
-// Define the async thunk for user registration
 export const register = createAsyncThunk("auth/register", async (userData) => {
   try {
     const response = await axios.post(`${baseApiUrl}/auth/register`, {
       email: userData?.email,
       password: userData?.password,
       username: userData?.username,
+      phoneNumber: userData?.phoneNumber,
+      address: userData?.address,
     });
     const clone_kraft_user_token = response?.data?.token;
     localStorage.setItem("clone_kraft_user_token", clone_kraft_user_token);

@@ -68,6 +68,17 @@
   align-items: center;
   height: 100vh;
 }
+.password-field {
+  position: relative;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 16%;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
 
 .div-input {
   margin-bottom: 32px;

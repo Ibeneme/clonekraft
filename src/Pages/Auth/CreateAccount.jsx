@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import "./Auth.css";
@@ -6,16 +6,21 @@ import { useNavigate } from "react-router-dom";
 import "../LandingPage/Hero/Hero.css";
 import { useDispatch } from "react-redux";
 import { register } from "../../Redux/auth/auth";
-import { useState } from "react";
+import { FaEye, FaEyeSlash } from "react-icons/fa"; // Importing the icons
 
 const CreateAccount = () => {
   const dispatch = useDispatch();
   const [err, setErr] = useState();
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
   const initialValues = {
     username: "",
     email: "",
     password: "",
     confirmPassword: "",
+    phoneNumber: "",
+    address: "",
   };
 
   const navigate = useNavigate();
@@ -33,14 +38,15 @@ const CreateAccount = () => {
     confirmPassword: Yup.string()
       .oneOf([Yup.ref("password"), null], "Passwords must match")
       .required("Confirm Password is Required"),
+    phoneNumber: Yup.string()
+      .min(10, "Phone number must be at least 10 digits")
+      .max(15, "Phone number can't be longer than 15 digits")
+      .required("Phone number is Required"),
+    address: Yup.string()
+      .min(5, "Address must be at least 5 characters")
+      .max(200, "Address can't be longer than 200 characters")
+      .required("Address is Required"),
   });
-
-  const handleSubmits = (values, { setSubmitting }) => {
-    // Handle signup submission here
-    console.log("Submitting signup form:", values);
-    setSubmitting(false);
-    navigate("/otp-new");
-  };
 
   const handleSubmit = (values, { setSubmitting }) => {
     console.log(values, "values");
@@ -52,7 +58,6 @@ const CreateAccount = () => {
         if (response?.payload?.token) {
           setSubmitting(false);
           navigate("/home");
-          //navigate("/otp-new", { state: { email: values.email } });
         } else if (
           response?.error?.message === "Request failed with status code 400"
         ) {
@@ -62,7 +67,6 @@ const CreateAccount = () => {
           setErr("An error Occurred");
         }
         setSubmitting(false);
-        // Navigate to the OTP verification page or any other page
       })
       .catch((error) => {
         setErr("An error Occurred");
@@ -72,17 +76,14 @@ const CreateAccount = () => {
   };
 
   const imageContainerRef = useRef(null);
-  // const navigate = useNavigate();
   useEffect(() => {
     const interval = setInterval(() => {
       if (imageContainerRef.current) {
-        imageContainerRef.current.scrollTop -= 1; // Change += to -= to scroll in the opposite direction
-        if (
-          imageContainerRef.current.scrollTop <= 0 // Update the condition for scrolling to top
-        ) {
+        imageContainerRef.current.scrollTop -= 1;
+        if (imageContainerRef.current.scrollTop <= 0) {
           imageContainerRef.current.scrollTop =
             imageContainerRef.current.scrollHeight -
-            imageContainerRef.current.clientHeight; // Scroll to the bottom
+            imageContainerRef.current.clientHeight;
         }
       }
     }, 1);
@@ -90,115 +91,11 @@ const CreateAccount = () => {
   }, []);
 
   return (
-    <div className="auth-div">
-      {/* <div style={{ width: "50%" }} data-aos="zoom-in">
-        <div
-          className="scrollingImages"
-          ref={imageContainerRef}
-          style={{ overflowY: "hidden", height: "800px", padding: 16 }}
-        >
-          <div className="image-containersz">
-            <img
-              src="https://f005.backblazeb2.com/file/Webimages-used/Pexelss.png"
-              alt="Sample Image 1"
-              style={{
-                marginBottom: "1rem",
-                borderRaadius: 32,
-                width: "100%",
-                height: "auto",
-              }}
-              className="imagesz"
-            />
-            <div className="overlaysz"></div>
-          </div>
-          <div className="image-containersz">
-            <img
-              src="https://res.cloudinary.com/daiiiiupy/image/upload/v1715427078/michael-oxendine-GHCVUtBECuY-unsplash_wuxwja.jpg"
-              alt="Sample Image 2"
-              style={{
-                marginBottom: "1rem",
-                borderRaadius: 32,
-                width: "100%",
-                height: "auto",
-              }}
-              className="imagesz"
-            />
-            <div className="overlaysz"></div>
-          </div>
-          <div className="image-containersz">
-            <img
-              src="https://res.cloudinary.com/daiiiiupy/image/upload/v1715626430/IMG_8266_y1buyw.jpg"
-              alt="Sample Image 3"
-              style={{
-                marginBottom: "1rem",
-                borderRaadius: 32,
-                width: "100%",
-                height: "auto",
-              }}
-              className="imagesz"
-            />
-            <div className="overlaysz"></div>
-          </div>
-
-          <div className="image-containersz">
-            <img
-              src="https://res.cloudinary.com/daiiiiupy/image/upload/v1715626430/IMG_8264_scfefo.jpg"
-              alt="Sample Image 1"
-              style={{
-                marginBottom: "1rem",
-                borderRaadius: 32,
-                width: "100%",
-                height: "auto",
-              }}
-              className="imagesz"
-            />
-            <div className="overlaysz"></div>
-          </div>
-          <div className="image-containersz">
-            <img
-              src="https://res.cloudinary.com/daiiiiupy/image/upload/v1715627032/5919f0d917510a632268b369b6e61be4_-_Copy_mvoiyw.webp"
-              alt="Sample Image 2"
-              style={{
-                marginBottom: "1rem",
-                borderRaadius: 32,
-                width: "100%",
-                height: "auto",
-              }}
-              className="imagesz"
-            />
-            <div className="overlaysz"></div>
-          </div>
-          <div className="image-containersz">
-            <img
-              src="https://res.cloudinary.com/daiiiiupy/image/upload/v1715427076/francesca-tosolini-Gh_UjjYoVwk-unsplash_vb28gq.jpg"
-              alt="Sample Image 2"
-              style={{
-                marginBottom: "1rem",
-                borderRaadius: 32,
-                width: "100%",
-                height: "auto",
-              }}
-              className="imagesz"
-            />
-            <div className="overlaysz"></div>
-          </div>
-          <div className="image-containersz">
-            <img
-              src="https://res.cloudinary.com/daiiiiupy/image/upload/v1715427077/kam-idris-_HqHX3LBN18-unsplash_kosckn.jpg"
-              alt="Sample Image 2"
-              style={{
-                marginBottom: "1rem",
-                borderRaadius: 32,
-                width: "100%",
-                height: "auto",
-              }}
-              className="imagesz"
-            />
-            <div className="overlaysz"></div>
-          </div>
-        </div>{" "}
-      </div> */}
-      <div className="auth-div-div">
+    <div className="auth-div" style={{ height: "200vh", paddingTop: 120 }}>
+      <div
+        className="auth-div-div"
+        style={{ height: "100%", overflowY: "scroll" }}
+      >
         <h2 style={{ margin: 0 }}>Create an Account</h2>
         <p className="auth-div-p">
           Already have an account?
@@ -262,13 +159,21 @@ const CreateAccount = () => {
               <div className="div-input">
                 <label htmlFor="password">Password</label>
                 <br />
-                <Field
-                  className="input-field"
-                  type="password"
-                  id="password"
-                  name="password"
-                  placeholder="Enter your password"
-                />
+                <div className="password-field">
+                  <Field
+                    className="input-field"
+                    type={showPassword ? "text" : "password"}
+                    id="password"
+                    name="password"
+                    placeholder="Enter your password"
+                  />
+                  <span
+                    className="password-toggle"
+                    onClick={() => setShowPassword(!showPassword)}
+                  >
+                    {showPassword ? <FaEyeSlash /> : <FaEye />}
+                  </span>
+                </div>
                 <ErrorMessage
                   className="err-field"
                   name="password"
@@ -278,16 +183,57 @@ const CreateAccount = () => {
               <div className="div-input">
                 <label htmlFor="confirmPassword">Confirm Password</label>
                 <br />
-                <Field
-                  className="input-field"
-                  type="password"
-                  id="confirmPassword"
-                  name="confirmPassword"
-                  placeholder="Confirm your password"
-                />
+                <div className="password-field">
+                  <Field
+                    className="input-field"
+                    type={showConfirmPassword ? "text" : "password"}
+                    id="confirmPassword"
+                    name="confirmPassword"
+                    placeholder="Confirm your password"
+                  />
+                  <span
+                    className="password-toggle"
+                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                  >
+                    {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
+                  </span>
+                </div>
                 <ErrorMessage
                   className="err-field"
                   name="confirmPassword"
+                  component="div"
+                />
+              </div>
+              <div className="div-input">
+                <label htmlFor="phoneNumber">Phone Number</label>
+                <br />
+                <Field
+                  className="input-field"
+                  type="text"
+                  id="phoneNumber"
+                  name="phoneNumber"
+                  placeholder="Enter your phone number"
+                />
+                <ErrorMessage
+                  className="err-field"
+                  name="phoneNumber"
+                  component="div"
+                />
+              </div>
+              <div className="div-input">
+                <label htmlFor="address">Address</label>
+                <br />
+                <Field
+                  className="input-field"
+                  as="textarea"
+                  id="address"
+                  name="address"
+                  placeholder="Enter your address"
+                  rows="4"
+                />
+                <ErrorMessage
+                  className="err-field"
+                  name="address"
                   component="div"
                 />
               </div>

@@ -20,9 +20,9 @@ export function capitalizeFirstLetter(str) {
   if (!str) return ""; // handle null or undefined input
 
   return str
-    .split(" ")
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(" ");
+    ?.split(" ")
+    ?.map((word) => word?.charAt(0)?.toUpperCase() + word?.slice(1))
+    ?.join(" ");
 }
 
 const AdminOrderDescriptionPage = () => {
@@ -535,16 +535,12 @@ const AdminOrderDescriptionPage = () => {
 
         <div className="order-info">
           <h3>Order Information</h3>
-          <p>Status: {capitalizeFirstLetter(ordersFetched?.status)}</p>
-          {/* <p>Status: {capitalizeFirstLetter(ordersFetched?.status)}</p>
-          <p>Seaters: {capitalizeFirstLetter(ordersFetched?.seaters)}</p>
-          <p>Choice: {capitalizeFirstLetter(ordersFetched?.choice)}</p>
+          <p>Class: {capitalizeFirstLetter(ordersFetched?.selectedLabel)}</p>
           <p>
-            Style of Furniture:{" "}
-            {capitalizeFirstLetter(ordersFetched?.styleOfChair)}
+            Delivery Option:{" "}
+            {(ordersFetched?.deliveryOption)}  'days'
           </p>
-          <p>Shape: {capitalizeFirstLetter(ordersFetched?.shape)}</p> */}
-
+          <p>Status: {capitalizeFirstLetter(ordersFetched?.status)}</p>
           <p>Order Created At: {formatDate(ordersFetched?.createdAt)}</p>
           <p>
             To be Delivered:{" "}
@@ -561,7 +557,6 @@ const AdminOrderDescriptionPage = () => {
                 })} `
               : "Pls set a Price"}
           </h1>
-
           <div>
             <br />
             <p

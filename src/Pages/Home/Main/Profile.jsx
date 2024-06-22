@@ -527,7 +527,7 @@ const ProfilePage = () => {
             </div>
           </div>
 
-          {rating ? (
+          {/* {rating ? (
             <>
               <br /> <br />
               <h1 style={{ margin: 0, fontSize: 18, marginTop: 64 }}>
@@ -535,7 +535,7 @@ const ProfilePage = () => {
               </h1>
               <RatingGrid ratings={rating} />
             </>
-          ) : null}
+          ) : null} */}
         </div>
       )}
     </>

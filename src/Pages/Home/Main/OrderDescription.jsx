@@ -861,7 +861,7 @@ const OrderDescriptionPage = () => {
           </>
 
           <>
-          <br /> <br /> <br /> <br /> <br /> <br /> <br />
+            <br /> <br /> <br /> <br /> <br /> <br /> <br />
             <h1>Images Displaying your Orders Progress</h1>
             <div className="big-display-container">
               <img
@@ -938,10 +938,8 @@ const OrderDescriptionPage = () => {
                   Charges */}
                 </span>
               </>
-            ) : timeRemaining > 0 ? (
-              `You'll Get a Price in: ${formatCountdown(timeRemaining)}`
             ) : (
-              " "
+              "Admin is calculating your price, please wait"
             )}
           </h1>
 
@@ -1017,20 +1015,28 @@ const OrderDescriptionPage = () => {
             )}
           </h1>
 
-          {order?.paid !== true && order.isInstallment !== true && (
-            // Render the "Proceed to Payment" button only if time remaining
-            <div style={{ cursor: "pointer", marginTop: 40, marginBottom: 24 }}>
-              <div className="div-btn-auth"></div>
-              <button className="btn-auth" onClick={() => setModalOpen(true)}>
-                Proceed to Pay
-              </button>
-              {/* <PaystackButton
+          {order?.price !== null
+            ? order?.paid !== true &&
+              order.isInstallment !== true && (
+                // Render the "Proceed to Payment" button only if time remaining
+                <div
+                  style={{ cursor: "pointer", marginTop: 40, marginBottom: 24 }}
+                >
+                  <div className="div-btn-auth"></div>
+                  <button
+                    className="btn-auth"
+                    onClick={() => setModalOpen(true)}
+                  >
+                    Proceed to Pay
+                  </button>
+                  {/* <PaystackButton
                 {...componentProps}
                 className="btn-auth"
                 onClick={handleClick}
               /> */}
-            </div>
-          )}
+                </div>
+              )
+            : null}
 
           {order?.isInstallmentPaid !== true &&
             order.isInstallment === true && (
