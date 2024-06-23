@@ -659,7 +659,7 @@ const OrderDescriptionPage = () => {
           style={styles.radioInput}
         />
         <label htmlFor="nego" style={styles.customLabel}>
-          Negotiate your Pricing, Takes you to our admin Whatsapp Chat
+          Bargain your price
         </label>
       </div>
       {/* //whatsappUrl */}
