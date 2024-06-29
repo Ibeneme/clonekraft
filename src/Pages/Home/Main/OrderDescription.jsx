@@ -897,35 +897,37 @@ const OrderDescriptionPage = () => {
             </div>
           </>
 
-          <>
-            <br /> <br /> <br /> <br /> <br /> <br /> <br />
-            <h1>Images Displaying your Orders Progress</h1>
-            <div className="big-display-container">
-              <img
-                src={bigDisplayImageProgress}
-                alt="Big Display"
-                className="big-display-image"
-              />
-            </div>
-            <div className="invoice-images">
-              <div className="image-grid">
-                {order?.progressImages?.map((image, index) => (
-                  <img
-                    key={index}
-                    src={image}
-                    alt={`Image ${index + 1}`}
-                    className={
-                      index === selectedImageIndexProgress
-                        ? "selected-image-item"
-                        : "image-item"
-                    }
-                    // onClick={handleUploads}
-                    onClick={() => handleImageClickProgress(image, index)}
-                  />
-                ))}
+          {order?.progressImages && (
+            <>
+              <br /> <br /> <br /> <br /> <br /> <br /> <br />
+              <h1>Images Displaying your Orders Progress</h1>
+              <div className="big-display-container">
+                <img
+                  src={bigDisplayImageProgress}
+                  alt="Big Display"
+                  className="big-display-image"
+                />
               </div>
-            </div>
-          </>
+              <div className="invoice-images">
+                <div className="image-grid">
+                  {order?.progressImages?.map((image, index) => (
+                    <img
+                      key={index}
+                      src={image}
+                      alt={`Image ${index + 1}`}
+                      className={
+                        index === selectedImageIndexProgress
+                          ? "selected-image-item"
+                          : "image-item"
+                      }
+                      // onClick={handleUploads}
+                      onClick={() => handleImageClickProgress(image, index)}
+                    />
+                  ))}
+                </div>
+              </div>
+            </>
+          )}
         </div>
 
         <div className="order-info">
