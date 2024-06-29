@@ -897,7 +897,7 @@ const OrderDescriptionPage = () => {
             </div>
           </>
 
-          {order?.progressImages && (
+          {order?.progressImages?.length > 0 && (
             <>
               <br /> <br /> <br /> <br /> <br /> <br /> <br />
               <h1>Images Displaying your Orders Progress</h1>
