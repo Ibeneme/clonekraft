@@ -35,6 +35,12 @@ import TeamMembers from "./Pages/LandingPage/Hero/Team";
 import GeneralPolicy from "./Pages/LandingPage/Hero/AboutUsRefund";
 import AboutUsHeaderRefund from "./Pages/LandingPage/Hero/AboutUsRefundHeader";
 import OrdersPage from "./Pages/Home/Main/OrdersPage";
+import CreateAccountMarketers from "./Pages/AffilateMarketers/CreateAccount";
+import LoginAsAffiliate from "./Pages/AffilateMarketers/LoginAsAffiliate";
+import ForgotPasswordAffiliate from "./Pages/AffilateMarketers/ForgotPasswordAffilate";
+import PasswordResetSuccess from "./Pages/AffilateMarketers/PasswordResetSuccessAffilate";
+import ExpenseIndex from "./Pages/AffilateMarketers/analytics/Index";
+import Dashboard from "./Pages/AffilateMarketers/analytics/Dashboard";
 
 function App() {
   useEffect(() => {
@@ -53,7 +59,9 @@ function App() {
     return null;
   }
 
-  const isLoggedIn = !!localStorage.getItem("clone_kraft_user_token") || !!localStorage.getItem("clone_kraft_admin_token");
+  const isLoggedIn =
+    !!localStorage.getItem("clone_kraft_user_token") ||
+    !!localStorage.getItem("clone_kraft_admin_token");
   //const isAdminLoggedIn = !!localStorage.getItem("clone_kraft_admin_token"); // Separate storage for admin token
 
   useEffect(() => {
@@ -74,7 +82,7 @@ function App() {
 
     if (!isLoggedIn && protectedPaths.includes(currentPath)) {
       navigate("/"); // Redirect to login for non-admin protected routes
-    } 
+    }
     // else if ( adminProtectedPaths.includes(currentPath)) {
     //   navigate("/admin"); // Redirect to admin login for admin-specific routes
     // }
@@ -227,7 +235,9 @@ function App() {
         {/* Other routes without the Navbar */}
         <Route path="/" element={<Index />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/createaccount/:referralId" element={<CreateAccount />} />
         <Route path="/createaccount" element={<CreateAccount />} />
+
         <Route path="/forgot" element={<ForgotPassword />} />
         <Route path="/otp" element={<OTP />} />
         <Route path="/reset" element={<ResetPassword />} />
@@ -272,6 +282,18 @@ function App() {
             </>
           }
         />
+
+        <Route
+          path="/create-account-marketer"
+          element={<CreateAccountMarketers />}
+        />
+        <Route path="/login-marketer" element={<LoginAsAffiliate />} />
+        <Route path="/forgot-marketer" element={<ForgotPasswordAffiliate />} />
+        <Route
+          path="/reset-success-marketer"
+          element={<PasswordResetSuccess />}
+        />
+        <Route path="/index-dashboard" element={<Dashboard />} />
       </Routes>
     </>
   );

@@ -1,0 +1,1 @@
+export const dashBoardUrl = 'https://oberon-analytics.neofin.ng'
