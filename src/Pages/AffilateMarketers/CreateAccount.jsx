@@ -50,6 +50,13 @@ const CreateAccountMarketers = () => {
         console.log("Registration successful:", response);
         if (response?.payload?.token) {
           setSubmitting(false);
+          localStorage.setItem(
+            "marketer",
+            JSON.stringify(response.payload.marketer)
+          );
+          localStorage.setItem("token", response.payload.token);
+
+          navigate("/index-dashboard");
           // navigate("/home");
         } else if (
           response?.error?.message === "Request failed with status code 400"
