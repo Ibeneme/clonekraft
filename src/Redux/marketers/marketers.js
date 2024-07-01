@@ -17,6 +17,7 @@ export const registerAffiliate = createAsyncThunk(
       const response = await axios.post(`${baseApiUrl}/marketer/register`, {
         email: payload.email,
         password: payload.password,
+        username: payload.email,
       });
 
       console.log(response.data);

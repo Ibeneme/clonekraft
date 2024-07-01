@@ -92,7 +92,7 @@ const UserProfile = ({ user }) => {
           (e.target.style.backgroundColor = buttonStyle.backgroundColor)
         }
       >
-        Go to Login Marketers
+        Logout
       </button>
     </div>
   );
