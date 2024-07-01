@@ -12,12 +12,14 @@ const initialState = {
 
 export const register = createAsyncThunk("auth/register", async (userData) => {
   try {
+    console.log(userData, 'userData')
     const response = await axios.post(`${baseApiUrl}/auth/register`, {
       email: userData?.email,
       password: userData?.password,
       username: userData?.username,
       phoneNumber: userData?.phoneNumber,
       address: userData?.address,
+      referralId: userData?.referralId,
       
     });
     const clone_kraft_user_token = response?.data?.token;
