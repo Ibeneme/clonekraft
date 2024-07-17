@@ -37,7 +37,7 @@ const ClusterBarChartOrders = ({ text, marketer }) => {
 
   // Calculate total order earnings with 40% deduction
   const totalOrderEarnings = orderMetrics.reduce(
-    (total, order) => total + (order.price ? order.price * 0.4 : 0),
+    (total, order) => total + (order.price ? order.price * 0.4 * 0.4 : 0),
     0
   );
 

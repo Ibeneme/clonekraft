@@ -235,6 +235,15 @@ const DashboardOrders = () => {
     (total, order) => total + (order.price || 0),
     0
   );
+
+  const fortyPercent = totalOrderEarnings * 0.4;
+
+  // Calculate 40% of the 40%
+  const result = fortyPercent * 0.4;
+
+  // Format result with commas for thousands separator
+  const formattedResult = formatNumberWithCommas(result);
+
   const totalOrdersWithdrawn = fetchedMetrics.filter(
     (order) => order.withdrawn
   ).length;
@@ -334,7 +343,7 @@ const DashboardOrders = () => {
             <div className="expense-card-content">
               <p className="expense-card-title">Total Earnings</p>
               <p className="expense-card-count">
-                NGN {(formatNumberWithCommas(totalOrderEarnings) * 40) / 100}
+                NGN {(formatNumberWithCommas(formattedResult))}
               </p>
             </div>
           </div>
