@@ -11,7 +11,10 @@ const PasswordResetSuccess = () => {
   };
 
   return (
-    <div className="auth-div" style={{ height: "100vh", paddingTop: 120 }}>
+    <div
+      className="auth-div"
+      style={{ height: "100vh", paddingTop: 120, width: "96vw" }}
+    >
       <div
         className="auth-div-div"
         style={{ height: "100%", overflowY: "scroll" }}

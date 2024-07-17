@@ -103,8 +103,9 @@ const styles = {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    width: "100%",
+    width: "90%",
     maxWidth: "400px",
+    padding: '16px',
   },
   input: {
     width: "100%",

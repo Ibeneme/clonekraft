@@ -14,6 +14,7 @@ const UserProfile = ({ user }) => {
     borderRadius: "8px",
     maxWidth: "400px",
     margin: "20px auto",
+    fontSize: 13,
 
     backgroundColor: "#fff",
   };
@@ -54,8 +55,7 @@ const UserProfile = ({ user }) => {
   };
 
   return (
-    <div style={containerStyle}>
-      <h2 style={headerStyle}>User Profile</h2>
+    <div style={containerStyle} >
       <p style={fieldStyle}>
         <span style={labelStyle}>ID:</span> {user._id}
       </p>

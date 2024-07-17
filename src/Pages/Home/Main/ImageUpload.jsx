@@ -369,14 +369,14 @@ const ImageUpload = () => {
         alignItems: "center",
       }}
     >
-      <h2>
+      <h2 style={{ textAlign: "center" }}>
         {" "}
         <span style={{ color: "#C19F62" }}>
-          {formattedUsername ? `Hi ${formattedUsername}` : null},{" "}
+          {formattedUsername ? `Hi ${formattedUsername}` : null}{" "}
         </span>{" "}
-        You can Upload your Design
+        Upload a Design you wish to be cloned
       </h2>
-      <p className="auth-div-p">
+      {/* <p className="auth-div-p">
         Learn about uploading your design
         <span
           style={{ color: "#C19F62" }}
@@ -385,7 +385,7 @@ const ImageUpload = () => {
           {" "}
           How it works
         </span>
-      </p>
+      </p> */}
 
       <div
         style={{ backgroundColor: "#C19F6225", padding: 24, borderRadius: 4 }}

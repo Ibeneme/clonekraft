@@ -72,7 +72,7 @@ const OrderPage = () => {
           backgroundColor: "#C19F6220",
           width: "fit-content",
           padding: 6,
-          borderRadius: 35,
+          borderRadius: 12,
           marginBottom: 32,
           flexWrap: "wrap",
         }}
@@ -80,9 +80,9 @@ const OrderPage = () => {
         <button
           onClick={() => setFilter("all")}
           style={{
-            padding: `10px 18px`,
+            padding: `10px 10px`,
             marginRight: 0,
-            borderRadius: 32,
+            borderRadius: 8,
             fontSize: 12,
             fontFamily: "var(--fontFamily)",
             backgroundColor: filter === "all" ? "#C19F62" : "transparent",
@@ -95,9 +95,9 @@ const OrderPage = () => {
         <button
           onClick={() => setFilter("pending")}
           style={{
-            padding: `10px 18px`,
+            padding: `10px 10px`,
             marginRight: 0,
-            borderRadius: 32,
+            borderRadius: 8,
             fontSize: 12,
             fontFamily: "var(--fontFamily)",
             backgroundColor: filter === "pending" ? "#C19F62" : "transparent",
@@ -110,9 +110,9 @@ const OrderPage = () => {
         <button
           onClick={() => setFilter("inProgress")}
           style={{
-            padding: `10px 18px`,
+            padding: `10px 10px`,
             marginRight: 0,
-            borderRadius: 32,
+            borderRadius: 8,
             fontSize: 12,
             fontFamily: "var(--fontFamily)",
             backgroundColor:
@@ -126,9 +126,9 @@ const OrderPage = () => {
         <button
           onClick={() => setFilter("completed")}
           style={{
-            padding: `10px 18px`,
+            padding: `10px 10px`,
             marginRight: 0,
-            borderRadius: 32,
+            borderRadius: 8,
             fontSize: 12,
             fontFamily: "var(--fontFamily)",
             backgroundColor: filter === "completed" ? "#C19F62" : "transparent",
@@ -141,9 +141,9 @@ const OrderPage = () => {
         <button
           onClick={() => setFilter("cancelled")}
           style={{
-            padding: `10px 18px`,
+            padding: `10px 10px`,
             marginRight: 0,
-            borderRadius: 32,
+            borderRadius: 8,
             fontSize: 12,
             fontFamily: "var(--fontFamily)",
             backgroundColor: filter === "cancelled" ? "#C19F62" : "transparent",
@@ -178,7 +178,7 @@ const OrderPage = () => {
                   flexDirection: "row",
                 }}
               >
-                <div style={{ width: 84 }}>
+                <div style={{ width: 64, marginRight: 8 }}>
                   <div
                     className={`order-image-container ${
                       order.selectedImages.length > 1 ? "stack-images" : ""

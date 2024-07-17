@@ -10,11 +10,13 @@ import ExpenseManagementCards from "./ExpenseManagementCards";
 import { useNavigate } from "react-router-dom";
 import UserProfile from "./UserProfile";
 import useCustomToasts from "../../ToastNotifications/Toastify";
-import { FaUser } from "react-icons/fa";
+import { FaClipboardList } from "react-icons/fa";
 import ClusterBarChart from "./components/ClusterBarChart";
 import RadialBar from "./components/RadialBar";
+import ClusterBarChartOrders from "./components/ClusterBarChartOrders";
+import RadialBarOrders from "./components/RadialBarOrders";
 
-const Dashboard = () => {
+const DashboardOrders = () => {
   const [scatterSeries, setScatterSeries] = useState([]);
   const [fetchedMetrics, setFetchedMetrics] = useState([]);
   const [data, setData] = useState([]);
@@ -32,7 +34,7 @@ const Dashboard = () => {
   };
   const getBackgroundColor = (typethreeexpenseonleave) => {
     if (typethreeexpenseonleave > 10000) {
-      return "#ff000012"; // Type 1 expense background color
+      return "#FA0C7E12"; // Type 1 expense background color
     } else if (
       typethreeexpenseonleave === 0 ||
       typethreeexpenseonleave === null
@@ -92,154 +94,6 @@ const Dashboard = () => {
     }
   };
 
-  const [columnOptions] = useState({
-    series: [
-      {
-        name: "Pending",
-        data: [44, 55, 57, 56, 61, 58, 63, 60, 66],
-      },
-      {
-        name: "Approved",
-        data: [76, 85, 101, 98, 87, 105, 91, 114, 94],
-      },
-      {
-        name: "Rejected",
-        data: [35, 41, 36, 26, 45, 48, 52, 53, 41],
-      },
-    ],
-    chart: {
-      type: "bar",
-      height: 350,
-    },
-    plotOptions: {
-      bar: {
-        horizontal: false,
-        columnWidth: "55%",
-        endingShape: "rounded",
-      },
-    },
-    dataLabels: {
-      enabled: false,
-    },
-    stroke: {
-      show: true,
-      width: 2,
-      colors: ["transparent"],
-    },
-    xaxis: {
-      categories: [
-        "Feb",
-        "Mar",
-        "Apr",
-        "May",
-        "Jun",
-        "Jul",
-        "Aug",
-        "Sep",
-        "Oct",
-      ],
-    },
-    yaxis: {
-      title: {
-        text: "Count",
-      },
-    },
-    fill: {
-      opacity: 1,
-    },
-    tooltip: {
-      y: {
-        formatter: function (val) {
-          return "Count";
-        },
-      },
-    },
-  });
-
-  const [areaOptions] = useState({
-    chart: {
-      height: 350,
-      type: "area",
-    },
-    dataLabels: {
-      enabled: false,
-    },
-    stroke: {
-      curve: "smooth",
-    },
-    xaxis: {
-      type: "datetime",
-      categories: [
-        "2018-09-19T00:00:00.000Z",
-        "2018-09-20T00:00:00.000Z",
-        "2018-09-21T00:00:00.000Z",
-        "2018-09-22T00:00:00.000Z",
-        "2018-09-23T00:00:00.000Z",
-        "2018-09-24T00:00:00.000Z",
-        "2018-09-25T00:00:00.000Z",
-        "2018-09-26T00:00:00.000Z",
-        "2018-09-27T00:00:00.000Z",
-        "2018-09-28T00:00:00.000Z",
-        "2018-09-29T00:00:00.000Z",
-        "2018-09-30T00:00:00.000Z",
-      ],
-    },
-    yaxis: {
-      labels: {
-        formatter: function (value) {
-          return value.toLocaleString("en-US", {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2,
-          });
-        },
-      },
-    },
-    tooltip: {
-      x: {
-        format: "dd/MM/yy",
-      },
-      y: {
-        formatter: function (value) {
-          return value.toLocaleString("en-US", {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2,
-          });
-        },
-      },
-    },
-  });
-
-  const [scatterOptions] = useState({
-    chart: {
-      height: 350,
-      type: "scatter",
-      zoom: {
-        type: "xy",
-      },
-    },
-    dataLabels: {
-      enabled: false,
-    },
-    grid: {
-      xaxis: {
-        lines: {
-          show: true,
-        },
-      },
-      yaxis: {
-        lines: {
-          show: true,
-        },
-      },
-    },
-    xaxis: {
-      type: "datetime",
-    },
-    yaxis: {
-      max: 70,
-    },
-  });
-
   useEffect(() => {
     const generateScatterData = () => {
       const type1Data = initialData
@@ -273,39 +127,6 @@ const Dashboard = () => {
     generateScatterData();
   }, []);
 
-  const columnSeries = columnOptions.series;
-
-  const areaSeries = [
-    {
-      name: "Type 1",
-      data: [
-        310000.0, 400000.0, 280000.0, 510000.0, 420000.0, 1090000.0, 1000000.0,
-        850000.0, 950000.0, 750000.0, 650000.0, 900000.0,
-      ],
-    },
-    {
-      name: "Type 2",
-      data: [
-        110000.0, 320000.0, 450000.0, 320000.0, 340000.0, 520000.0, 410000.0,
-        670000.0, 580000.0, 430000.0, 390000.0, 540000.0,
-      ],
-    },
-    {
-      name: "Type 3",
-      data: [
-        230000.0, 290000.0, 370000.0, 550000.0, 290000.0, 630000.0, 900000.0,
-        800000.0, 700000.0, 600000.0, 500000.0, 400000.0,
-      ],
-    },
-  ];
-
-  function cleanToken(token) {
-    if (token.startsWith('"') && token.endsWith('"')) {
-      return token.slice(1, -1);
-    } else {
-      return token;
-    }
-  }
   const marketer = JSON.parse(localStorage.getItem("marketer"));
   console.log(marketer?._id, "marketer?._id");
   useEffect(() => {
@@ -315,7 +136,7 @@ const Dashboard = () => {
           `${baseApiUrl}/marketer/users/${marketer?._id}`
         );
         console.log("response?.data?.generalTable:", response?.data);
-        setUserInfo(response?.data);
+        //setUserInfo(response?.data);
         //setFetchedMetrics(response?.data);
         setData(response?.data || []); // Ensure to handle empty response or non-array data
       } catch (error) {
@@ -361,10 +182,10 @@ const Dashboard = () => {
 
   const totalUsers = userInfo?.length;
 
-  const totalPaidOrders = userInfo?.reduce(
-    (acc, userInfo) => acc + userInfo?.paidOrders,
-    0
-  );
+  //   const totalPaidOrders = userInfo?.reduce(
+  //     (acc, userInfo) => acc + userInfo?.paidOrders,
+  //     0
+  //   );
 
   const totalOrders = userInfo?.reduce(
     (acc, userInfo) => acc + userInfo?.totalOrders,
@@ -391,7 +212,32 @@ const Dashboard = () => {
     setCurrentPage(1); // Reset pagination to first page when search term changes
   };
   console.log(filteredData, data, "filteredData");
-  const { showSuccessToast, showErrorToast } = useCustomToasts();
+
+  const pendingOrders = fetchedMetrics.filter(
+    (order) => order.status === "pending"
+  ).length;
+  const cancelledOrders = fetchedMetrics.filter(
+    (order) => order.status === "cancelled"
+  ).length;
+  const inProgressOrders = fetchedMetrics.filter(
+    (order) => order.status === "in Progress"
+  ).length;
+  const completedOrders = fetchedMetrics.filter(
+    (order) => order.status === "completed"
+  ).length;
+
+  const totalPaidOrders = fetchedMetrics.filter((order) => order.paid).length;
+  const totalNotPaidOrders = fetchedMetrics.filter(
+    (order) => !order.paid
+  ).length;
+
+  const totalOrderEarnings = fetchedMetrics.reduce(
+    (total, order) => total + (order.price || 0),
+    0
+  );
+  const totalOrdersWithdrawn = fetchedMetrics.filter(
+    (order) => order.withdrawn
+  ).length;
 
   return (
     <div
@@ -411,7 +257,7 @@ const Dashboard = () => {
             borderRadius: 16,
           }}
         >
-          <ReferralLink referralId={marketer} order={false}/>
+          <ReferralLink referralId={marketer} order={true} />
         </div>
       </div>
       <div
@@ -425,53 +271,94 @@ const Dashboard = () => {
         <div className="expense-cards-container">
           <div className="expense-card">
             <div className="expense-card-icon">
-              <FaUser />
+              <FaClipboardList />
             </div>
             <div className="expense-card-content">
-              <p className="expense-card-title">Total Users Signed up</p>
+              <p className="expense-card-title">Total Pending Orders</p>
               <p className="expense-card-count">
-                {formatNumberWithCommas(totalUsers)}
+                {formatNumberWithCommas(pendingOrders)}
               </p>
             </div>
           </div>
           <div className="expense-card">
             <div className="expense-card-icon">
-              <FaUser />
+              <FaClipboardList />
             </div>
             <div className="expense-card-content">
-              <p className="expense-card-title">
-                Total Orders Placed by referred users
-              </p>
+              <p className="expense-card-title"> Total In Progress Orders</p>
               <p className="expense-card-count">
-                {formatNumberWithCommas(totalOrders)}
+                {formatNumberWithCommas(inProgressOrders)}
               </p>
             </div>
           </div>
+
           <div className="expense-card">
             <div className="expense-card-icon">
-              <FaUser />
+              <FaClipboardList />
             </div>
             <div className="expense-card-content">
-              <p className="expense-card-title">
-                {" "}
-                Total Orders Paid by referred users
+              <p className="expense-card-title">Total Completed Orders</p>
+              <p className="expense-card-count">
+                {formatNumberWithCommas(completedOrders)}
               </p>
+            </div>
+          </div>
+
+          <div className="expense-card">
+            <div className="expense-card-icon">
+              <FaClipboardList />
+            </div>
+            <div className="expense-card-content">
+              <p className="expense-card-title">Cancelled Orders</p>
+              <p className="expense-card-count">
+                {formatNumberWithCommas(cancelledOrders)}
+              </p>
+            </div>
+          </div>
+
+          <div className="expense-card">
+            <div className="expense-card-icon">
+              <FaClipboardList />
+            </div>
+            <div className="expense-card-content">
+              <p className="expense-card-title">Total Paid Orders</p>
               <p className="expense-card-count">
                 {formatNumberWithCommas(totalPaidOrders)}
               </p>
             </div>
           </div>
+          <div className="expense-card">
+            <div className="expense-card-icon">
+              <FaClipboardList />
+            </div>
+            <div className="expense-card-content">
+              <p className="expense-card-title">Total Earnings</p>
+              <p className="expense-card-count">
+                NGN {(formatNumberWithCommas(totalOrderEarnings) * 40) / 100}
+              </p>
+            </div>
+          </div>
+          <div className="expense-card">
+            <div className="expense-card-icon">
+              <FaClipboardList />
+            </div>
+            <div className="expense-card-content">
+              <p className="expense-card-title">Total Withdrawn</p>
+              <p className="expense-card-count">
+                {formatNumberWithCommas(totalOrdersWithdrawn)}
+              </p>
+            </div>
+          </div>
         </div>
+
         <div className="expense-index-first-div">
           <div className="expense-index-second-div">
             <div className="expense-index-third-div">
-              <ClusterBarChart text={`All Data`} marketer={marketer} />
+              <ClusterBarChartOrders text={` `} marketer={marketer} />
             </div>
-            {/* <div className="expense-index-third-div">
-              <ClusterBarChart text="This Month count" marketer={marketer} />
-            </div> */}
+
             <div className="expense-index-third-div">
-              <RadialBar marketer={marketer} />
+              <RadialBarOrders marketer={marketer} />
             </div>
           </div>
           <br />
@@ -543,7 +430,7 @@ const Dashboard = () => {
             </h4>
           </div> */}
           {activeTab === "profile" && <UserProfile user={marketer} />}
-          <div
+          {/* <div
             //className="container-dashboard-ib"
             style={{ backgroundColor: "#fff", marginTop: 12 }}
           >
@@ -577,87 +464,8 @@ const Dashboard = () => {
                 <h4>No User referred Yet</h4>
               </div>
             )}
-            {filteredData?.length === 0 && data?.length !== 0 && (
-              <div className="no-items-found">
-                <div className="no-items-icon-container">
-                  <FaExclamationCircle className="no-items-icon" />
-                </div>
-                <p className="no-items-message">
-                  No items found with{" "}
-                  <span className="search-term">"{searchTerm}"</span>.
-                </p>
-              </div>
-            )}
-            {filteredData?.length > 0 && (
-              <>
-                <table
-                  className="expense-table"
-                  style={{ marginTop: 48, borderRadius: 24 }}
-                >
-                  <thead>
-                    <tr>
-                      <th>Referred User</th>
-                      <th>Total Orders</th>
-                      <th> Total Paid Orders</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {filteredData.map((item) => (
-                      <tr key={item.id}>
-                        <td>
-                          <span className="expense-table-hide">
-                            Referred User:{" "}
-                          </span>
-                          {item?.username} - {item?.email}
-                        </td>
-                        <td>
-                          <span
-                            style={{
-                              backgroundColor: getBackgroundColor(
-                                item?.deduction
-                              ),
-                              color: getTextColor(item?.deduction),
-                              fontSize: "12px",
-                              padding: "10px 14px",
-                              borderRadius: "14px",
-                              fontWeight: "bold",
-                              display: "inline-block",
-                            }}
-                          >
-                            <span className="expense-table-hide">
-                              Total Orders:{" "}
-                            </span>
-                            {formatMoney(item.totalOrders || "0")}{" "}
-                          </span>
-                        </td>
 
-                        <td>
-                          <span
-                            style={{
-                              backgroundColor: getBackgroundColorpayCount(
-                                item.count_payslips
-                              ),
-                              color: getTextColorpayCount(item.count_payslips),
-                              fontSize: "12px",
-                              padding: "10px 14px",
-                              borderRadius: "14px",
-                              fontWeight: "bold",
-                              display: "inline-block",
-                            }}
-                          >
-                            <span className="expense-table-hide">
-                              Paid Orders:{" "}
-                            </span>
-                            {item?.paidOrder || 0}
-                          </span>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </>
-            )}
-            {filteredData?.length > 0 && (
+         {filteredData?.length > 0 && (
               <>
                 <table
                   className="mobile-expense-table"
@@ -674,9 +482,7 @@ const Dashboard = () => {
                     {filteredData.map((item) => (
                       <tr key={item.id}>
                         <td style={{ fontSize: 16, fontFamily: "400" }}>
-                          {/* <span className="mobile-expense-table-hide">
-                            Referred User:{" "}
-                          </span> */}
+                        
                           <span></span>
                         </td>
                         <td
@@ -686,9 +492,7 @@ const Dashboard = () => {
                             color: "#000",
                           }}
                         >
-                          {/* <span className="mobile-expense-table-hide">
-                            Referred User:{" "}
-                          </span> */}
+                      
                           <span>{item?.username}</span>
                         </td>
                         <td
@@ -700,9 +504,7 @@ const Dashboard = () => {
                             marginBottom: 12,
                           }}
                         >
-                          {/* <span className="mobile-expense-table-hide">
-                            Referred User:{" "}
-                          </span> */}
+                    
 
                           <span>{item?.email}</span>
                         </td>
@@ -784,206 +586,361 @@ const Dashboard = () => {
                   ))}
                 </div>
               </>
+            )} 
+          </div> */}
+
+          <div className="container-dashboard-ib">
+            <div className="search-input-container">
+              <input
+                type="text"
+                placeholder="Search..."
+                value={searchTerm}
+                onChange={handleSearchChange}
+                className="search-input"
+              />
+            </div>
+
+            {fetchedMetrics?.length === 0 && (
+              <div
+                style={{
+                  height: 200,
+                  backgroundColor: "#fff",
+                  display: "flex",
+                  flexDirection: "column",
+                  marginTop: 48,
+                  borderRadius: 24,
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <h4>No User referred Yet</h4>
+              </div>
+            )}
+
+            {fetchedMetrics?.length > 0 && (
+              <>
+                <table
+                  className="expense-table"
+                  style={{ marginTop: 48, borderRadius: 24 }}
+                >
+                  <thead>
+                    <tr>
+                      <th>Order by</th>
+                      <th>Order Paid</th>
+                      <th>Order Progress</th>
+                      <th>Order status</th>
+                      <th>Earnings</th>
+                      <th>Withdrawn</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {fetchedMetrics.map((item) => (
+                      <tr key={item.id}>
+                        <td>
+                          <span className="expense-table-hide">Order by: </span>
+                          {item?.username} - {item?.email}
+                        </td>
+                        <td>
+                          <span
+                            style={{
+                              backgroundColor: getBackgroundColor(
+                                item?.deduction
+                              ),
+                              color: getTextColor(item?.deduction),
+                              fontSize: "12px",
+                              padding: "10px 14px",
+                              borderRadius: "14px",
+                              fontWeight: "bold",
+                              display: "inline-block",
+                            }}
+                          >
+                            {item.paid === false ? "Not Yet Paid" : "Paid"}
+                          </span>
+                        </td>
+
+                        <td>
+                          <span
+                            style={{
+                              backgroundColor: getBackgroundColorpayCount(
+                                item.count_payslips
+                              ),
+                              color: getTextColorpayCount(item.count_payslips),
+                              fontSize: "12px",
+                              padding: "10px 14px",
+                              borderRadius: "14px",
+                              fontWeight: "bold",
+                              display: "inline-block",
+                            }}
+                          >
+                            <span className="expense-table-hide">
+                              Progress:{" "}
+                            </span>
+                            {item?.progress || 0}%
+                          </span>
+                        </td>
+                        <td>
+                          <span
+                            style={{
+                              backgroundColor: getBackgroundColor(
+                                item?.deduction
+                              ),
+                              color: getTextColor(item?.deduction),
+                              fontSize: "12px",
+                              padding: "10px 14px",
+                              borderRadius: "14px",
+                              fontWeight: "bold",
+                              display: "inline-block",
+                            }}
+                          >
+                            {" "}
+                            <span className="expense-table-hide">
+                              Order Status:{" "}
+                            </span>
+                            {item.status}
+                          </span>
+                        </td>
+
+                        <td>
+                          <span
+                            style={{
+                              backgroundColor: getBackgroundColor(
+                                item?.deduction
+                              ),
+                              color: getTextColor(item?.deduction),
+                              fontSize: "12px",
+                              padding: "10px 14px",
+                              borderRadius: "14px",
+                              fontWeight: "bold",
+                              display: "inline-block",
+                            }}
+                          >
+                            {" "}
+                            <span className="expense-table-hide">
+                              Earnings:{" "}
+                            </span>
+                            NGN {item.price * (12 / 120)}
+                          </span>
+                        </td>
+
+                        <td>
+                          <span
+                            style={{
+                              backgroundColor: getBackgroundColor(
+                                item?.deduction
+                              ),
+                              color: getTextColor(item?.deduction),
+                              fontSize: "12px",
+                              padding: "10px 14px",
+                              borderRadius: "14px",
+                              fontWeight: "bold",
+                              display: "inline-block",
+                            }}
+                          >
+                            {" "}
+                            <span className="expense-table-hide">
+                              Withdrawn:{" "}
+                            </span>
+                            False
+                          </span>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </>
+            )}
+
+            {fetchedMetrics?.length > 0 && (
+              <>
+                <table
+                  className="mobile-expense-table"
+                  style={{ marginTop: 48, borderRadius: 24 }}
+                >
+                  <thead>
+                    <tr>
+                      <th>Order by</th>
+                      <th>Order Paid</th>
+                      <th>Order Progress</th>
+                      <th>Order status</th>
+                      <th>Earnings</th>
+                      <th>Withdrawn</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {fetchedMetrics.map((item) => (
+                      <tr key={item.id}>
+                        <td>
+                          <span className="mobile-expense-table-hide">
+                            {/* Order by:{" "} */}
+                          </span>
+                          {/* {item?.username} - {item?.email} */}
+                        </td>
+
+                        <td style={{ fontSize: 16, fontFamily: "400" }}>
+                          <span></span>
+                        </td>
+                        <td
+                          style={{
+                            fontSize: 22,
+                            fontWeight: "bold",
+                            color: "#000",
+                          }}
+                        >
+                          <span>{item?.username}</span>
+                        </td>
+
+                        <td>
+                          <span className="mobile-expense-table-hide">
+                            Order by:{" "}
+                          </span>
+                          {item?.username} - {item?.email}
+                        </td>
+                        <td>
+                          <span
+                            style={{
+                              backgroundColor: getBackgroundColor(
+                                item?.deduction
+                              ),
+                              color: getTextColor(item?.deduction),
+                              fontSize: "12px",
+                              padding: "10px 14px",
+                              borderRadius: "14px",
+                              fontWeight: "bold",
+                              display: "inline-block",
+                            }}
+                          >
+                            {item.paid === false ? "Not Yet Paid" : "Paid"}
+                          </span>
+                        </td>
+
+                        <td style={{ display: "flex" }}>
+                          <span
+                            style={{
+                              backgroundColor: getBackgroundColorpayCount(
+                                item.count_payslips
+                              ),
+                              color: getTextColorpayCount(item.count_payslips),
+                              fontSize: "12px",
+                              padding: "10px 14px",
+                              borderRadius: "14px",
+                              fontWeight: "bold",
+                              display: "flex",
+                              gap: 4,
+                            }}
+                          >
+                            <span className="mobile-expense-table-hide">
+                              Progress:{" "}
+                            </span>
+                            <span>{item?.progress || 0}%</span>
+                          </span>
+                        </td>
+                        <td>
+                          <span
+                            style={{
+                              backgroundColor: getBackgroundColor(
+                                item?.deduction
+                              ),
+                              color: getTextColor(item?.deduction),
+                              fontSize: "12px",
+                              padding: "10px 14px",
+                              borderRadius: "14px",
+                              fontWeight: "bold",
+                              display: "flex",
+                              gap: 4,
+                            }}
+                          >
+                            {" "}
+                            <span className="mobile-expense-table-hide">
+                              Order Status:{" "}
+                            </span>
+                            {item.status}
+                          </span>
+                        </td>
+
+                        <td>
+                          <span
+                            style={{
+                              backgroundColor: getBackgroundColor(
+                                item?.deduction
+                              ),
+                              color: getTextColor(item?.deduction),
+                              fontSize: "12px",
+                              padding: "10px 14px",
+                              borderRadius: "14px",
+                              fontWeight: "bold",
+                              display: "flex",
+                              display: "flex",
+                            }}
+                          >
+                            {" "}
+                            <span className="mobile-expense-table-hide">
+                              Earnings:{" "}
+                            </span>
+                            NGN {item.price * (12 / 120)}
+                          </span>
+                        </td>
+
+                        <td>
+                          <span
+                            style={{
+                              backgroundColor: getBackgroundColor(
+                                item?.deduction
+                              ),
+                              color: getTextColor(item?.deduction),
+                              fontSize: "12px",
+                              padding: "10px 14px",
+                              borderRadius: "14px",
+                              fontWeight: "bold",
+                              display: "flex",
+                              gap: 4,
+                            }}
+                          >
+                            {" "}
+                            <span className="mobile-expense-table-hide">
+                              Withdrawn:{" "}
+                            </span>
+                            False
+                          </span>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+                <div className="pagination">
+                  {Array.from({
+                    length: Math.ceil(data.length / itemsPerPage),
+                  }).map((_, index) => (
+                    <button
+                      key={index}
+                      className={`pagination-button ${
+                        index + 1 === currentPage ? "active" : ""
+                      }`}
+                      onClick={() => paginate(index + 1)}
+                      style={{
+                        padding: 16,
+                        marginRight: 8,
+                        marginTop: 32,
+                        backgroundColor:
+                          index + 1 === currentPage ? "#830CFA" : "#830CFA16",
+                        color:
+                          index + 1 === currentPage ? "#ffffff" : "#830CFA",
+                        border: "none",
+                        fontWeight: 900,
+                        borderRadius: 12,
+                        fontSize: 14,
+                      }}
+                    >
+                      {index + 1}
+                    </button>
+                  ))}
+                </div>
+              </>
             )}
           </div>
-          {activeTab === "orders" && (
-            <div className="container-dashboard-ib">
-              <div className="search-input-container">
-                <input
-                  type="text"
-                  placeholder="Search..."
-                  value={searchTerm}
-                  onChange={handleSearchChange}
-                  className="search-input"
-                />
-              </div>
-
-              {fetchedMetrics?.length === 0 && (
-                <div
-                  style={{
-                    height: 200,
-                    backgroundColor: "#fff",
-                    display: "flex",
-                    flexDirection: "column",
-                    marginTop: 48,
-                    borderRadius: 24,
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  <h4>No User referred Yet</h4>
-                </div>
-              )}
-
-              {fetchedMetrics?.length > 0 && (
-                <>
-                  <table
-                    className="expense-table"
-                    style={{ marginTop: 48, borderRadius: 24 }}
-                  >
-                    <thead>
-                      <tr>
-                        <th>Order by</th>
-                        <th>Total Orders</th>
-                        <th> Order Progress</th>
-                        <th> Order status</th>
-                        <th> Earnings</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {fetchedMetrics.map((item) => (
-                        <tr key={item.id}>
-                          <td>
-                            <span className="expense-table-hide">
-                              Order by:{" "}
-                            </span>
-                            {item?.username} - {item?.email}
-                          </td>
-                          <td>
-                            <span
-                              style={{
-                                backgroundColor: getBackgroundColor(
-                                  item?.deduction
-                                ),
-                                color: getTextColor(item?.deduction),
-                                fontSize: "12px",
-                                padding: "10px 14px",
-                                borderRadius: "14px",
-                                fontWeight: "bold",
-                                display: "inline-block",
-                              }}
-                            >
-                              {item.paid === false ? "Not Yet Paid" : "Paid"}
-                            </span>
-                          </td>
-
-                          <td>
-                            <span
-                              style={{
-                                backgroundColor: getBackgroundColorpayCount(
-                                  item.count_payslips
-                                ),
-                                color: getTextColorpayCount(
-                                  item.count_payslips
-                                ),
-                                fontSize: "12px",
-                                padding: "10px 14px",
-                                borderRadius: "14px",
-                                fontWeight: "bold",
-                                display: "inline-block",
-                              }}
-                            >
-                              <span className="expense-table-hide">
-                                Progress:{" "}
-                              </span>
-                              {item?.progress || 0}%
-                            </span>
-                          </td>
-                          <td>
-                            <span
-                              style={{
-                                backgroundColor: getBackgroundColor(
-                                  item?.deduction
-                                ),
-                                color: getTextColor(item?.deduction),
-                                fontSize: "12px",
-                                padding: "10px 14px",
-                                borderRadius: "14px",
-                                fontWeight: "bold",
-                                display: "inline-block",
-                              }}
-                            >
-                              {" "}
-                              <span className="expense-table-hide">
-                                Order Status:{" "}
-                              </span>
-                              {item.status}
-                            </span>
-                          </td>
-
-                          <td>
-                            <span
-                              style={{
-                                backgroundColor: getBackgroundColor(
-                                  item?.deduction
-                                ),
-                                color: getTextColor(item?.deduction),
-                                fontSize: "12px",
-                                padding: "10px 14px",
-                                borderRadius: "14px",
-                                fontWeight: "bold",
-                                display: "inline-block",
-                              }}
-                            >
-                              {" "}
-                              <span className="expense-table-hide">
-                                Earnings:{" "}
-                              </span>
-                              NGN {item.price * (12 / 120)}
-                            </span>
-                          </td>
-
-                          <td>
-                            <span
-                              style={{
-                                backgroundColor: getBackgroundColor(
-                                  item?.deduction
-                                ),
-                                color: getTextColor(item?.deduction),
-                                fontSize: "12px",
-                                padding: "10px 14px",
-                                borderRadius: "14px",
-                                fontWeight: "bold",
-                                display: "inline-block",
-                              }}
-                            >
-                              {" "}
-                              <span className="expense-table-hide">
-                                Withdrawn:{" "}
-                              </span>
-                              False
-                            </span>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                  <div className="pagination">
-                    {Array.from({
-                      length: Math.ceil(data.length / itemsPerPage),
-                    }).map((_, index) => (
-                      <button
-                        key={index}
-                        className={`pagination-button ${
-                          index + 1 === currentPage ? "active" : ""
-                        }`}
-                        onClick={() => paginate(index + 1)}
-                        style={{
-                          padding: 16,
-                          marginRight: 8,
-                          marginTop: 32,
-                          backgroundColor:
-                            index + 1 === currentPage ? "#830CFA" : "#830CFA16",
-                          color:
-                            index + 1 === currentPage ? "#ffffff" : "#830CFA",
-                          border: "none",
-                          fontWeight: 900,
-                          borderRadius: 12,
-                          fontSize: 14,
-                        }}
-                      >
-                        {index + 1}
-                      </button>
-                    ))}
-                  </div>
-                </>
-              )}
-            </div>
-          )}
         </div>
       </div>
     </div>
   );
 };
 
-export default Dashboard;
+export default DashboardOrders;

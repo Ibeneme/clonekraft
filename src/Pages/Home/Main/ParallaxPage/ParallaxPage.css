@@ -1,0 +1,22 @@
+.parallax-page {
+    height: 100vh; /* Adjust height as needed */
+    overflow-x: hidden;
+  }
+  
+  .parallax-section {
+    height: 100%; /* Fill entire height of parallax-page */
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .parallax-content {
+    text-align: center;
+    color: white;
+    font-size: 2rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  }
+  

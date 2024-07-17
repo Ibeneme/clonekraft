@@ -110,7 +110,10 @@ const ForgotPasswordAffiliate = () => {
   };
 
   return (
-    <div className="auth-div" style={{ height: "200vh", paddingTop: 120 }}>
+    <div
+      className="auth-div"
+      style={{ height: "200vh", paddingTop: 120, width: "96vw" }}
+    >
       <div
         className="auth-div-div"
         style={{ height: "100%", overflowY: "scroll" }}
@@ -123,8 +126,17 @@ const ForgotPasswordAffiliate = () => {
           >
             {({ isSubmitting }) => (
               <Form>
-                <h2 style={{ margin: 0 }}>Forgot Password</h2>
-
+                <h2 style={{ margin: 0 }}>Forgot Password as a Promoter</h2>
+                <p className="auth-div-p">
+                  Already have an account?
+                  <span
+                    style={{ color: "#C19F62" }}
+                    onClick={() => navigate("/login-marketer")}
+                  >
+                    {" "}
+                    Login
+                  </span>
+                </p>
                 {err && (
                   <p
                     className="error-message"

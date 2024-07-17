@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { FaUser, FaEnvelope, FaMapMarkerAlt, FaPhone } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { profile, updateUser, updateUserImage } from "../../../Redux/auth/auth";
-import { MdEdit } from "react-icons/md";
+import { MdEdit, MdLogout } from "react-icons/md";
 import Modal from "../../Components/Modal/Modal";
 import useCustomToasts from "../../ToastNotifications/Toastify";
 import profilePic from "../../..//assets/auth/left.png";
@@ -421,9 +421,9 @@ const ProfilePage = () => {
                   src={user?.imageUrl} // Changed from user?.avatar to user?.imageUrl
                   alt="User Avatar"
                   style={{
-                    width: 200,
-                    height: 220,
-                    borderRadius: 12,
+                    width: 180,
+                    height: 180,
+                    borderRadius: 120000,
                     marginBottom: "20px",
                   }}
                 />
@@ -459,10 +459,10 @@ const ProfilePage = () => {
           </div>
           <div
             style={{
-              backgroundColor: "#C19F6217",
+              // backgroundColor: "#C19F6217",
               padding: "20px",
               borderRadius: "10px",
-              boxShadow: "0px 0px 10px 0px rgba(0,0,0,0.1)",
+              //  boxShadow: "0px 0px 10px 0px rgba(0,0,0,0.1)",
             }}
           >
             <h3 style={{ marginBottom: "20px" }}>Contact Information</h3>
@@ -471,9 +471,13 @@ const ProfilePage = () => {
                 display: "flex",
                 alignItems: "center",
                 marginBottom: "10px",
+                backgroundColor: "#C19F62",
+                color: "#fff",
+                paddingLeft: 16,
+                borderRadius: 16,
               }}
             >
-              <FaEnvelope style={{ marginRight: "10px", color: "#C19F62" }} />
+              <FaEnvelope style={{ marginRight: "10px", color: "#fff" }} />
               <p>{user?.email}</p>
             </div>
             <div
@@ -481,21 +485,33 @@ const ProfilePage = () => {
                 display: "flex",
                 alignItems: "center",
                 marginBottom: "10px",
+                backgroundColor: "#C19F62",
+                color: "#fff",
+                paddingLeft: 16,
+                borderRadius: 16,
               }}
             >
-              <FaMapMarkerAlt
-                style={{ marginRight: "10px", color: "#C19F62" }}
-              />
+              <FaMapMarkerAlt style={{ marginRight: "10px", color: "#fff" }} />
               <p>{user?.address}</p>
             </div>
-            <div style={{ display: "flex", alignItems: "center" }}>
-              <FaPhone style={{ marginRight: "10px", color: "#C19F62" }} />
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                marginBottom: "10px",
+                backgroundColor: "#C19F62",
+                color: "#fff",
+                paddingLeft: 16,
+                borderRadius: 16,
+              }}
+            >
+              <FaPhone style={{ marginRight: "10px", color: "#fff" }} />
               <p>{user?.phoneNumber}</p>
             </div>
           </div>
           <div
             style={{
-              backgroundColor: "#C19F6230",
+              //backgroundColor: "#C19F6230",
               padding: "20px",
               borderRadius: "10px",
               marginTop: "20px",
@@ -507,9 +523,13 @@ const ProfilePage = () => {
                 display: "flex",
                 alignItems: "center",
                 marginBottom: "10px",
+                backgroundColor: "#C19F62",
+                color: "#fff",
+                paddingLeft: 16,
+                borderRadius: 16,
               }}
             >
-              <FaUser style={{ marginRight: "10px", color: "#C19F62" }} />
+              <FaUser style={{ marginRight: "10px", color: "#fff" }} />
               <p>Joined Date: {formatDate(user?.createdAt)}</p>
             </div>
 
@@ -518,11 +538,19 @@ const ProfilePage = () => {
                 cursor: "pointer",
                 padding: 16,
                 borderRadius: 24,
+                display: "flex",
+                alignItems: "center",
+                marginBottom: "10px",
+                backgroundColor: "#C19F62",
+                color: "#fff",
+                paddingLeft: 16,
+                borderRadius: 16,
                 // backgroundColor: "#C19F6245",
                 // color: "#C19F6230",
               }}
               onClick={handleLogout}
             >
+              <MdLogout style={{ marginRight: "10px", color: "#fff" }} />
               <span>Log Out</span>
             </div>
           </div>

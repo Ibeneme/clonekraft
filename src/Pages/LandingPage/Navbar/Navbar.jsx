@@ -27,11 +27,13 @@ const TopLevel = () => {
       }}
     >
       <div className="navbars">
-        <div className="brands">LDL</div>
+        <div className="brands" style={{ fontWeight: "bold" }}>
+          LDL
+        </div>
         <button
           data-aos="zoom-in"
           onClick={handleClick}
-          className="btn-auth"
+          //className="btn-auth"
           style={{
             marginTop: -0,
             height: 55,
@@ -39,10 +41,13 @@ const TopLevel = () => {
             backgroundColor: "#C19F62",
             marginBottom: 0,
             border: `1.4px solid #fff`,
+            color:'#Fff',
+            padding: 16
+   
           }}
           type="submit"
         >
-          Clonekraft
+          Get Started
         </button>
       </div>
     </div>

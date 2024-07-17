@@ -91,14 +91,12 @@ const CreateAccountMarketers = () => {
   }, []);
 
   return (
-    <div className="auth-div" style={{ height: "200vh", paddingTop: 120 }}>
+    <div className="auth-div" style={{ height: "200vh", paddingTop: 120, width: '96vw' }}>
       <div
         className="auth-div-div"
         style={{ height: "100%", overflowY: "scroll" }}
       >
-        <h2 style={{ margin: 0 }}>
-          Create an Account as an Affiliate Marketer
-        </h2>
+        <h2 style={{ margin: 0 }}>Sign Up to Promote Clonekraft</h2>
         <p className="auth-div-p">
           Already have an account?
           <span

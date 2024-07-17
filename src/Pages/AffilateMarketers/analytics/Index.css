@@ -4,11 +4,11 @@
   width: 100vw;
 }
 
-.expense-container {
-  padding: 80px 24px;
-  background-color: #f4f4f4;
+/* .expense-container {
+  /* padding: 80px 24px; */
+/* background-color: #f4f4f4; 
 
-}
+} */
 
 .expense-dashboard {
   display: grid;
@@ -17,7 +17,7 @@
 }
 
 .expense-index-first-div {
-  padding: 24px;
+  padding: 16px;
 }
 
 .expense-index-second-div {
@@ -42,6 +42,7 @@
   background-color: #fff;
   margin-top: 24px;
   border-radius: 24px;
+  width: 100%;
 }
 
 .expense-table {
@@ -54,7 +55,7 @@
 .expense-table td {
   padding: 16px;
   text-align: left;
-  font-size: 12px;
+  font-size: 16px;
 }
 
 .expense-table th {
@@ -91,8 +92,8 @@
 }
 
 .search-input:focus {
-  border: 1px solid #0066ff;
-  color: #0066ff;
+  border: 1px solid var(--darkOrange);
+  color: var(--darkOrange);
 }
 
 .no-items-found {
@@ -137,8 +138,8 @@
 .expense-card-icon {
   font-size: 24px;
   margin-right: 10px;
-  background-color: #0066ff18;
-  color: #0066ff;
+  background-color: #C19F6218;
+  color: var(--darkOrange);
   padding: 16px 20px;
   border-radius: 8px;
 }
@@ -170,11 +171,18 @@
   display: none;
 }
 
+.mobile-expense-table {
+  font-size: 0.9em;
+  flex-direction: column;
+  display: none;
+
+}
+
 @media (max-width: 991px) {
-  .expense-container {
-    padding: 124px 24px;
+  /*  .expense-container {
+   padding: 124px 24px;
     padding-left: 24px;
-  }
+  } */
 
   .search-container {
     margin-top: 20px;
@@ -188,7 +196,7 @@
     border-radius: 24px;
     font-size: 16px;
     background-color: transparent;
-    color: #0066ff;
+    color: var(--darkOrange);
     box-sizing: border-box;
     max-width: 400px;
     background-color: transparent;
@@ -203,7 +211,7 @@
     margin: 0 auto;
     padding: 0px;
     background-color: var(--background);
-    margin-top: 24px;
+    margin-top: -40px;
     border-radius: 24px;
     display: block;
   }
@@ -223,10 +231,12 @@
 
   .expense-table {
     font-size: 0.9em;
+    display: none;
   }
 
   .expense-table-hide {
     display: block;
+    display: none;
   }
 
   .expense-table thead {
@@ -239,6 +249,7 @@
     display: block;
     background-color: var(--background);
     padding-top: 23px;
+    display: none;
   }
 
   .expense-table tr {
@@ -247,6 +258,7 @@
     border-radius: 16px;
     background-color: #fff;
     padding: 16px 0px;
+    display: none;
   }
 
   .expense-table td {
@@ -255,27 +267,102 @@
     padding: 4px 16px;
     border: none;
     gap: 4px;
+    display: none;
   }
 
   .expense-id {
     width: fit-content;
     margin-bottom: 10px;
+    display: none;
   }
 
   .expense-table td:nth-child(1) {
     font-size: 20px;
     font-weight: 900;
+    display: none;
   }
 
   .expense-table td:nth-child(3),
   .expense-table td:nth-child(4) {
     color: #666666;
     font-size: 14px;
+    display: none;
   }
 
   .expense-table td:nth-child(5) {
     font-size: 14px;
+    display: none;
   }
+
+
+
+  .mobile-expense-table {
+    font-size: 0.9em;
+    flex-direction: column;
+    display: flex;
+ 
+  }
+
+  .mobile-expense-table-hide {
+    display: block;
+
+  }
+
+  .mobile-expense-table thead {
+    background-color: transparent;
+    /* Hide table header on mobile */
+  }
+
+  .mobile-expense-table tbody {
+    display: block;
+    background-color: var(--background);
+    padding-top: 23px;
+    margin-top: -160px
+
+  }
+
+  .mobile-expense-table tr {
+    display: block;
+    margin-top: 20px;
+    border-radius: 16px;
+    background-color: #fff;
+    padding: 16px 0px;
+
+  }
+
+  .mobile-expense-table td {
+    display: flex;
+    width: 100%;
+    padding: 4px 16px;
+    border: none;
+    gap: 4px;
+
+  }
+
+  .mobile-expense-id {
+    width: fit-content;
+    margin-bottom: 10px;
+
+  }
+
+  .mobile-expense-table td:nth-child(1) {
+    font-size: 20px;
+    font-weight: 900;
+
+  }
+
+  .mobile-expense-table td:nth-child(3),
+  .mobile-expense-table td:nth-child(4) {
+    color: #666666;
+    font-size: 14px;
+
+  }
+
+  .mobile-expense-table td:nth-child(5) {
+    font-size: 14px;
+
+  }
+
 
   /* .expense-table td:nth-child(6) {
     font-size: 14px;

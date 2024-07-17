@@ -1,0 +1,50 @@
+/* MobileNavbar.css */
+
+.mobile-navbar {
+    background-color: #333;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    height: 88px;
+
+}
+
+.mobile-navbar ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: inherit
+}
+
+.mobile-navbar ul li {
+    margin: 0;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 13px;
+}
+
+.mobile-navbar ul li a,
+.mobile-navbar ul li button {
+    color: white;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px
+}
+
+.mobile-navbar ul li a:hover,
+.mobile-navbar ul li button:hover {
+    text-decoration: none;
+}
+
+.mobile-navbar ul li.active .active-link {
+    color: #c19f62;
+}

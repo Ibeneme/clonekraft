@@ -73,12 +73,15 @@ const LoginAsAffiliate = () => {
   }, []);
 
   return (
-    <div className="auth-div" style={{ height: "200vh", paddingTop: 120 }}>
+    <div
+      className="auth-div"
+      style={{ height: "200vh", paddingTop: 120, width: "95vw" }}
+    >
       <div
         className="auth-div-div"
         style={{ height: "100%", overflowY: "scroll" }}
       >
-        <h2 style={{ margin: 0 }}>Affiliate Marketer Login</h2>
+        <h2 style={{ margin: 0 }}>Login to Promote Clonekraft</h2>
         <div className="background-image" />{" "}
         {/* Replace with your background image */}
         <p className="auth-div-p">

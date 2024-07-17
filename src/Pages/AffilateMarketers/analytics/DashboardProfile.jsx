@@ -1,39 +1,35 @@
-import { FaWallet } from "react-icons/fa";
-import { initialData } from "./ExpenseData";
-import "./Index.css";
 import React, { useEffect, useState } from "react";
 import Chart from "react-apexcharts";
+import { initialData } from "./ExpenseData"; // Assuming initialData is correctly structured
 import axios from "axios";
+import { FaExclamationCircle } from "react-icons/fa";
+import "./Index.css"; // Import CSS file for styling
 import { baseApiUrl } from "../../../Redux/Baseurl/Baseurl";
 import ReferralLink from "./RefLink";
+import ExpenseManagementCards from "./ExpenseManagementCards";
+import { useNavigate } from "react-router-dom";
+import UserProfile from "./UserProfile";
+import useCustomToasts from "../../ToastNotifications/Toastify";
+import { FaUser } from "react-icons/fa";
+import ClusterBarChart from "./components/ClusterBarChart";
+import RadialBar from "./components/RadialBar";
 
-const ExpenseManagementCards = () => {
-  // Function to format numbers with commas
-  const formatNumberWithCommas = (number) => {
-    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  };
-
-  // Calculate counts based on initialData
-  const type1Count = initialData.filter((item) => item.type === 1).length;
-  const type2Count = initialData.filter((item) => item.type === 2).length;
-  const type3Count = initialData.filter((item) => item.type === 3).length;
-  const approvedCount = initialData.filter(
-    (item) => item.status === "Approved"
-  ).length;
-  const pendingCount = initialData.filter(
-    (item) => item.status === "Pending"
-  ).length;
-  const rejectedCount = initialData.filter(
-    (item) => item.status === "Rejected"
-  ).length;
-
+const DashboardProfile = () => {
   const [scatterSeries, setScatterSeries] = useState([]);
   const [fetchedMetrics, setFetchedMetrics] = useState([]);
   const [data, setData] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 30;
+  const navigate = useNavigate();
 
+  const handleNavigate = () => {
+    navigate("/login-marketers");
+  };
+
+  const formatNumberWithCommas = (number) => {
+    return number?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  };
   const getBackgroundColor = (typethreeexpenseonleave) => {
     if (typethreeexpenseonleave > 10000) {
       return "#ff000012"; // Type 1 expense background color
@@ -319,6 +315,7 @@ const ExpenseManagementCards = () => {
           `${baseApiUrl}/marketer/users/${marketer?._id}`
         );
         console.log("response?.data?.generalTable:", response?.data);
+        setUserInfo(response?.data);
         //setFetchedMetrics(response?.data);
         setData(response?.data || []); // Ensure to handle empty response or non-array data
       } catch (error) {
@@ -360,6 +357,25 @@ const ExpenseManagementCards = () => {
     : [];
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const [userInfo, setUserInfo] = useState([]);
+
+  const totalUsers = userInfo?.length;
+
+  const totalPaidOrders = userInfo?.reduce(
+    (acc, userInfo) => acc + userInfo?.paidOrders,
+    0
+  );
+
+  const totalOrders = userInfo?.reduce(
+    (acc, userInfo) => acc + userInfo?.totalOrders,
+    0
+  );
+
+  const newData = {
+    Users: totalUsers,
+    Orders: totalOrders,
+    Paid: totalOrders,
+  };
 
   // Filter data based on search term
   const filteredData = currentItems?.filter((item) =>
@@ -375,95 +391,44 @@ const ExpenseManagementCards = () => {
     setCurrentPage(1); // Reset pagination to first page when search term changes
   };
   console.log(filteredData, data, "filteredData");
+  const { showSuccessToast, showErrorToast } = useCustomToasts();
 
   return (
     <div
-      className="padding"
-      style={{ backgroundColor: "#f4f4f4",
-      /// marginBottom: -170 
-    }}
+      style={{
+        backgroundColor: "#f4f4f4",
+        minHeight: "140vh",
+        //paddingBottom: 120,
+      }}
     >
-      {/* <div className="expense-cards-container">
-        {/* Type 1 Expense Card 
-        <div className="expense-card">
-          <div className="expense-card-icon">
-            <FaWallet />
-          </div>
-          <div className="expense-card-content">
-            <p className="expense-card-title">Type 1 Expenses</p>
-            <p className="expense-card-count">
-              {formatNumberWithCommas(type1Count)}
-            </p>
-          </div>
-        </div>
+      <div
+        style={{
+          backgroundColor: "#f4f4f4",
+          padding: 16,
+          marginTop: -24,
+        }}
+      >
+        <div
+          className="expense-cards-container"
+          style={{ backgroundColor: "#fff", borderRadius: 16 }}
+        >
+          <div
+            //className="container-dashboard-ib"
+            style={{
+              backgroundColor: "#f4f4f4",
+              marginTop: 12,
 
-        {/* Type 2 Expense Card 
-        <div className="expense-card">
-          <div className="expense-card-icon">
-            <FaWallet />
-          </div>
-          <div className="expense-card-content">
-            <p className="expense-card-title">Type 2 Expenses</p>
-            <p className="expense-card-count">
-              {formatNumberWithCommas(type2Count)}
-            </p>
+              alignItems: "center",
+              display: "flex",
+              minHeight: "100vh",
+            }}
+          >
+            <UserProfile user={marketer} />
           </div>
         </div>
-
-        {/* Type 3 Expense Card 
-        <div className="expense-card">
-          <div className="expense-card-icon">
-            <FaWallet />
-          </div>
-          <div className="expense-card-content">
-            <p className="expense-card-title">Type 3 Expenses</p>
-            <p className="expense-card-count">
-              {formatNumberWithCommas(type3Count)}
-            </p>
-          </div>
-        </div>
-
-        {/* Approved Expenses Card 
-        <div className="expense-card">
-          <div className="expense-card-icon">
-            <FaWallet />
-          </div>
-          <div className="expense-card-content">
-            <p className="expense-card-title">Approved</p>
-            <p className="expense-card-count">
-              {formatNumberWithCommas(approvedCount)}
-            </p>
-          </div>
-        </div>
-
-        {/* Pending Expenses Card 
-        <div className="expense-card">
-          <div className="expense-card-icon">
-            <FaWallet />
-          </div>
-          <div className="expense-card-content">
-            <p className="expense-card-title">Pending</p>
-            <p className="expense-card-count">
-              {formatNumberWithCommas(pendingCount)}
-            </p>
-          </div>
-        </div>
-
-        {/* Rejected Expenses Card 
-        <div className="expense-card">
-          <div className="expense-card-icon">
-            <FaWallet />
-          </div>
-          <div className="expense-card-content">
-            <p className="expense-card-title">Rejected</p>
-            <p className="expense-card-count">
-              {formatNumberWithCommas(rejectedCount)}
-            </p>
-          </div>
-        </div>
-      </div> */}
+      </div>
     </div>
   );
 };
 
-export default ExpenseManagementCards;
+export default DashboardProfile;

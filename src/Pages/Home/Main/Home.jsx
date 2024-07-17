@@ -9,6 +9,13 @@ import { useDispatch } from "react-redux";
 import { profile } from "../../../Redux/auth/auth";
 import useCustomToasts from "../../ToastNotifications/Toastify";
 import heroImage from "../../../../src/assets/Sofa/Sofa08.png";
+import imageb from "../../../assets/Sofa/Frameb.png";
+import ParallaxPage from "./ParallaxPage/ParallaxPage";
+import ParallaxImages from "./ParallaxPage/ParralaxImage";
+import NewHero from "../../LandingPage/Hero/NewHero";
+import SectionI from "../../LandingPage/Hero/SectionI";
+import Products from "../../LandingPage/Hero/New/Products";
+import OurClones from "../../LandingPage/Hero/New/OurClones";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -58,9 +65,14 @@ const Home = () => {
 
   return (
     <div style={{ backgroundColor: "#fff" }}>
-      <section
+      <ParallaxPage />
+      <OurClones />
+      {/* <NewHero /> */}
+
+      {/* <ParallaxImages /> */}
+      {/* <section
         style={{
-          backgroundImage: `url(${heroImage})`,
+          backgroundImage: `url(${imageb})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           minHeight: "100vh",
@@ -127,7 +139,7 @@ const Home = () => {
       </section>
       <section>
         <WelcomeSection username={user?.username} />
-      </section>
+      </section> */}
 
       {/* <section
         style={{

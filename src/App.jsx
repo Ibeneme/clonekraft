@@ -41,6 +41,11 @@ import ForgotPasswordAffiliate from "./Pages/AffilateMarketers/ForgotPasswordAff
 import PasswordResetSuccess from "./Pages/AffilateMarketers/PasswordResetSuccessAffilate";
 import ExpenseIndex from "./Pages/AffilateMarketers/analytics/Index";
 import Dashboard from "./Pages/AffilateMarketers/analytics/Dashboard";
+import WhatsAppRedirect from "./WhatsappRedirect/WhatsappRedirect";
+import MobileNavbar from "./Redux/MobileNav/MobileNavbar";
+import MobileNavbarMarketers from "./Pages/AffilateMarketers/MobileNavMarketers/MobileNavbarMarketers";
+import DashboardOrders from "./Pages/AffilateMarketers/analytics/DashboardOrders";
+import DashboardProfile from "./Pages/AffilateMarketers/analytics/DashboardProfile";
 
 function App() {
   useEffect(() => {
@@ -101,90 +106,10 @@ function App() {
         <Route path="/order-details/:orderId" element={<OrdersPage />} />
 
         <Route
-          path="/home"
-          element={
-            <ProtectedRoutes>
-              <Navbar />
-              <Home />
-              <Footer />
-            </ProtectedRoutes>
-          }
-        />
-        <Route
-          path="/chatpage"
-          element={
-            <ProtectedRoutes>
-              <Navbar />
-              <ChatPage />
-            </ProtectedRoutes>
-          }
-        />
-        <Route
-          path="/profile"
-          element={
-            <ProtectedRoutes>
-              <Navbar />
-              <ProfilePage />
-              <Footer />
-            </ProtectedRoutes>
-          }
-        />
-        <Route
-          path="/order"
-          element={
-            <ProtectedRoutes>
-              <Navbar />
-              <OrderPage />
-              <Footer />
-            </ProtectedRoutes>
-          }
-        />
-        <Route
-          path="/order-single"
-          element={
-            <ProtectedRoutes>
-              <Navbar />
-              <OrderDescriptionPage />
-              <Footer />
-            </ProtectedRoutes>
-          }
-        />
-        <Route
-          path="/upload"
-          element={
-            <ProtectedRoutes>
-              <Navbar />
-              <ImageUpload />
-              <Footer />
-            </ProtectedRoutes>
-          }
-        />
-        <Route
-          path="/gallery"
-          element={
-            <ProtectedRoutes>
-              <Navbar />
-              <Gallery />
-              <Footer />
-            </ProtectedRoutes>
-          }
-        />
-
-        <Route
-          path="/pricing"
-          element={
-            <ProtectedRoutes>
-              <Navbar />
-              <TimerPricing />
-              <Footer />
-            </ProtectedRoutes>
-          }
-        />
-
-        <Route
           path="/users"
           element={
             <ProtectedRoutes>
+              <MobileNavbar />
               <NavbarAdmin />
               <User />
               <Footer />
@@ -195,6 +120,7 @@ function App() {
           path="/orders"
           element={
             <ProtectedRoutes>
+              <MobileNavbar />
               <NavbarAdmin />
               <AdminOrders />
               <Footer />
@@ -225,6 +151,7 @@ function App() {
           path="/chat-user"
           element={
             <ProtectedRoutes>
+              <MobileNavbar />
               <NavbarAdmin />
               <Chat />
               {/* <Footer /> */}
@@ -233,15 +160,15 @@ function App() {
         />
 
         {/* Other routes without the Navbar */}
-        <Route path="/" element={<Index />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/createaccount/:referralId" element={<CreateAccount />} />
-        <Route path="/createaccount" element={<CreateAccount />} />
-
-        <Route path="/forgot" element={<ForgotPassword />} />
-        <Route path="/otp" element={<OTP />} />
-        <Route path="/reset" element={<ResetPassword />} />
-        <Route path="/otp-new" element={<OTPNew />} />
+        <Route
+          path="/"
+          element={
+            <>
+              <Index />
+              <WhatsAppRedirect />
+            </>
+          }
+        />
         <Route
           path="/about"
           element={
@@ -265,6 +192,104 @@ function App() {
             </>
           }
         />
+
+        <Route path="/login" element={<Login />} />
+        <Route path="/createaccount/:referralId" element={<CreateAccount />} />
+        <Route path="/createaccount" element={<CreateAccount />} />
+
+        <Route path="/forgot" element={<ForgotPassword />} />
+        <Route path="/otp" element={<OTP />} />
+        <Route path="/reset" element={<ResetPassword />} />
+        <Route path="/otp-new" element={<OTPNew />} />
+        <Route
+          path="/home"
+          element={
+            <ProtectedRoutes>
+              <MobileNavbar />
+              <Navbar />
+              <Home />
+              <Footer />
+            </ProtectedRoutes>
+          }
+        />
+        <Route
+          path="/chatpage"
+          element={
+            <ProtectedRoutes>
+              <MobileNavbar />
+              <Navbar />
+              <ChatPage />
+            </ProtectedRoutes>
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoutes>
+              <MobileNavbar />
+              <Navbar />
+              <ProfilePage />
+              <Footer />
+            </ProtectedRoutes>
+          }
+        />
+        <Route
+          path="/order"
+          element={
+            <ProtectedRoutes>
+              <MobileNavbar />
+              <Navbar />
+              <OrderPage />
+              <Footer />
+            </ProtectedRoutes>
+          }
+        />
+        <Route
+          path="/order-single"
+          element={
+            <ProtectedRoutes>
+              <MobileNavbar />
+              <Navbar />
+              <OrderDescriptionPage />
+              <Footer />
+            </ProtectedRoutes>
+          }
+        />
+        <Route
+          path="/upload"
+          element={
+            <ProtectedRoutes>
+              <MobileNavbar />
+              <Navbar />
+              <ImageUpload />
+              <Footer />
+            </ProtectedRoutes>
+          }
+        />
+        <Route
+          path="/gallery"
+          element={
+            <ProtectedRoutes>
+              <MobileNavbar />
+              <Navbar />
+              <Gallery />
+              <Footer />
+            </ProtectedRoutes>
+          }
+        />
+
+        <Route
+          path="/pricing"
+          element={
+            <ProtectedRoutes>
+              <MobileNavbar />
+              <Navbar />
+              <TimerPricing />
+              <Footer />
+            </ProtectedRoutes>
+          }
+        />
+
         <Route
           path="/upload"
           element={
@@ -273,6 +298,7 @@ function App() {
             </>
           }
         />
+
         <Route path="/sucess" element={<PaymentSuccess />} />
         <Route
           path="/admin"
@@ -285,15 +311,63 @@ function App() {
 
         <Route
           path="/create-account-marketer"
-          element={<CreateAccountMarketers />}
+          element={
+            <>
+              <CreateAccountMarketers />
+            </>
+          }
         />
-        <Route path="/login-marketer" element={<LoginAsAffiliate />} />
-        <Route path="/forgot-marketer" element={<ForgotPasswordAffiliate />} />
+        <Route
+          path="/login-marketer"
+          element={
+            <>
+              <LoginAsAffiliate />
+            </>
+          }
+        />
+        <Route
+          path="/forgot-marketer"
+          element={
+            <>
+              <ForgotPasswordAffiliate />
+            </>
+          }
+        />
+        <Route
+          path="/profile-marketer"
+          element={
+            <>
+              <DashboardProfile />
+              <MobileNavbarMarketers />
+            </>
+          }
+        />
         <Route
           path="/reset-success-marketer"
-          element={<PasswordResetSuccess />}
+          element={
+            <>
+              <PasswordResetSuccess />
+            </>
+          }
         />
-        <Route path="/index-dashboard" element={<Dashboard />} />
+        <Route
+          path="/index-dashboard"
+          element={
+            <>
+              <Dashboard />
+              <MobileNavbarMarketers />
+            </>
+          }
+        />
+        <Route
+          path="/marketers-dashboard-orders"
+          element={
+            <>
+              <DashboardOrders />
+              <MobileNavbarMarketers />
+            </>
+          }
+        />
       </Routes>
     </>
   );
