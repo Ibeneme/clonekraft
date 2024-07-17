@@ -66,7 +66,11 @@ const NewHero = () => {
       <Slider {...settings}>
         {slides.map((slide) => (
           <div key={slide.id} className="slide">
-            <img src={slide.image} alt={`Slide ${slide.id}`} />
+            <img
+              src={slide.image}
+              alt={`Slide ${slide.id}`}
+              style={{ height: "90vh" }}
+            />
             <h3 className="slide-text">{slide.text}</h3>
           </div>
         ))}

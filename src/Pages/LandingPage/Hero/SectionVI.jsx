@@ -67,7 +67,11 @@ const SectionVI = () => {
   };
 
   return (
-    <div className="faq-section" data-aos="zoom-in">
+    <div
+      className="faq-section"
+      data-aos="zoom-in"
+      style={{ backgroundColor: "#000" }}
+    >
       <h2 className="section-header">FAQs</h2>
       <div className="accordion-container" data-aos="zoom-in">
         {faqsData.map((faq, index) => (
