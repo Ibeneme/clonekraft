@@ -101,7 +101,7 @@ const CreateAccountMarketers = () => {
           Already have an account?
           <span
             style={{ color: "#C19F62" }}
-            onClick={() => navigate("/login-marketer")}
+            onClick={() => navigate("/login-influencer")}
           >
             {" "}
             Login

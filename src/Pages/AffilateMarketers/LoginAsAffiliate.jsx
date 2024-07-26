@@ -54,7 +54,7 @@ const LoginAsAffiliate = () => {
   };
 
   const handleForgotPassword = () => {
-    navigate("/forgot-marketer"); // Navigate to the Forgot Password page
+    navigate("/forgot-influencer"); // Navigate to the Forgot Password page
   };
 
   const imageContainerRef = useRef(null);
@@ -88,7 +88,7 @@ const LoginAsAffiliate = () => {
           Don't have an account?
           <span
             style={{ color: "#C19F62" }}
-            onClick={() => navigate("/create-account-marketer")}
+            onClick={() => navigate("/create-account-influencer")}
           >
             {" "}
             Create Account

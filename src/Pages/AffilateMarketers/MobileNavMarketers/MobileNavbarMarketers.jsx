@@ -84,7 +84,7 @@ const MobileNavbarMarketers = () => {
           </NavLink>
         </li>
         <li className={activeItem === "profile" ? "active" : ""}>
-          <NavLink exact to="/profile-marketer" activeClassName="active-link">
+          <NavLink exact to="/profile-influencer" activeClassName="active-link">
             <FaUser
               size={15}
               color={activeItem === "profile" ? "#c19f62" : "white"}

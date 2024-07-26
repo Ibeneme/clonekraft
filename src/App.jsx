@@ -310,7 +310,7 @@ function App() {
         />
 
         <Route
-          path="/create-account-marketer"
+          path="/create-account-influencer"
           element={
             <>
               <CreateAccountMarketers />
@@ -318,7 +318,7 @@ function App() {
           }
         />
         <Route
-          path="/login-marketer"
+          path="/login-influencer"
           element={
             <>
               <LoginAsAffiliate />
@@ -326,7 +326,7 @@ function App() {
           }
         />
         <Route
-          path="/forgot-marketer"
+          path="/forgot-influencer"
           element={
             <>
               <ForgotPasswordAffiliate />
@@ -334,7 +334,7 @@ function App() {
           }
         />
         <Route
-          path="/profile-marketer"
+          path="/profile-influencer"
           element={
             <>
               <DashboardProfile />
@@ -343,7 +343,7 @@ function App() {
           }
         />
         <Route
-          path="/reset-success-marketer"
+          path="/reset-success-influencer"
           element={
             <>
               <PasswordResetSuccess />

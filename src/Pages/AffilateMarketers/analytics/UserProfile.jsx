@@ -6,7 +6,7 @@ const UserProfile = ({ user }) => {
   const navigate = useNavigate();
 
   const handleNavigate = () => {
-    navigate("/login-marketer");
+    navigate("/login-influencer");
   };
 
   const containerStyle = {

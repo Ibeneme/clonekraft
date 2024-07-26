@@ -7,7 +7,7 @@ const PasswordResetSuccess = () => {
   const navigate = useNavigate();
 
   const handleLoginRedirect = () => {
-    navigate("/login-marketer");
+    navigate("/login-influencer");
   };
 
   return (

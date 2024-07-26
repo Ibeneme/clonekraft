@@ -84,7 +84,7 @@ const ForgotPasswordAffiliate = () => {
         console.log("Password reset successful:", response);
         setSubmitting(false);
         if (response.payload === "Password updated successfully.") {
-          navigate("/reset-success-marketer");
+          navigate("/reset-success-influencer");
         } else {
           setErr("Incorrect OTP");
         }
@@ -131,7 +131,7 @@ const ForgotPasswordAffiliate = () => {
                   Already have an account?
                   <span
                     style={{ color: "#C19F62" }}
-                    onClick={() => navigate("/login-marketer")}
+                    onClick={() => navigate("/login-influencer")}
                   >
                     {" "}
                     Login
