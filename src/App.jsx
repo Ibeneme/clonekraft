@@ -266,6 +266,7 @@ function App() {
             </ProtectedRoutes>
           }
         />
+        
         <Route
           path="/gallery"
           element={
@@ -277,6 +278,7 @@ function App() {
             </ProtectedRoutes>
           }
         />
+
 
         <Route
           path="/pricing"
@@ -290,6 +292,7 @@ function App() {
           }
         />
 
+
         <Route
           path="/upload"
           element={
@@ -299,7 +302,9 @@ function App() {
           }
         />
 
+
         <Route path="/sucess" element={<PaymentSuccess />} />
+       
         <Route
           path="/admin"
           element={
@@ -317,6 +322,7 @@ function App() {
             </>
           }
         />
+
         <Route
           path="/login-influencer"
           element={
@@ -325,6 +331,7 @@ function App() {
             </>
           }
         />
+
         <Route
           path="/forgot-influencer"
           element={
@@ -333,6 +340,7 @@ function App() {
             </>
           }
         />
+
         <Route
           path="/profile-influencer"
           element={
@@ -342,6 +350,7 @@ function App() {
             </>
           }
         />
+
         <Route
           path="/reset-success-influencer"
           element={
@@ -350,6 +359,7 @@ function App() {
             </>
           }
         />
+
         <Route
           path="/index-dashboard"
           element={
