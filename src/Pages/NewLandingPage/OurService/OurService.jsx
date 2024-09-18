@@ -54,15 +54,17 @@ const IconWrapper = styled.div`
 
 // Styled component for the card title
 const CardTitle = styled.h3`
-  font-size: 16px;
+  font-size: 18px; /* Increased font size for better readability */
   color: #121212;
-  margin-bottom: 8px;
+  margin-bottom: 12px; /* Added margin for spacing */
 `;
 
 // Styled component for the card description
 const CardDescription = styled.p`
-  font-size: 13px;
+  font-size: 15px; /* Increased font size for better readability */
   color: #121212;
+  line-height: 1.5; /* Improved readability with line height */
+  text-align: center; /* Center align text for consistency */
 `;
 
 const OurService = () => {
@@ -73,40 +75,74 @@ const OurService = () => {
         {/* First Card - Commercial Design */}
         <Card>
           <IconWrapper>
-            <FaBuilding size={18} color="#121212" />{" "}
+            <FaBuilding size={24} color="#121212" />{" "}
             {/* Commercial Design Icon */}
           </IconWrapper>
           <CardTitle>Commercial Design</CardTitle>
           <CardDescription>
-            Bespoke furniture and interior solutions for offices, hotels, and
-            other commercial spaces, focusing on brand identity and
-            functionality.
+            Our Commercial Design service is dedicated to providing tailored
+            furniture and interior solutions that elevate the functionality and
+            aesthetic appeal of commercial spaces. Whether it's for a high-end
+            office, a trendy hotel, or a vibrant retail store, our designs are
+            crafted to reflect your brand's identity and meet your operational
+            needs. We focus on creating environments that are not only visually
+            impressive but also optimized for performance, ensuring that your
+            space supports your business goals and leaves a lasting impression
+            on clients and visitors alike.
+            <br />
+            We understand the unique demands of commercial settings and
+            collaborate closely with clients to deliver solutions that balance
+            style and practicality. Our expert team will guide you through every
+            step of the process, from conceptualization to installation,
+            ensuring a seamless experience and exceptional results.
           </CardDescription>
         </Card>
 
         {/* Second Card - Residential Design */}
         <Card>
           <IconWrapper>
-            <FaHome size={18} color="#121212" /> {/* Residential Design Icon */}
+            <FaHome size={24} color="#121212" /> {/* Residential Design Icon */}
           </IconWrapper>
           <CardTitle>Residential Design</CardTitle>
           <CardDescription>
-            Custom furniture design and interior design consultation tailored to
-            enhance the beauty and functionality of homes.
+            Transform your living space into a personalized haven with our
+            Residential Design service. We offer custom furniture design and
+            comprehensive interior design consultations to enhance the beauty
+            and functionality of your home. Our approach is centered around
+            understanding your unique style and preferences, creating a
+            harmonious environment that reflects your personality and meets your
+            lifestyle needs.
+            <br />
+            From modern minimalist designs to cozy traditional aesthetics, our
+            team is skilled in bringing your vision to life. We focus on every
+            detail to ensure that your home is not only aesthetically pleasing
+            but also comfortable and practical. Whether you're renovating a
+            single room or undertaking a complete home makeover, we are here to
+            make your dream home a reality.
           </CardDescription>
         </Card>
 
         {/* Third Card - Legacy of Legends Collection */}
         <Card>
           <IconWrapper>
-            <FaCrown size={18} color="#121212" />{" "}
+            <FaCrown size={24} color="#121212" />{" "}
             {/* Legacy of Legends Collection Icon */}
           </IconWrapper>
           <CardTitle>Legacy of Legends Collection</CardTitle>
           <CardDescription>
-            A premium custom furniture collection celebrating iconic figures,
-            available through exclusive auctions for collectors and art
-            enthusiasts.
+            Immerse yourself in the grandeur of our Legacy of Legends
+            Collection, a premium line of custom furniture that celebrates
+            iconic figures from history. Each piece is designed to capture the
+            essence of the legends it represents, blending artistic innovation
+            with historical reverence. This exclusive collection is perfect for
+            collectors and art enthusiasts looking to own unique, one-of-a-kind
+            masterpieces.
+            <br />
+            Available through exclusive auctions, our Legacy of Legends
+            Collection offers a rare opportunity to acquire furniture that is
+            both a work of art and a piece of history. Each item is crafted with
+            meticulous attention to detail, ensuring that it stands as a
+            testament to timeless elegance and cultural significance.
           </CardDescription>
         </Card>
       </CardGrid>
