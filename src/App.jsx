@@ -46,6 +46,8 @@ import MobileNavbar from "./Redux/MobileNav/MobileNavbar";
 import MobileNavbarMarketers from "./Pages/AffilateMarketers/MobileNavMarketers/MobileNavbarMarketers";
 import DashboardOrders from "./Pages/AffilateMarketers/analytics/DashboardOrders";
 import DashboardProfile from "./Pages/AffilateMarketers/analytics/DashboardProfile";
+import IndexNewLandingPage from "./Pages/NewLandingPage/Index";
+import NewNavbar from "./Pages/NewLandingPage/Navbar/Navbar";
 
 function App() {
   useEffect(() => {
@@ -103,6 +105,17 @@ function App() {
       <ScrollToTop />
 
       <Routes>
+        <Route
+          path="/"
+          element={
+            <>
+              <IndexNewLandingPage />
+              <WhatsAppRedirect />
+              <Footer />
+            </>
+          }
+        />
+
         <Route path="/order-details/:orderId" element={<OrdersPage />} />
 
         <Route
@@ -160,7 +173,7 @@ function App() {
         />
 
         {/* Other routes without the Navbar */}
-        <Route
+        {/* <Route
           path="/"
           element={
             <>
@@ -168,14 +181,15 @@ function App() {
               <WhatsAppRedirect />
             </>
           }
-        />
+        /> */}
         <Route
           path="/about"
           element={
             <>
-              <TopLevel />
+              <NewNavbar />
+              {/* <TopLevel /> */}
               <AboutUsHeader />
-              <AboutUs />
+              {/* <AboutUs /> */}
               <TeamMembers />
               <Footer />
             </>
@@ -266,7 +280,7 @@ function App() {
             </ProtectedRoutes>
           }
         />
-        
+
         <Route
           path="/gallery"
           element={
@@ -278,7 +292,6 @@ function App() {
             </ProtectedRoutes>
           }
         />
-
 
         <Route
           path="/pricing"
@@ -292,7 +305,6 @@ function App() {
           }
         />
 
-
         <Route
           path="/upload"
           element={
@@ -302,9 +314,8 @@ function App() {
           }
         />
 
-
         <Route path="/sucess" element={<PaymentSuccess />} />
-       
+
         <Route
           path="/admin"
           element={

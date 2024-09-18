@@ -1,0 +1,137 @@
+/* Root styling */
+:root {
+    --primary-color: #FFEDD0;
+    /* Light background color */
+    --white: #FFFFFF;
+    --black: #121212;
+}
+
+/* Navbar styling */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: var(--primary-color);
+    color: var(--black);
+    position: relative;
+    z-index: 1000;
+}
+
+/* Logo */
+.logo img {
+    width: 120px;
+    /* Adjust size as needed */
+    height: auto;
+}
+
+/* Links styling */
+.navLinks {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+}
+
+.navLinks li {
+    margin: 0;
+}
+
+.navLinks a {
+    text-decoration: none;
+    color: var(--black);
+    font-weight: 500;
+}
+
+.signInButton {
+    background-color: var(--black);
+    color: var(--white);
+    padding: 14px 24px;
+    border: none;
+    border-radius: 244px;
+    cursor: pointer;
+    font-weight: 500;
+    font-family: var(--fontFamily);
+    margin-top: -24px
+}
+
+.signInButton:hover {
+    background-color: rgba(18, 18, 18, 0.8);
+
+}
+
+/* Burger icon */
+.burger {
+    display: none;
+    cursor: pointer;
+}
+
+.burger div {
+    width: 25px;
+    height: 3px;
+    background-color: var(--black);
+    margin: 5px;
+    transition: all 0.3s ease;
+}
+
+/* Close icon animation */
+.line1Close {
+    transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.line2Close {
+    opacity: 0;
+}
+
+.line3Close {
+    transform: rotate(45deg) translate(-5px, -6px);
+}
+
+/* Mobile view */
+@media (max-width: 768px) {
+    .navLinks {
+        position: absolute;
+        top: 60px;
+        left: 0;
+        background-color: var(--primary-color);
+        height: 100vh;
+        width: 100%;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        /* Align content to the left */
+        padding-left: 1rem;
+        transform: translateX(100%);
+        transition: transform 0.3s ease-in;
+    }
+
+    .navLinks.active {
+        transform: translateX(0%);
+    }
+
+    .burger {
+        display: block;
+    }
+
+    .navLinks li {
+        margin: 12px 0;
+    }
+
+    .navLinks a {
+        width: 100%;
+        border-radius: 0px;
+
+        /* Take full width */
+        text-align: left;
+        /* Align text to the left */
+    }
+
+    .signInButton {
+        width: 200px;
+        border-radius: 0px;
+        padding: 14px 24px;
+        /* Take full width */
+        text-align: left;
+        /* Align text to the left */
+    }
+
+}
