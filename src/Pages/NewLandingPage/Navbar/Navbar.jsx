@@ -37,17 +37,17 @@ const NewNavbar = () => {
 
       <ul className={`${styles.navLinks} ${isOpen ? styles.active : ""}`}>
         <br />
-        <li>
+        {/* <li>
           <a href="#" onClick={() => handleNavigation("/")}>
             Home
           </a>
-        </li>
+        </li> */}
         <li>
           <a href="#" onClick={() => handleNavigation("/about")}>
             About Us
           </a>
         </li>
-        <li>
+        {/* <li>
           <a href="#" onClick={() => handleNavigation("/about")}>
             Our Services
           </a>
@@ -61,7 +61,7 @@ const NewNavbar = () => {
           <a href="#" onClick={() => handleNavigation("/")}>
             Site Inspections
           </a>
-        </li>
+        </li> */}
         <li>
           <button onClick={handleClick} className={styles.signInButton}>
             Sign In

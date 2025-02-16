@@ -1,0 +1,81 @@
+@keyframes scroll {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+.carousel-container {
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+    width: 100%;
+    padding: 10px 0;
+    margin-top: 120px;
+    gap: 24px
+}
+
+.carousel-track {
+    display: flex;
+    align-items: center;
+    animation: scroll 10s linear infinite;
+}
+
+.carousel-track img {
+    width: 350px;
+    height: 350px;
+    margin: 0 10px;
+    object-fit: cover;
+    border-radius: 16px;
+
+}
+
+.carousel-card {
+    position: relative;
+
+}
+
+.carousel-image-container {
+    position: relative;
+}
+
+.carousel-image {
+    width: 100%;
+    height: auto;
+    border-radius: 16px;
+    object-fit: cover;
+
+}
+
+.carousel-info {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    right: 10px;
+    background-color: white;
+    padding: 10px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    opacity: 0.8;
+    margin: 12px;
+    height: 120px
+
+    /* Slight opacity for the overlay */
+}
+
+.carousel-title {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.carousel-text {
+    font-size: 12px;
+    color: #555;
+    margin-top: 5px;
+    word-wrap: break-word; /* Ensures text wraps to the next line if it's too long */
+    white-space: normal;
+}

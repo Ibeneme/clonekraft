@@ -1,0 +1,119 @@
+.steps-container {
+    background-color: #172534;
+    /* Background color */
+    padding: 30px 20px;
+}
+
+.step {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 40px;
+    color: white;
+    padding: 120px 16px
+}
+
+.step-info {
+    flex: 1;
+
+}
+
+.step-title {
+    font-size: 48px;
+    margin-bottom: 10px;
+    color: #C19F62;
+    font-family: var(--font-lalezar);
+    margin: 0px
+}
+
+.ctaButtonNew {
+    background-color: #ffffff16;
+    color: var(--white);
+    border: none;
+    padding: 16px 24px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    border-radius: 48px;
+    font-family: var(--fontFamily);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: fit-content;
+    gap: 24px;
+    line-height: 1.6;
+}
+
+.step-text {
+    font-size: 16px;
+    line-height: 1.6;
+    padding: 12px;
+    background-color: #ffffff12;
+    border-radius: 16px;
+    max-width: 500px;
+    margin: 0px;
+    list-style: none;
+}
+
+.step-image {
+    flex: 1;
+    padding: 10px;
+}
+
+li {
+    margin: 24px 8px;
+}
+
+.step-image img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 24px;
+    height: 600px
+}
+
+/* Reverse the layout for even steps */
+.step.reverse {
+    flex-direction: row-reverse;
+    gap: 32px;
+}
+
+/* Responsive styling */
+@media (max-width: 768px) {
+    .step {
+        flex-direction: column;
+        /* Stack content vertically on small screens */
+        align-items: center;
+        padding: 0px
+        /* Center the content horizontally */
+    }
+
+    .step.reverse {
+        flex-direction: column;
+    }
+
+    .step-info {
+        flex: none;
+        /* Remove flex grow to prevent it from taking full width */
+        margin: 40px 0px;
+    }
+
+    .step-image {
+        flex: none;
+        /* Remove flex grow to prevent it from taking full width */
+        width: 100%;
+        /* Adjust image width to fit smaller screens */
+        margin-bottom: 20px;
+    }
+
+    .step-title {
+        font-size: 32px;
+        /* Reduce title font size on smaller screens */
+    }
+
+    .step-text {
+        font-size: 14px;
+        /* Reduce text size for better readability on small screens */
+    }
+}

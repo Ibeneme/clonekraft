@@ -1,0 +1,102 @@
+/* Main container */
+.about-us-container {
+    background-color: #172534;
+    color: #ffffff;
+    padding: 300px 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: center;
+}
+
+/* Common header styles */
+.about-us-header {
+    font-size: 32px;
+    color: #c19f62;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    font-family: var(--font-lalezar);
+}
+
+/* Common text styles */
+.about-us-text {
+    font-size: 18px;
+    line-height: 1.8;
+    color: #ffffff;
+    max-width: 900px;
+    margin: 0 auto 30px auto;
+    text-align: justify;
+}
+
+/* Services section */
+.about-us-services {
+
+    padding: 40px;
+    border-radius: 10px;
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.about-us-service-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.about-us-service {
+    width: 45%;
+    background-color: #ffffff12;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.about-us-service h3 {
+    color: #c19f62;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.about-us-service p {
+    color: #ffffff;
+    font-size: 16px;
+}
+
+/* Process, Innovation, Team, and Join sections */
+.about-us-process,
+.about-us-commitment,
+.about-us-team,
+.about-us-join {
+    margin-bottom: 40px;
+}
+
+.about-us-process p,
+.about-us-commitment p,
+.about-us-team p,
+.about-us-join p {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Responsive styling */
+@media (max-width: 768px) {
+    .about-us-service-list {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .about-us-service {
+        width: 90%;
+        margin-bottom: 20px;
+    }
+
+    .about-us-header {
+        font-size: 28px;
+    }
+
+    .about-us-text {
+        font-size: 16px;
+    }
+}

@@ -14,6 +14,8 @@ import ProfilePage from "./Pages/Home/Main/Profile";
 //import ImageUpload from "./Pages/Home/Main/ImageUpload";
 import ChatPage from "./Pages/Home/Main/ChatPage";
 import Index from "./Pages/LandingPage/Index";
+import Us from './Pages/NewLandingPage/Hero/Us'
+
 import AOS from "aos";
 import "aos/dist/aos.css";
 import TimerPricing from "./Pages/Home/Main/Pricing";
@@ -28,7 +30,6 @@ import Chat from "./Admin/Chat/Chat";
 import ObjectDetection from "./Pages/ObjeectDetection/ObjectDetection";
 import PaymentSuccess from "./Pages/ObjeectDetection/PaymentSuccess";
 import ImageUpload from "./Pages/Home/Main/ImageUpload";
-import AboutUs from "./Pages/LandingPage/Hero/AboutUs";
 import TopLevel from "./Pages/LandingPage/Navbar/Navbar";
 import AboutUsHeader from "./Pages/LandingPage/Hero/AboutUsHeader";
 import TeamMembers from "./Pages/LandingPage/Hero/Team";
@@ -189,6 +190,7 @@ function App() {
               <NewNavbar />
               {/* <TopLevel /> */}
               <AboutUsHeader />
+      {/* <Us /> */}
               {/* <AboutUs /> */}
               <TeamMembers />
               <Footer />
