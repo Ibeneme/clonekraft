@@ -1,16 +1,17 @@
 .our-team {
     background-color: #fff;
-    color: #030928;
+    color: var(--darkBlue);
     padding: 80px 20px;
     text-align: center;
     padding-bottom: 160px;
+
 }
 
 .section-header-teams {
     font-size: 48px;
     margin-bottom: 10px;
     font-weight: 900;
-    color: #000;
+    color: var(--darkBlue);
     padding: 4px 12px;
 
 }
@@ -25,8 +26,14 @@
 
 .team-members {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
+    /* Ensures exactly 2 columns */
     gap: 20px;
+    justify-content: center;
+    max-width: 1000px;
+    /* Limits width */
+    margin: 0 auto;
+    /* Centers it */
 }
 
 .team-member {
@@ -44,7 +51,7 @@
 .team-member-image {
     position: relative;
     width: 100%;
-    height: 360px;
+    height: 700px;
     overflow: hidden;
 }
 
@@ -118,6 +125,11 @@
 
     .section-paragraph-teams {
         font-size: 18px;
+    }
+
+    .team-members {
+        grid-template-columns: 1fr;
+        /* Switch to single column on smaller screens */
     }
 
     /* Remove grayscale on mobile view */

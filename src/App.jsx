@@ -14,7 +14,7 @@ import ProfilePage from "./Pages/Home/Main/Profile";
 //import ImageUpload from "./Pages/Home/Main/ImageUpload";
 import ChatPage from "./Pages/Home/Main/ChatPage";
 import Index from "./Pages/LandingPage/Index";
-import Us from './Pages/NewLandingPage/Hero/Us'
+import Us from "./Pages/NewLandingPage/Hero/Us";
 
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -49,6 +49,8 @@ import DashboardOrders from "./Pages/AffilateMarketers/analytics/DashboardOrders
 import DashboardProfile from "./Pages/AffilateMarketers/analytics/DashboardProfile";
 import IndexNewLandingPage from "./Pages/NewLandingPage/Index";
 import NewNavbar from "./Pages/NewLandingPage/Navbar/Navbar";
+import HeroHeader from "./Pages/NewLandingPage/Hero/HeroHeader";
+import OurTeam from "./Pages/LandingPage/Hero/Our_Teams/OurTeams";
 
 function App() {
   useEffect(() => {
@@ -188,21 +190,44 @@ function App() {
           element={
             <>
               <NewNavbar />
-              {/* <TopLevel /> */}
-              <AboutUsHeader />
-      {/* <Us /> */}
-              {/* <AboutUs /> */}
-              <TeamMembers />
+              <HeroHeader
+                title="About Us"
+                subtitle="At Lukas Design Lab, we believe that furniture is more than just functional—it’s an expression of art, innovation, and craftsmanship. Our passion is in creating exceptional pieces that resonate with your soul and elevate your living spaces. We seamlessly blend form and function, using high-quality materials and cutting-edge technology. Every design is a unique reflection of your vision, crafted with meticulous attention to detail. We aim to transform environments and inspire those who experience our work. At Lukas Design Lab, furniture becomes a statement, not just an object."
+              />
+              <Us />
               <Footer />
             </>
           }
         />
+
+        <Route
+          path="/our-team"
+          element={
+            <>
+              <NewNavbar />
+              <HeroHeader
+                title="Our Team"
+                subtitle="Our team is a powerhouse of talent and creativity. With a crew of bold
+                designers, sharp engineers, and marketing mavericks, Lukas Design Lab
+                is a force to be reckoned with. We don’t just work together—we
+                collaborate, challenge, and push each other to create designs that
+                don’t just meet expectations—they shatter them."
+              />
+              <OurTeam />
+              <Footer />
+            </>
+          }
+        />
+
         <Route
           path="/policy"
           element={
             <>
-              <TopLevel />
-              <AboutUsHeaderRefund />
+              <NewNavbar />
+              <HeroHeader
+                title="Our Refund Policy"
+                subtitle="Lukas Design Lab (LDL) is committed to customer satisfaction and strives to provide high-quality products and services. However, we understand that there may be circumstances where a refund is necessary. This refund policy outlines the terms and conditions for requesting and processing refunds for products and services purchased from LDL."
+              />
               <GeneralPolicy />
               <Footer />
             </>
@@ -242,8 +267,12 @@ function App() {
           path="/profile"
           element={
             <ProtectedRoutes>
-              <MobileNavbar />
-              <Navbar />
+              <NewNavbar />
+              <HeroHeader
+                hideButton
+                title="Your Profile"
+                subtitle="Welcome to your personal space! Here, you can manage your account details, update your preferences, track your activity, and customize your experience. Stay in control of your journey, connect with your network, and access everything you need—all in one place."
+              />
               <ProfilePage />
               <Footer />
             </ProtectedRoutes>

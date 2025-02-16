@@ -7,6 +7,7 @@ import OurTeam from "./Our_Teams/OurTeams";
 const Container = styled.div`
   background-color: #fff;
   padding: 0px 0px;
+  color: var(--darkBlue);
 `;
 
 // Styled component for the vision and services section
@@ -14,6 +15,7 @@ const VisionServicesSection = styled.section`
   background-color: #fff3dd;
   padding: 120px 48px;
   border-radius: 12px;
+  color: var(--darkBlue);
 
   @media (max-width: 600px) {
     padding: 120px 16px;
@@ -22,7 +24,7 @@ const VisionServicesSection = styled.section`
 
 const VisionServicesHeading = styled.h2`
   font-size: 28px;
-  color: #121212;
+  color: var(--darkBlue);
   margin-bottom: 20px;
   text-align: left;
   font-family: var(--font-lalezar);
@@ -30,7 +32,7 @@ const VisionServicesHeading = styled.h2`
 
 const VisionServicesText = styled.p`
   font-size: 16px;
-  color: #121212;
+  color: var(--darkBlue);
   margin-bottom: 40px;
   line-height: 1.6;
   text-align: left;
@@ -52,7 +54,7 @@ const ManagementTeamGrid = styled.div`
   gap: 24px;
   max-width: 800px;
   margin: 0 auto;
-
+  color: var(--darkBlue);
   @media (max-width: 600px) {
     grid-template-columns: 1fr;
   }
@@ -64,6 +66,7 @@ const TeamMember = styled.div`
   overflow: hidden;
   text-align: center;
   padding: 12px;
+  color: var(--darkBlue);
 `;
 
 const TeamImage = styled.img`
@@ -74,7 +77,7 @@ const TeamImage = styled.img`
 
 const TeamName = styled.h3`
   font-size: 18px;
-  color: #121212;
+  color: var(--darkBlue);
   margin: 8px 0;
 `;
 
@@ -170,7 +173,6 @@ const AboutUsSection = () => {
       </VisionServicesSection>
 
       <OurTeam />
-  
     </Container>
   );
 };

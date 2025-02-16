@@ -15,6 +15,7 @@ const NewNavbar = () => {
     navigate(path); // Use navigate to route to different paths
     setIsOpen(false); // Close the menu after navigation
   };
+  const token = localStorage.getItem("clone_kraft_user_token");
 
   const handleClick = () => {
     const token = localStorage.getItem("clone_kraft_user_token");
@@ -30,7 +31,7 @@ const NewNavbar = () => {
     <nav className={styles.navbar}>
       {/* Logo as an Image */}
       <div className={styles.logo}>
-        <a href="#" onClick={() => handleNavigation("/")}>
+        <a onClick={() => handleNavigation("/")}>
           <img src={logo} alt="SafeGad Logo" />
         </a>
       </div>
@@ -38,33 +39,41 @@ const NewNavbar = () => {
       <ul className={`${styles.navLinks} ${isOpen ? styles.active : ""}`}>
         <br />
         {/* <li>
-          <a href="#" onClick={() => handleNavigation("/")}>
+          <a onClick={() => handleNavigation("/")}>
             Home
           </a>
         </li> */}
         <li>
-          <a href="#" onClick={() => handleNavigation("/about")}>
-            About Us
-          </a>
+          <a onClick={() => handleNavigation("/about")}>About Us</a>
         </li>
+        <li>
+          <a onClick={() => handleNavigation("/our-team")}>Our Team</a>
+        </li>
+        {token && (
+          <>
+            <li>
+              <a onClick={() => handleNavigation("/profile")}>Your Profile</a>
+            </li>
+          </>
+        )}
         {/* <li>
-          <a href="#" onClick={() => handleNavigation("/about")}>
+          <a onClick={() => handleNavigation("/about")}>
             Our Services
           </a>
         </li>
         <li>
-          <a href="#" onClick={() => handleNavigation("/")}>
+          <a onClick={() => handleNavigation("/")}>
             Our Products
           </a>
         </li>
         <li>
-          <a href="#" onClick={() => handleNavigation("/")}>
+          <a onClick={() => handleNavigation("/")}>
             Site Inspections
           </a>
         </li> */}
         <li>
           <button onClick={handleClick} className={styles.signInButton}>
-            Sign In
+            {token ? "Upload a Design" : "Get Started "}
           </button>
         </li>
       </ul>

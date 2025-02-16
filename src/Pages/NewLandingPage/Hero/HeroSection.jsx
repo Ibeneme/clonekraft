@@ -11,10 +11,9 @@ import { FaStar } from "react-icons/fa";
 import InfiniteCarousel from "./InfiniteCarousel";
 const HeroSection = () => {
   const navigate = useNavigate();
+  const token = localStorage.getItem("clone_kraft_user_token");
 
   const handleClick = () => {
-    const token = localStorage.getItem("clone_kraft_user_token");
-
     if (token) {
       navigate("/home");
     } else {
@@ -43,7 +42,8 @@ const HeroSection = () => {
         Where Innovation, Tech, AI, and carpentry unite.
       </p>
       <button onClick={handleClick} className={styles.ctaButtonNew}>
-        Get Started <IoArrowForwardCircleSharp color="#fff" fontSize={32} />
+        {token ? "Upload a Design" : "Get Started "}
+        <IoArrowForwardCircleSharp color="#fff" fontSize={32} />
       </button>
 
       <div

@@ -24,28 +24,32 @@
     color: var(--black);
     /* padding-top: 120px */
     padding: 16px;
-
+    min-height: 50vh;
 
     flex-direction: column;
-    padding-top: 240px 
+    padding-top: 240px
 }
 
 .newH1Hero {
-    font-size: 64px;
+    font-size: 48px;
     font-weight: bold;
     font-family: var(--font-lalezar);
-    line-height: 72px;
+    line-height: 64px;
     text-align: center;
     max-width: 800px;
-    margin: 0px
+    margin: 0px;
+    color: var(--darkBlue);
+
 }
 
 .newPHero {
     color: var(--darkBlue);
-    font-size: 16px;
+    font-size: 18px;
     margin: 0px;
     padding-top: 6px;
     padding-bottom: 16px;
+    max-width: 800px;
+    text-align: center;
 }
 
 .ctaButtonNew {
@@ -126,6 +130,7 @@
         padding: 16px;
         padding-top: 150px
     }
+
     .newH1Hero {
         font-size: 48px;
         font-weight: bold;
@@ -135,7 +140,7 @@
         max-width: 800px;
         margin: 0px
     }
-    
+
     .newPHero {
         color: var(--darkBlue);
         font-size: 14px;

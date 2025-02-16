@@ -2,7 +2,7 @@
 .about-us-container {
     background-color: #172534;
     color: #ffffff;
-    padding: 300px 16px;
+    padding: 120px 16px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -12,12 +12,15 @@
 
 /* Common header styles */
 .about-us-header {
-    font-size: 32px;
+    font-size: 48px;
     color: #c19f62;
     font-weight: 700;
     text-transform: uppercase;
     margin-bottom: 15px;
     font-family: var(--font-lalezar);
+    text-align: left;
+    margin: 0;
+    margin-top: 64px
 }
 
 /* Common text styles */
@@ -26,8 +29,11 @@
     line-height: 1.8;
     color: #ffffff;
     max-width: 900px;
-    margin: 0 auto 30px auto;
+    margin: 0;
     text-align: justify;
+    background-color: #ffffff12;
+    padding: 16px;
+    border-radius: 12px;
 }
 
 /* Services section */
@@ -39,29 +45,25 @@
     margin-bottom: 30px;
 }
 
-.about-us-service-list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 30px;
-}
+
 
 .about-us-service {
-    width: 45%;
     background-color: #ffffff12;
     padding: 20px;
     border-radius: 8px;
 }
 
 .about-us-service h3 {
-    color: #c19f62;
+    color: #fff;
     font-size: 24px;
-    margin-bottom: 10px;
+    margin: 0px;
+    text-align: left;
 }
 
 .about-us-service p {
     color: #ffffff;
     font-size: 16px;
+    text-align: left;
 }
 
 /* Process, Innovation, Team, and Join sections */
