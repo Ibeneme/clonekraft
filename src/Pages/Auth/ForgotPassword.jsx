@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { forgot } from "../../Redux/auth/auth";
 import { useEffect } from "react";
+import { IoArrowForwardCircleSharp } from "react-icons/io5";
 
 const ForgotPassword = () => {
   const initialValues = {
@@ -226,7 +227,8 @@ const ForgotPassword = () => {
                   type="submit"
                   disabled={isSubmitting}
                 >
-                  Submit
+                  Submit{" "}
+                  <IoArrowForwardCircleSharp color="#fff" fontSize={32} />
                 </button>
               </div>
             </Form>

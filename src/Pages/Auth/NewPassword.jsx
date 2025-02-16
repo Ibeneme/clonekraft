@@ -7,6 +7,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { resetPassword } from "../../Redux/auth/auth";
 import useCustomToasts from "../ToastNotifications/Toastify";
+import { IoArrowForwardCircleSharp } from "react-icons/io5";
 
 const ResetPassword = () => {
   const initialValues = {
@@ -255,7 +256,8 @@ const ResetPassword = () => {
                   type="submit"
                   disabled={isSubmitting}
                 >
-                  Submit
+                  Submit{" "}
+                  <IoArrowForwardCircleSharp color="#fff" fontSize={32} />
                 </button>
               </div>
             </Form>

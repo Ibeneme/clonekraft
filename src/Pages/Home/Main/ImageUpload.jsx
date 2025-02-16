@@ -6,6 +6,8 @@ import { useDispatch } from "react-redux";
 import { profile } from "../../../Redux/auth/auth";
 import { createOrder } from "../../../Redux/order/order";
 import useCustomToasts from "../../ToastNotifications/Toastify";
+import styles from "../../NewLandingPage/Hero/HeroSection.module.css"; // Adjust if necessary
+import { IoArrowForwardCircleSharp } from "react-icons/io5";
 
 const ImageUpload = () => {
   const [selectedFiles, setSelectedFiles] = useState([]);
@@ -337,18 +339,15 @@ const ImageUpload = () => {
           <br />
 
           {deliveryOption && label && description ? (
-            <div style={{ cursor: "pointer", marginTop: 40, marginBottom: 96 }}>
-              <div className="div-btn-auth"></div>
-              <button
-                // onClick={() => navigate("/pricing")}
-                onClick={handleUploads}
-                className="btn-auth"
-                type="button"
-                disabled={loading}
-              >
-                {loading ? "Loading..." : "Request a Clone"}
-              </button>
-            </div>
+            <button
+              onClick={handleUploads}
+              type="button"
+              disabled={loading}
+              className={styles.ctaButtonNew}
+            >
+              {loading ? "Loading..." : "Request a Clone"}
+              <IoArrowForwardCircleSharp color="#fff" fontSize={32} />
+            </button>
           ) : null}
         </div>
       </div>
@@ -360,23 +359,50 @@ const ImageUpload = () => {
   };
 
   return (
-    <div
-      style={{
-        padding: "222px 16px",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <h2 style={{ textAlign: "center" }}>
-        {" "}
-        <span style={{ color: "#C19F62" }}>
-          {formattedUsername ? `Hi ${formattedUsername}` : null}{" "}
-        </span>{" "}
-        Upload a Design you wish to be cloned
-      </h2>
-      {/* <p className="auth-div-p">
+    <>
+      <section className={styles.heroSection}>
+        <h1 className={styles.newH1Hero}>Furniture Upload</h1>
+        <p className={styles.newPHero}>
+          Upload images of the furniture you'd like to clone and manage.
+        </p>
+
+        <div>
+          <input
+            type="file"
+            onChange={handleFileChange}
+            style={{ display: "none" }}
+            id="fileInput" // added id to link button
+            multiple // Allow multiple file selection
+          />
+          {/* Custom styled button */}
+          <label htmlFor="fileInput" style={{ cursor: "pointer" }}>
+            <div style={{ cursor: "pointer" }}>
+              <button
+                onClick={() => document.getElementById("fileInput").click()}
+                className={styles.ctaButtonNew}
+                type="button"
+              >
+                Choose File(s)
+                <IoArrowForwardCircleSharp color="#fff" fontSize={32} />
+              </button>
+            </div>
+          </label>
+        </div>
+      </section>
+      <div
+        style={{
+          // marginBottom: -32,
+          marginBottom: 64,
+        }}
+      >
+        {/* <h2 style={{ textAlign: "center" }}>
+          {" "}
+          <span style={{ color: "#C19F62" }}>
+            {formattedUsername ? `Hi ${formattedUsername}` : null}{" "}
+          </span>{" "}
+          Upload a Design you wish to be cloned
+        </h2> */}
+        {/* <p className="auth-div-p">
         Learn about uploading your design
         <span
           style={{ color: "#C19F62" }}
@@ -387,112 +413,112 @@ const ImageUpload = () => {
         </span>
       </p> */}
 
-      <div
-        style={{ backgroundColor: "#C19F6225", padding: 24, borderRadius: 4 }}
-      >
-        {/* Hidden file input */}
-        <input
-          type="file"
-          onChange={handleFileChange}
-          style={{ display: "none" }}
-          id="fileInput" // added id to link button
-          multiple // Allow multiple file selection
-        />
-        {/* Custom styled button */}
-        <label htmlFor="fileInput" style={{ cursor: "pointer" }}>
-          <div style={{ cursor: "pointer" }}>
-            <div className="div-btn-auth"></div>
-            <button
-              onClick={() => document.getElementById("fileInput").click()}
-              className="btn-auth"
-              type="button"
-            >
-              Choose File(s)
-            </button>
-          </div>
-        </label>
-      </div>
-      <br />
-      {error && <div style={{ color: "#C19F62" }}>{error}</div>}
-
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))",
-          gap: "16px",
-        }}
-      >
-        {selectedFiles.map((file, index) => (
-          <div key={index} style={{ position: "relative" }}>
-            <img
-              src={URL.createObjectURL(file)}
-              alt={`Selected ${index}`}
-              style={{ width: "100%", height: "100%", borderRadius: "8px" }}
-            />
-            <button
-              onClick={() => handleRemoveImage(index)}
-              style={{
-                position: "absolute",
-                top: "8px",
-                right: "8px",
-                background: "rgba(255, 255, 255, 0.7)",
-                border: "none",
-                borderRadius: "50%",
-                width: "32px",
-                height: "32px",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                cursor: "pointer",
-              }}
-            >
-              <FaTimes style={{ color: "#ff0000" }} />
-            </button>
-          </div>
-        ))}
-
         {/* <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            marginTop: "16px",
-          }}
+          style={{ backgroundColor: "#C19F6225", padding: 24, borderRadius: 4 }}
         >
-          <button onClick={handleAddMore} className="btn-auth" type="button">
-            Add More
-          </button>
-          <button onClick={handleSubmit} className="btn-auth" type="button">
-            Submit
-          </button>
+ 
+          <input
+            type="file"
+            onChange={handleFileChange}
+            style={{ display: "none" }}
+            id="fileInput" // added id to link button
+            multiple // Allow multiple file selection
+          />
+ 
+          <label htmlFor="fileInput" style={{ cursor: "pointer" }}>
+            <div style={{ cursor: "pointer" }}>
+              <div className="div-btn-auth"></div>
+              <button
+                onClick={() => document.getElementById("fileInput").click()}
+                className="btn-auth"
+                type="button"
+              >
+                Choose File(s)
+              </button>
+            </div>
+          </label>
         </div> */}
-      </div>
-      {selectedFiles?.length > 0 ? (
+        <br />
+        {error && <div style={{ color: "#C19F62" }}>{error}</div>}
+
         <div
           style={{
             display: "flex",
-            justifyContent: "center",
-            marginTop: "120px",
-            gap: 12,
-            alignItems: "center",
+            justifyContent: "center", // Centers horizontally
+            alignItems: "center", // Centers vertically
+           // height: "100vh", // Makes sure the container takes full height of the screen
           }}
         >
-          <button
-            style={{ width: "fit-content" }}
-            onClick={handleSubmit}
-            className="btn-auth"
-            type="button"
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))",
+              gap: "16px",
+              maxWidth: "90%", // Restrict max width to avoid too large a grid
+            }}
           >
-            Submit
-          </button>
+            {selectedFiles.map((file, index) => (
+              <div key={index} style={{ position: "relative" }}>
+                <img
+                  src={URL.createObjectURL(file)}
+                  alt={`Selected ${index}`}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    borderRadius: "8px",
+                  }}
+                />
+                <div
+                  onClick={() => handleRemoveImage(index)}
+                  style={{
+                    position: "absolute",
+                    top: "8px",
+                    right: "8px",
+                    background: "rgba(255, 255, 255, 0.7)",
+                    border: "none",
+                    borderRadius: "50%",
+                    width: "32px",
+                    height: "32px",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    cursor: "pointer",
+                  }}
+                >
+                  <FaTimes style={{ color: "#ff0000" }} fontSize={16} />
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
-      ) : null}
-      <Modal
-        isOpen={modalOpen}
-        onClose={closeModal}
-        ifClose={true}
-        formContent={Content}
-      />
-    </div>
+        {selectedFiles?.length > 0 ? (
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              marginTop: "120px",
+              gap: 12,
+              alignItems: "center",
+            }}
+          >
+            <button
+              style={{ width: "fit-content" }}
+              onClick={handleSubmit}
+              className={styles.ctaButtonNew}
+              type="button"
+            >
+              Submit
+            </button>
+          </div>
+        ) : null}
+        <Modal
+          isOpen={modalOpen}
+          onClose={closeModal}
+          ifClose={true}
+          formContent={Content}
+        />
+      </div>{" "}
+    </>
   );
 };
 

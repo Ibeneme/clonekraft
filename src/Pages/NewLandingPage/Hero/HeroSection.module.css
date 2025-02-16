@@ -24,10 +24,11 @@
     color: var(--black);
     /* padding-top: 120px */
     padding: 16px;
-    min-height: 50vh;
+
 
     flex-direction: column;
-    padding-top: 240px
+    padding-top: 240px;
+    padding-bottom: 240px
 }
 
 .newH1Hero {
@@ -129,6 +130,24 @@
         text-align: center;
         padding: 16px;
         padding-top: 150px
+    }
+
+    .heroSection {
+        display: flex;
+        align-items: center;
+        background: linear-gradient(135deg,
+                var(--primary-color-gradient-start),
+                var(--primary-color-gradient-end));
+        /* padding: 2rem; */
+
+        color: var(--black);
+        /* padding-top: 120px */
+        padding: 16px;
+
+
+        flex-direction: column;
+        padding-top: 240px;
+        padding-bottom: 80px;
     }
 
     .newH1Hero {

@@ -14,7 +14,7 @@ const StepsToGetStarted: React.FC = () => {
     const token = localStorage.getItem("clone_kraft_user_token");
 
     if (token) {
-      navigate("/home");
+      navigate("/upload");
     } else {
       navigate("/login");
     }

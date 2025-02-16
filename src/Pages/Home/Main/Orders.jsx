@@ -66,10 +66,10 @@ const OrderPage = () => {
         paddingBottom: 200,
       }}
     >
-      <h4>My Orders</h4>
+      {/* <h4>My Orders</h4> */}
       <div
         style={{
-          backgroundColor: "#C19F6220",
+          backgroundColor: "var(--darkBlue)",
           width: "fit-content",
           padding: 6,
           borderRadius: 12,
@@ -87,7 +87,7 @@ const OrderPage = () => {
             fontFamily: "var(--fontFamily)",
             backgroundColor: filter === "all" ? "#C19F62" : "transparent",
             color: filter === "all" ? "#fff" : "#C19F62",
-            border: filter === "all" ? "1.5px solid #fff" : "none",
+            //border: filter === "all" ? "1.5px solid #fff" : "none",
           }}
         >
           All
@@ -102,7 +102,7 @@ const OrderPage = () => {
             fontFamily: "var(--fontFamily)",
             backgroundColor: filter === "pending" ? "#C19F62" : "transparent",
             color: filter === "pending" ? "#fff" : "#C19F62",
-            border: filter === "pending" ? "1.5px solid #fff" : "none",
+            //  border: filter === "pending" ? "1.5px solid #fff" : "none",
           }}
         >
           Pending
@@ -118,7 +118,7 @@ const OrderPage = () => {
             backgroundColor:
               filter === "inProgress" ? "#C19F62" : "transparent",
             color: filter === "inProgress" ? "#fff" : "#C19F62",
-            border: filter === "inProgress" ? "1.5px solid #fff" : "none",
+            //  border: filter === "inProgress" ? "1.5px solid #fff" : "none",
           }}
         >
           InProgress
@@ -133,7 +133,7 @@ const OrderPage = () => {
             fontFamily: "var(--fontFamily)",
             backgroundColor: filter === "completed" ? "#C19F62" : "transparent",
             color: filter === "completed" ? "#fff" : "#C19F62",
-            border: filter === "completed" ? "1.5px solid #fff" : "none",
+            //border: filter === "completed" ? "1.5px solid #fff" : "none",
           }}
         >
           Completed
@@ -148,7 +148,7 @@ const OrderPage = () => {
             fontFamily: "var(--fontFamily)",
             backgroundColor: filter === "cancelled" ? "#C19F62" : "transparent",
             color: filter === "cancelled" ? "#fff" : "#C19F62",
-            border: filter === "cancelled" ? "1.5px solid #fff" : "none",
+            //border: filter === "cancelled" ? "1.5px solid #fff" : "none",
           }}
         >
           Cancelled

@@ -9,13 +9,17 @@ interface HeroHeaderProps {
   hideButton?: boolean; // Optional prop to hide the button
 }
 
-const HeroHeader: React.FC<HeroHeaderProps> = ({ title, subtitle, hideButton }) => {
+const HeroHeader: React.FC<HeroHeaderProps> = ({
+  title,
+  subtitle,
+  hideButton,
+}) => {
   const navigate = useNavigate();
   const token = localStorage.getItem("clone_kraft_user_token");
 
   const handleClick = () => {
     if (token) {
-      navigate("/home");
+      navigate("/upload");
     } else {
       navigate("/login");
     }
@@ -25,12 +29,11 @@ const HeroHeader: React.FC<HeroHeaderProps> = ({ title, subtitle, hideButton }) 
     <section className={styles.heroSection}>
       <h1 className={styles.newH1Hero}>{title}</h1>
       <p className={styles.newPHero}>{subtitle}</p>
-      
+
       {/* Conditionally render the button */}
       {!hideButton && (
         <button onClick={handleClick} className={styles.ctaButtonNew}>
           {token ? "Upload a Design" : "Get Started "}
-          <IoArrowForwardCircleSharp color="#fff" fontSize={32} />
         </button>
       )}
     </section>

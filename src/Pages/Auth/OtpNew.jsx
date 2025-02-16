@@ -7,6 +7,7 @@ import { resendOtp, updateUser, validateOtp } from "../../Redux/auth/auth";
 import { useDispatch } from "react-redux";
 import useCustomToasts from "../ToastNotifications/Toastify";
 import Modal from "../Components/Modal/Modal";
+import { IoArrowForwardCircleSharp } from "react-icons/io5";
 
 const OTPNew = () => {
   const location = useLocation();
@@ -202,7 +203,8 @@ const OTPNew = () => {
                       className="btn-auth"
                       type="submit"
                     >
-                      Submit
+                      Submit{" "}
+                      <IoArrowForwardCircleSharp color="#fff" fontSize={32} />
                     </button>
                   </div>
                 ) : null}
@@ -261,6 +263,7 @@ const OTPNew = () => {
                   disabled={isSubmitting}
                 >
                   Submit
+                  <IoArrowForwardCircleSharp color="#fff" fontSize={32} />
                 </button>
                 <br /> <br />
                 <p style={{ cursor: "pointer" }} onClick={handleResend}>

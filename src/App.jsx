@@ -74,6 +74,8 @@ function App() {
     !!localStorage.getItem("clone_kraft_admin_token");
   //const isAdminLoggedIn = !!localStorage.getItem("clone_kraft_admin_token"); // Separate storage for admin token
 
+  const token = localStorage.getItem("clone_kraft_user_token");
+
   useEffect(() => {
     const currentPath = window.location.pathname;
     const protectedPaths = [
@@ -114,6 +116,7 @@ function App() {
             <>
               <IndexNewLandingPage />
               <WhatsAppRedirect />
+              {token && <MobileNavbar />}
               <Footer />
             </>
           }
@@ -268,6 +271,7 @@ function App() {
           element={
             <ProtectedRoutes>
               <NewNavbar />
+              <MobileNavbar />
               <HeroHeader
                 hideButton
                 title="Your Profile"
@@ -282,8 +286,13 @@ function App() {
           path="/order"
           element={
             <ProtectedRoutes>
+              <NewNavbar />
               <MobileNavbar />
-              <Navbar />
+              <HeroHeader
+                hideButton
+                title="Your Orders"
+                subtitle="Welcome to your order management hub! Here, you can view all your past and current orders, track their status, manage your preferences, and make adjustments as needed. Stay updated, make informed decisions, and take full control of your orders—all in one place."
+              />
               <OrderPage />
               <Footer />
             </ProtectedRoutes>
@@ -294,7 +303,7 @@ function App() {
           element={
             <ProtectedRoutes>
               <MobileNavbar />
-              <Navbar />
+              <NewNavbar />
               <OrderDescriptionPage />
               <Footer />
             </ProtectedRoutes>
@@ -305,7 +314,8 @@ function App() {
           element={
             <ProtectedRoutes>
               <MobileNavbar />
-              <Navbar />
+              <NewNavbar />
+
               <ImageUpload />
               <Footer />
             </ProtectedRoutes>

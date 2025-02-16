@@ -8,6 +8,7 @@ import GallerySectionIi from "../Home/Main/DeliverySectionII";
 import { useDispatch } from "react-redux";
 import { login } from "../../Redux/auth/auth";
 import useCustomToasts from "../ToastNotifications/Toastify";
+import { IoArrowForwardCircleSharp } from "react-icons/io5";
 
 const Login = () => {
   const initialValues = {
@@ -40,7 +41,7 @@ const Login = () => {
           setSubmitting(false);
           showSuccessToast("Login Successful");
 
-          navigate("/home", { state: { email: values.email } });
+          navigate("/", { state: { email: values.email } });
         } else if (
           response?.error?.message === "Request failed with status code 400"
         ) {
@@ -166,6 +167,7 @@ const Login = () => {
                     disabled={isSubmitting}
                   >
                     Submit
+                    <IoArrowForwardCircleSharp color="#fff" fontSize={32} />
                   </button>
                 </div>
 

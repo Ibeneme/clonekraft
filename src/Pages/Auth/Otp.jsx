@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { validateOtp } from "../../Redux/auth/auth";
 import { useRef } from "react";
+import { IoArrowForwardCircleSharp } from "react-icons/io5";
 
 const OTP = () => {
   const initialValues = {
@@ -109,7 +110,8 @@ const OTP = () => {
                   type="submit"
                   disabled={isSubmitting}
                 >
-                  Submit
+                  Submit{" "}
+                  <IoArrowForwardCircleSharp color="#fff" fontSize={32} />
                 </button>
               </div>
             </Form>

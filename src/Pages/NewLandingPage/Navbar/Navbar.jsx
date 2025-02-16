@@ -21,7 +21,7 @@ const NewNavbar = () => {
     const token = localStorage.getItem("clone_kraft_user_token");
 
     if (token) {
-      navigate("/home");
+      navigate("/upload");
     } else {
       navigate("/login");
     }
@@ -53,6 +53,9 @@ const NewNavbar = () => {
           <>
             <li>
               <a onClick={() => handleNavigation("/profile")}>Your Profile</a>
+            </li>
+            <li>
+              <a onClick={() => handleNavigation("/order")}>Your Orders</a>
             </li>
           </>
         )}

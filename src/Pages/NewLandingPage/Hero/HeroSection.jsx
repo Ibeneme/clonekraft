@@ -15,7 +15,7 @@ const HeroSection = () => {
 
   const handleClick = () => {
     if (token) {
-      navigate("/home");
+      navigate("/upload");
     } else {
       navigate("/login");
     }

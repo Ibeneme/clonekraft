@@ -1,6 +1,12 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { FaHome, FaClipboardList, FaUser, FaComments, FaChair } from "react-icons/fa"; // Added FaChair
+import {
+  FaHome,
+  FaClipboardList,
+  FaUser,
+  FaComments,
+  FaChair,
+} from "react-icons/fa"; // Added FaChair
 import "./MobileNavbar.css";
 
 const MobileNavbar = () => {
@@ -32,7 +38,8 @@ const MobileNavbar = () => {
       return "order";
     } else if (pathname.startsWith("/profile")) {
       return "profile";
-    } else if (pathname.startsWith("/upload")) { // Added condition for /upload
+    } else if (pathname.startsWith("/upload")) {
+      // Added condition for /upload
       return "upload";
     } else {
       return "";
@@ -52,33 +59,65 @@ const MobileNavbar = () => {
   }
 
   return (
-    <nav className="mobile-navbar">
+    <nav className="mobile-navbar" style={{ backgroundColor: "#172534" }}>
       <ul>
         <li className={activeItem === "home" ? "active" : ""}>
-          <NavLink exact to="/home" activeClassName="active-link">
-            <FaHome size={15} color={activeItem === "home" ? "#c19f62" : "white"} />
-            <span style={{ color: activeItem === "home" ? "#c19f62" : "white" }}>Home</span>
+          <NavLink exact to="/" activeClassName="active-link">
+            <FaHome
+              size={15}
+              color={activeItem === "home" ? "#c19f62" : "white"}
+            />
+            <span
+              style={{ color: activeItem === "home" ? "#c19f62" : "white" }}
+            >
+              Home
+            </span>
           </NavLink>
         </li>
-        <li className={activeItem === "upload" ? "active" : ""}> {/* Added li for /upload */}
+        <li className={activeItem === "upload" ? "active" : ""}>
+          {" "}
+          {/* Added li for /upload */}
           <NavLink exact to="/upload" activeClassName="active-link">
-            <FaChair size={15} color={activeItem === "upload" ? "#c19f62" : "white"} /> {/* Changed icon to FaChair */}
-            <span style={{ color: activeItem === "upload" ? "#c19f62" : "white" }}>Clone</span> {/* Changed text to Clone */}
+            <FaChair
+              size={15}
+              color={activeItem === "upload" ? "#c19f62" : "white"}
+            />{" "}
+            {/* Changed icon to FaChair */}
+            <span
+              style={{ color: activeItem === "upload" ? "#c19f62" : "white" }}
+            >
+              Clone
+            </span>{" "}
+            {/* Changed text to Clone */}
           </NavLink>
         </li>
         <li className={activeItem === "order" ? "active" : ""}>
           <NavLink exact to="/order" activeClassName="active-link">
-            <FaClipboardList size={15} color={activeItem === "order" ? "#c19f62" : "white"} />
-            <span style={{ color: activeItem === "order" ? "#c19f62" : "white" }}>Orders</span>
+            <FaClipboardList
+              size={15}
+              color={activeItem === "order" ? "#c19f62" : "white"}
+            />
+            <span
+              style={{ color: activeItem === "order" ? "#c19f62" : "white" }}
+            >
+              Orders
+            </span>
           </NavLink>
         </li>
         <li className={activeItem === "profile" ? "active" : ""}>
           <NavLink exact to="/profile" activeClassName="active-link">
-            <FaUser size={15} color={activeItem === "profile" ? "#c19f62" : "white"} />
-            <span style={{ color: activeItem === "profile" ? "#c19f62" : "white" }}>Profile</span>
+            <FaUser
+              size={15}
+              color={activeItem === "profile" ? "#c19f62" : "white"}
+            />
+            <span
+              style={{ color: activeItem === "profile" ? "#c19f62" : "white" }}
+            >
+              Profile
+            </span>
           </NavLink>
         </li>
-    
+
         <li>
           <a href="https://wa.me/+2349134270313?text=Hello%20CloneKraft">
             <FaComments size={15} />

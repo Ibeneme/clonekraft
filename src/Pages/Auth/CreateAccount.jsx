@@ -7,6 +7,7 @@ import "../LandingPage/Hero/Hero.css";
 import { useDispatch } from "react-redux";
 import { register } from "../../Redux/auth/auth";
 import { FaEye, FaEyeSlash } from "react-icons/fa"; // Importing the icons
+import { IoArrowForwardCircleSharp } from "react-icons/io5";
 
 const CreateAccount = () => {
   const dispatch = useDispatch();
@@ -265,6 +266,7 @@ const CreateAccount = () => {
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? "Submitting..." : "Submit"}
+                  <IoArrowForwardCircleSharp color="#fff" fontSize={32} />
                 </button>
               </div>
             </Form>
