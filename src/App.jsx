@@ -51,6 +51,7 @@ import IndexNewLandingPage from "./Pages/NewLandingPage/Index";
 import NewNavbar from "./Pages/NewLandingPage/Navbar/Navbar";
 import HeroHeader from "./Pages/NewLandingPage/Hero/HeroHeader";
 import OurTeam from "./Pages/LandingPage/Hero/Our_Teams/OurTeams";
+import axios from "axios";
 
 function App() {
   useEffect(() => {
@@ -73,7 +74,7 @@ function App() {
     // Cleanup function to clear the interval when component unmounts
     return () => clearInterval(interval);
   }, []); //
-  
+
 
   useEffect(() => {
     AOS.init();
