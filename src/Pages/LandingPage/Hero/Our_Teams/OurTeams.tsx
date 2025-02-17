@@ -13,17 +13,18 @@ const teamMembers = [
     image: founder1,
     bio: "Lucky Lukas Ibeh is a visionary entrepreneur with a passion for creating innovative design solutions. As the CEO of Lukas Design Lab, he leads the team with a focus on growth, creativity, and building a brand that stands out in the design industry. His leadership ensures that every project meets the highest standards of craftsmanship and functionality.",
   },
-  {
-    name: "Ikenna Ibeneme",
-    title: "Chief Technology Officer",
-    image: founder2,
-    bio: "Ikenna Ibeneme is a technology enthusiast and a skilled developer. With a background in software engineering, he leads the technological innovations at Lukas Design Lab. Ikenna is responsible for overseeing the development of the Clonekraft app and ensuring that all technological aspects align with the company’s commitment to excellence.",
-  },
+
   {
     name: "Judith Ichado",
     title: "Chief Communications Officer",
     image: founder3,
     bio: "Judith Ichado is a communications expert with a flair for strategic storytelling. As the CCO, she shapes the brand’s narrative and manages public relations, ensuring that Lukas Design Lab’s vision, mission, and values resonate with both internal and external stakeholders. Judith plays a key role in building relationships and elevating the company’s presence in the design world.",
+  },
+  {
+    name: "Ikenna Ibeneme",
+    title: "Chief Technology Officer",
+    image: founder2,
+    bio: "Ikenna Ibeneme is a technology enthusiast and a skilled developer. With a background in software engineering, he leads the technological innovations at Lukas Design Lab. Ikenna is responsible for overseeing the development of the Clonekraft app and ensuring that all technological aspects align with the company’s commitment to excellence.",
   },
 ];
 
