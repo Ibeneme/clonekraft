@@ -20,12 +20,6 @@ const teamMembers = [
     bio: "Ikenna Ibeneme is a technology enthusiast and a skilled developer. With a background in software engineering, he leads the technological innovations at Lukas Design Lab. Ikenna is responsible for overseeing the development of the Clonekraft app and ensuring that all technological aspects align with the company’s commitment to excellence.",
   },
   {
-    name: "Gbolahan Ifeoluwa",
-    title: "Chief Operating Officer",
-    image: founder4,
-    bio: "Gbolahan Ifeoluwa is a dynamic operations strategist who brings efficiency and precision to Lukas Design Lab. As the COO, he is responsible for managing day-to-day operations, optimizing processes, and ensuring that all teams work seamlessly to deliver exceptional results on time and within budget.",
-  },
-  {
     name: "Judith Ichado",
     title: "Chief Communications Officer",
     image: founder3,
@@ -62,9 +56,7 @@ const OurTeam: React.FC = () => {
   }, []);
 
   return (
-    <div
-
-    >
+    <div>
       <section className="our-team">
         <div className="team-members">
           {teamMembers.map((member, index) => (
