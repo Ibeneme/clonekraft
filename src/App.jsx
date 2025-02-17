@@ -54,6 +54,28 @@ import OurTeam from "./Pages/LandingPage/Hero/Our_Teams/OurTeams";
 
 function App() {
   useEffect(() => {
+    let count = 0;
+    const interval = setInterval(() => {
+      if (count < 10) {
+        axios.get('https://clone-kraft-s-server-rjx3.onrender.com')
+          .then((response) => {
+            console.log('API response:', response.data); // Handle the response data
+          })
+          .catch((error) => {
+            console.error('Error calling API:', error); // Handle error
+          });
+        count++;
+      } else {
+        clearInterval(interval); // Stop the interval after 10 calls
+      }
+    }, 1000); // Call every 1 second (1000ms)
+
+    // Cleanup function to clear the interval when component unmounts
+    return () => clearInterval(interval);
+  }, []); //
+  
+
+  useEffect(() => {
     AOS.init();
   }, []);
 
